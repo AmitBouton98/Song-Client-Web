@@ -8,25 +8,21 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="random_songs.js"></script>
     <script src="ajaxCalls.js"></script>
-    <script>
+    <script defer>
+
         const api = "https://localhost:7281/api"
         function load() {
+
             // for (item of Arr) {
             //         PostArtist((data) => {
             //         }, item.artist)
             // }
-            for (item of Arr) {
-                 PostSong((data) => {
-                    console.log(data)
-                }, "0",item.artist,item.song,"0",item.text,"0")
-            }
-                // PostSong((data) => {
-                //     console.log(data)
-                // }, "0",'Tom Jones','Arr.song',"0",'Arr.text',"0")
-
+            // for (item of Arr) {
+            //      PostSong((data) => {
+            //         console.log(data)
+            //     }, "0",item.artist,item.song,"0",item.text,"0")
+            // }
         }
-
-
         // function Get(callback, artist) {
         //     ajaxCall("Get", `https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artist}&api_key=458ecbf52daa3d11632dfc7fd9cb1d3f&format=json`, "", function (data) {
         //         //swal.fire("Update Sucsessfully!", "", "success");
@@ -37,9 +33,6 @@
         //     return false;
         // }
         async function PostArtist(callback, artist) {
-            // if(artist == undefined){
-            //     return false
-            // }
             newArtist = {
                 ArtistName: artist,
                 Likes: "0"
@@ -53,9 +46,6 @@
             return false;
         }
         async function PostSong(callback, id, artist, name, likes, lyric, play) {
-            // if(artist == undefined){
-            //     return false
-            // }
             newSong = {
                 Id: id,
                 ArtistName: artist,
@@ -76,6 +66,7 @@
 </head>
 
 <body onload="load()">
+    
 
 </body>
 
