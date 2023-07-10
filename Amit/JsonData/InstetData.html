@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="random_songs.js"></script>
+    <script src="ajaxCalls.js"></script>
+    <script>
+        const api = "https://localhost:7281/api"
+        function load() {
+            // for (item of Arr) {
+            //         PostArtist((data) => {
+            //         }, item.artist)
+            // }
+            for (item of Arr) {
+                 PostSong((data) => {
+                    console.log(data)
+                }, "0",item.artist,item.song,"0",item.text,"0")
+            }
+                // PostSong((data) => {
+                //     console.log(data)
+                // }, "0",'Tom Jones','Arr.song',"0",'Arr.text',"0")
+
+        }
+
+
+        // function Get(callback, artist) {
+        //     ajaxCall("Get", `https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artist}&api_key=458ecbf52daa3d11632dfc7fd9cb1d3f&format=json`, "", function (data) {
+        //         //swal.fire("Update Sucsessfully!", "", "success");
+        //         callback(data);
+        //     }, (data) => {
+        //         console.log(data)
+        //     });
+        //     return false;
+        // }
+        async function PostArtist(callback, artist) {
+            // if(artist == undefined){
+            //     return false
+            // }
+            newArtist = {
+                ArtistName: artist,
+                Likes: "0"
+            }
+            ajaxCall("POST", `${api}/ArtistMusics`, JSON.stringify(newArtist), function (data) {
+
+                callback(data);
+            }, (data) => {
+                console.log("error")
+            });
+            return false;
+        }
+        async function PostSong(callback, id, artist, name, likes, lyric, play) {
+            // if(artist == undefined){
+            //     return false
+            // }
+            newSong = {
+                Id: id,
+                ArtistName: artist,
+                Name: name,
+                Likes: likes,
+                LyricLink: lyric,
+                PlayLink: play
+            }
+            ajaxCall("POST", `${api}/SongMusics`, JSON.stringify(newSong), function (data) {
+
+                callback(data);
+            }, (data) => {
+                console.log("error")
+            });
+            return false;
+        }
+    </script>
+</head>
+
+<body onload="load()">
+
+</body>
+
+</html>
