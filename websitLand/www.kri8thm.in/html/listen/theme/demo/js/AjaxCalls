@@ -37,7 +37,37 @@ function GetSongsForArtis(callback,artistName) {
     }, NotFound);
     return false;
 }
-
+function GetAllSongs(callback) {
+    ajaxCall("GET", `${api}/SongMusics`, "", function (data) {
+        callback(data)
+    }, NotFound);
+    return false;
+}
+function GetTop10GlobalSongs(callback) {
+    ajaxCall("GET", `${api}/SongMusics/GetTop10GlobalSongs`, "", function (data) {
+        callback(data)
+    }, NotFound);
+    return false;
+}
+function GetNumberOfListenersToMusic(callback,SongId) {
+    ajaxCall("GET", `${api}/SongMusics/GetTheNumberPlayedForGivenSong/SongId/${SongId}`, "", function (data) {
+        callback(data)
+    }, NotFound);
+    return false;
+}
+GetNumberOfPlayedForGivenArtist
+function GetTheNumberOfAppearanceInUserByGivenSong(callback,SongId) {
+    ajaxCall("GET", `${api}/SongMusics/GetTheNumberOfAppearanceInUserByGivenSong/SongId/${SongId}`, "", function (data) {
+        callback(data)
+    }, NotFound);
+    return false;
+}
+function GetNumberOfPlayedForGivenArtist(callback,ArtistName) {
+    ajaxCall("GET", `${api}/ArtistMusics/GetNumberOfPlayedForGivenArtist/ArtistName/${ArtistName}`, "", function (data) {
+        callback(data)
+    }, NotFound);
+    return false;
+}
 
 function NotFound(error){
     console.log("Not found")

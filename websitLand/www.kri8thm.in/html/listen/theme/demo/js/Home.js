@@ -1,9 +1,12 @@
 
-$(document).ready(function () {
 
-
-});
-
+function LoadHome(){
+    GetTop10GlobalSongs((data)=>{
+        for(item of data){
+            CreateLargeMusic(item)
+        }
+    })
+}
 // Event handler for button click
 function buttonClickHandler(btn) {
     // Check which button was clicked by examining the event target
@@ -24,16 +27,16 @@ function buttonClickHandler(btn) {
         // Perform actions based on the clicked button
         if (btn.innerHTML == 'Song name' && btn.classList.contains('active')) {
             getSongByName((data) => {
-                CreateElemFromReasrch(data, "SongListSearch",false)
+                CreateElemFromReasrch(data, "SongListSearch", false)
             }, searchValue)
         } else if (btn.innerHTML == 'Artist name' && btn.classList.contains('active')) {
             getArtistByName((data) => {
-                CreateElemFromReasrch(data, "ArtistListSearch",true)
+                CreateElemFromReasrch(data, "ArtistListSearch", true)
             }, searchValue)
         } else if (btn.innerHTML == 'Song text' && btn.classList.contains('active')) {
             getSongsByText((data) => {
                 for (item of data) {
-                    CreateElemFromReasrch(item, "SongListSearch",false)
+                    CreateElemFromReasrch(item, "SongListSearch", false)
                 }
             }, searchValue)
         }
@@ -119,6 +122,93 @@ function CreateElemFromReasrch(data, WhereToInster, song) {
     colDiv.appendChild(listDiv);
 
     div.appendChild(colDiv);
+}
+function CreateLargeMusic(data) {
+    var swiperSlide = document.createElement('div');
+    swiperSlide.className = 'swiper-slide';
+
+    var coverDiv = document.createElement('div');
+    coverDiv.className = 'cover cover--round';
+    coverDiv.setAttribute('data-song-id', '1');
+    coverDiv.setAttribute('data-song-name', 'I love you mummy');
+    coverDiv.setAttribute('data-song-artist', 'Arebica Luna');
+    coverDiv.setAttribute('data-song-album', 'Mummy');
+    coverDiv.setAttribute('data-song-url', 'audio/ringtone-1.mp3');
+    coverDiv.setAttribute('data-song-cover', 'images/cover/small/1.jpg');
+
+    var coverHeadDiv = document.createElement('div');
+    coverHeadDiv.className = 'cover__head';
+
+    var coverLabelUl = document.createElement('ul');
+    coverLabelUl.className = 'cover__label d-flex';
+
+    var coverLabelLi1 = document.createElement('li');
+    var badgeSpan1 = document.createElement('span');
+    badgeSpan1.className = 'badge rounded-pill bg-danger';
+    var heartIcon = document.createElement('i'); // need to check if the user like this music or not
+    heartIcon.className = 'ri-heart-fill';
+
+    badgeSpan1.appendChild(heartIcon);
+    coverLabelLi1.appendChild(badgeSpan1);
+    coverLabelUl.appendChild(coverLabelLi1);
+
+    var coverLabelLi2 = document.createElement('li');
+    var badgeSpan2 = document.createElement('span');
+    badgeSpan2.className = 'badge rounded-pill bg-info';
+    var crownIcon = document.createElement('i');
+    crownIcon.className = 'ri-vip-crown-fill';
+
+    badgeSpan2.appendChild(crownIcon);
+    coverLabelLi2.appendChild(badgeSpan2);
+    coverLabelUl.appendChild(coverLabelLi2);
+
+    coverHeadDiv.appendChild(coverLabelUl);
+    coverDiv.appendChild(coverHeadDiv);
+
+    var coverImageDiv = document.createElement('div');
+    coverImageDiv.className = 'cover__image';
+    var coverImage = document.createElement('img');
+    coverImage.src = 'images/cover/large/1.jpg';
+    coverImage.alt = 'I love you mummy';
+
+    var btnPlay = document.createElement('button');
+    btnPlay.type = 'button';
+    btnPlay.className = 'btn btn-play btn-default btn-icon rounded-pill';
+    btnPlay.setAttribute('data-play-id', '1');
+
+    var playIcon = document.createElement('i');
+    playIcon.className = 'ri-play-fill icon-play';
+
+    var pauseIcon = document.createElement('i');
+    pauseIcon.className = 'ri-pause-fill icon-pause';
+
+    btnPlay.appendChild(playIcon);
+    btnPlay.appendChild(pauseIcon);
+
+    coverImageDiv.appendChild(coverImage);
+    coverImageDiv.appendChild(btnPlay);
+    coverDiv.appendChild(coverImageDiv);
+
+    var coverFootDiv = document.createElement('div');
+    coverFootDiv.className = 'cover__foot';
+    var coverTitleLink = document.createElement('a');
+    coverTitleLink.href = 'song-details.html';
+    coverTitleLink.className = 'cover__title text-truncate';
+    coverTitleLink.textContent = data.name
+
+    var coverSubtitleP = document.createElement('p');
+    coverSubtitleP.className = 'cover__subtitle text-truncate';
+    var artistDetailsLink = document.createElement('a');
+    artistDetailsLink.href = 'artist-details.html';
+    artistDetailsLink.textContent = data.artistName
+
+    coverSubtitleP.appendChild(artistDetailsLink);
+    coverFootDiv.appendChild(coverTitleLink);
+    coverFootDiv.appendChild(coverSubtitleP);
+
+    coverDiv.appendChild(coverFootDiv);
+    swiperSlide.appendChild(coverDiv);
+    document.getElementById("LargeMusicTop10").appendChild(swiperSlide)
 }
 function navigateToPageArtistDetails(data) {
     var ArtistDetails = { artistName: data.artistName, content: data.content, published: data.published, listeners: data.listeners, playcount: data.playcount, likes: data.likes };

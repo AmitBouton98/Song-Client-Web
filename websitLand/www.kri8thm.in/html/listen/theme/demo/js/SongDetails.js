@@ -19,16 +19,23 @@ function AddInfoSong(data) {
 
     let id = document.createElement("li")
     id.innerHTML = "<b>Id :</b> " + data.id
+    GetTheNumberOfAppearanceInUserByGivenSong((num)=>{
+        let likes = document.createElement("li")
+        likes.innerHTML =  "<b>Followers(favorites) :</b> " + num
+        ul.appendChild(likes)
+    },data.id)
 
-    let likes = document.createElement("li")
-    likes.innerHTML =  "<b>Likes :</b> " + data.likes
 
     ul.appendChild(id)
-    ul.appendChild(likes)
 
     let SongArtistDetails = document.getElementById("SongArtistDetails")
     SongArtistDetails.innerHTML = data.artistName
 
     let SongLyricsDetails = document.getElementById("SongLyricsDetails")
     SongLyricsDetails.innerHTML = data.lyriclink
+
+    GetNumberOfListenersToMusic((num)=>{
+        console.log(num)
+        document.getElementById("ListenMusic").innerHTML = num
+    },data.id)
 }

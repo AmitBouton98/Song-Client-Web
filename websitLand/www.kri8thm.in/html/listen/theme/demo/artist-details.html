@@ -31,9 +31,12 @@
     <script src="js/Home.js"></script>
     <script src="js/AjaxCalls"></script>
     <script src="js/ArtistDetails.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
-<body>
+<body onload="LoadArtistPage()">
     <div id="line_loader"></div>
     <div id="loader">
         <div class="loader">
@@ -214,8 +217,7 @@
                                             class="btn btn-icon btn-primary rounded-pill" data-collection-play-id="1"><i
                                                 class="ri-play-fill icon-play"></i> <i
                                                 class="ri-pause-fill icon-pause"></i></button> <label for="play_all"
-                                            class="ps-2 fw-semi-bold text-primary mb-0" style="cursor: pointer;">Play
-                                            all</label></div>
+                                            class="ps-2 fw-semi-bold text-primary mb-0" style="cursor: pointer;" id="PlayNumberForArtist">0</label></div>
                                 </li>
                                 <li><a href="javascript:void(0);" role="button"
                                         class="text-dark d-flex align-items-center" aria-label="Favorite"
@@ -225,6 +227,7 @@
                                 <li><span class="text-dark d-flex align-items-center"><i
                                             class="ri-star-fill text-warning"></i> <span
                                             class="ps-2 fw-medium" id="ArtistLikes">0</span></span></li>
+
                             </ul>
                         </div>
                     </div>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <!-- This html is for load the info to sql (artists + songs) by amit-->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +9,8 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="random_songs.js"></script>
     <script src="ajaxCalls.js"></script>
-    <script defer>
-
+    <script defer type="text/javascript">
+        
         const api = "https://localhost:7281/api"
         function load() {
 
@@ -26,8 +27,8 @@
             //         console.log(data)
             //     }, "0",item.artist,item.song,"0",item.text,"0")
             // }
-
         }
+
         function Get(callback, artist) {
             ajaxCall("Get", `https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artist}&api_key=458ecbf52daa3d11632dfc7fd9cb1d3f&format=json`, "", function (data) {
                 //swal.fire("Update Sucsessfully!", "", "success");

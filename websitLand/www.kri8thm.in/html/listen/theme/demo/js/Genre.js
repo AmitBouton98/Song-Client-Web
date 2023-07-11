@@ -1,58 +1,13 @@
-// $(document).ready(function () {
-//     var data = JSON.parse(localStorage.getItem('ArtistDetails'));
-//     AddInfoArtist(data)
-//     GetSongsForArtis((songs)=>{
-//         console.log(songs)
-//         for(item of songs){
-//             AddSongForArtist(item)
-//         }
-//     },data.artistName)
-// });
-function LoadArtistPage(){
-    var data = JSON.parse(localStorage.getItem('ArtistDetails'));
-    AddInfoArtist(data)
-    GetSongsForArtis((songs)=>{
-        console.log(songs)
-        for(item of songs){
+$(document).ready(function () {
+    GetAllSongs((data)=>{
+        for(item of data){
             AddSongForArtist(item)
         }
-    },data.artistName)
-}
-function AddInfoArtist(data) {
-    // ul is to add the info down to the name
-    let ul = document.getElementById("InfoArtistLi")
+    })
+})
 
-    let published = document.createElement("li")
-    published.textContent = data.published
 
-    let listeners = document.createElement("li")
-    listeners.innerHTML = "<b>listeners :</b> " + data.listeners
 
-    let playcount = document.createElement("li")
-    playcount.innerHTML =  "<b>playcount :</b> " + data.playcount
-
-    // need to add likes
-    ul.appendChild(published)
-    ul.appendChild(listeners)
-    ul.appendChild(playcount)
-    // artist name
-    let InfoArtistName = document.getElementById("InfoArtistName")
-    InfoArtistName.textContent = data.artistName
-    // artist content
-    let InfoArtistContent = document.getElementById("InfoArtistContent")
-    InfoArtistContent.innerHTML = data.content
-
-    // artist likes
-    let ArtistLikes = document.getElementById("ArtistLikes")
-    ArtistLikes.textContent = data.likes
-
-    GetNumberOfPlayedForGivenArtist((item)=>{
-        console.log(item)
-        document.getElementById("PlayNumberForArtist").innerHTML = item
-    },data.artistName)
-    
-
-}
 function AddSongForArtist(data) {
     // Create the outer div with the appropriate classes
     var listDiv = document.createElement('div');
@@ -75,7 +30,7 @@ function AddSongForArtist(data) {
 
     // Create the play button
     var playButtonLink = document.createElement('a');
-    // playButtonLink.href = 'javascript:void(0);';
+    playButtonLink.href = 'javascript:void(0);';
     playButtonLink.className = 'btn btn-play btn-sm btn-default btn-icon rounded-pill';
     playButtonLink.setAttribute('data-play-id', '8');
     playButtonLink.setAttribute('aria-label', 'Play pause');
@@ -103,18 +58,18 @@ function AddSongForArtist(data) {
     titleLink.href = 'song-details.html';
     titleLink.className = 'list__title text-truncate';
     titleLink.textContent = data.name;
-    titleLink.addEventListener("click",()=>{
-        getSongByName((item)=>{
-            navigateToPageSongDetails(item)
-        },data.name)
-            console.log('Title link clicked');
-            // Add your code here to handle the click event for the title link
-        });
+ 
     // Create the subtitle paragraph
     var subtitleP = document.createElement('p');
     subtitleP.className = 'list__subtitle text-truncate';
 
+    // Create the artist anchor element
+    var artistLink = document.createElement('a');
+    artistLink.href = 'artist-details.html';
+    artistLink.textContent = data.artistName;
 
+    // Append the artist link to the subtitle paragraph
+    subtitleP.appendChild(artistLink);
 
     // Append the title link and subtitle paragraph to the content div
     contentDiv.appendChild(titleLink);
@@ -276,5 +231,5 @@ function AddSongForArtist(data) {
     listDiv.appendChild(contentDiv);
     listDiv.appendChild(optionsList);
 
-    document.getElementById("SongForArtist").appendChild(listDiv)
+    document.getElementById("SongS").appendChild(listDiv)
 }
