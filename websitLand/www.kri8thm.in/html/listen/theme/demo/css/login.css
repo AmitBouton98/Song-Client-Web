@@ -1,0 +1,8 @@
+.row-grid {
+    display: grid;
+}
+
+.c-2 {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
