@@ -6,3 +6,28 @@
     grid-template-columns: 1fr 1fr;
     gap: 10px;
 }
+
+#files {
+    width: 100%;
+    max-width: 100%;
+    color: #444;
+    padding: 2px;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid rgba(8, 8, 8, 0.288);
+}
+
+#files::file-selector-button {
+    margin-right: 20px;
+    border: none;
+    background: #084cdf;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    transition: background .2s ease-in-out;
+}
+
+#files::file-selector-button:hover {
+    background: #0d45a5;
+}
