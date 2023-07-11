@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<!-- This html is for load the info to sql (artists + songs) by amit-->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,34 +14,43 @@
         function load() {
 
             // for (item of Arr) {
-            //         PostArtist((data) => {
-            //         }, item.artist)
+            //     Get((data) => {
+            //         PostArtist((postdata) => {
+            //             console.log(postdata)
+            //         }, data.artist.name, data.artist.bio.content, data.artist.bio.published, data.artist.stats.listeners, data.artist.stats.playcount)
+            //     },item.artist)
             // }
-            // for (item of Arr) {
-            //      PostSong((data) => {
-            //         console.log(data)
-            //     }, "0",item.artist,item.song,"0",item.text,"0")
-            // }
+
+            for (item of Arr) {
+                 PostSong((data) => {
+                    console.log(data)
+                }, "0",item.artist,item.song,"0",item.text,"0")
+            }
+
         }
-        // function Get(callback, artist) {
-        //     ajaxCall("Get", `https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artist}&api_key=458ecbf52daa3d11632dfc7fd9cb1d3f&format=json`, "", function (data) {
-        //         //swal.fire("Update Sucsessfully!", "", "success");
-        //         callback(data);
-        //     }, (data) => {
-        //         console.log(data)
-        //     });
-        //     return false;
-        // }
-        async function PostArtist(callback, artist) {
+        function Get(callback, artist) {
+            ajaxCall("Get", `https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artist}&api_key=458ecbf52daa3d11632dfc7fd9cb1d3f&format=json`, "", function (data) {
+                //swal.fire("Update Sucsessfully!", "", "success");
+                callback(data);
+            }, (data) => {
+                console.log("error")
+            });
+            return false;
+        }
+        async function PostArtist(callback, name, content, published, listeners, playcount) {
             newArtist = {
-                ArtistName: artist,
+                ArtistName: name,
+                Content: content,
+                Published: published,
+                Listeners: listeners,
+                Playcount: playcount,
                 Likes: "0"
             }
             ajaxCall("POST", `${api}/ArtistMusics`, JSON.stringify(newArtist), function (data) {
 
                 callback(data);
             }, (data) => {
-                console.log("error")
+                console.log(data)
             });
             return false;
         }
@@ -66,7 +75,7 @@
 </head>
 
 <body onload="load()">
-    
+
 
 </body>
 
