@@ -1,0 +1,44 @@
+const api = "https://localhost:7281/api"
+
+function ajaxCall(method, api, data, successCB, errorCB) {
+    $.ajax({
+        type: method, // Get/Post/Put/Delete/Patch
+        url: api, // routing to the server
+        data: data, // the data we pass in the body (if any…)
+        cache: false, // allow caching
+        contentType: "application/json", // the data format we expect back
+        dataType: "json", // the data format that we send 
+        success: successCB, // the success callback function
+        error: errorCB // the error callback function
+    });
+
+}
+function getSongByName(callback,name) {
+    ajaxCall("GET", `${api}/SongMusics/GetSongByName/name/${name}`, "", function (data) {
+        callback(data)
+    }, NotFound);
+    return false;
+}
+function getSongsByText(callback,text) {
+    ajaxCall("GET", `${api}/SongMusics/GetSongByText/text/${text}`, "", function (data) {
+        callback(data)
+    }, NotFound);
+    return false;
+}
+function getArtistByName(callback,name) {
+    ajaxCall("GET", `${api}/ArtistMusics/GetArtistByName/name/${name}`, "", function (data) {
+        callback(data)
+    }, NotFound);
+    return false;
+}
+function GetSongsForArtis(callback,artistName) {
+    ajaxCall("GET", `${api}/SongMusics/GetByArtistName/artistName/${artistName}`, "", function (data) {
+        callback(data)
+    }, NotFound);
+    return false;
+}
+
+
+function NotFound(error){
+    console.log("Not found")
+}
