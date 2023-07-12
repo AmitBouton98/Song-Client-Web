@@ -147,11 +147,10 @@
                             </div>
                         </div>
                         <div class="d-flex align-items-center">
-                            
                             <div class="dropdown ms-3 ms-sm-4"><a href="javascript:void(0);" class="avatar header-text"
                                     role="button" id="user_menu" data-bs-toggle="dropdown" aria-expanded="false">
                                     <div class="avatar__image"><img src="images/users/thumb.jpg" alt="user"></div><span
-                                        class="ps-2 d-none d-sm-block">Androws</span>
+                                        class="ps-2 d-none d-sm-block" id="FirstNameToShow"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-md dropdown-menu-end"
                                     aria-labelledby="user_menu">
@@ -159,8 +158,7 @@
                                         <div class="py-2 px-3 avatar avatar--lg">
                                             <div class="avatar__image"><img src="images/users/thumb.jpg" alt="user">
                                             </div>
-                                            <div class="avatar__content"><span class="avatar__title">Androws
-                                                    Kinny</span> <span class="avatar__subtitle">Artist</span></div>
+                                            <div class="avatar__content"><span class="avatar__title" id="FirstAndLastNameToShow"></span> <span class="avatar__subtitle">User</span></div>
                                         </div>
                                     </li>
                                     <li class="dropdown-divider"></li>
@@ -223,9 +221,9 @@
                                 </li>
                                 <li><a href="javascript:void(0);" role="button"
                                         class="text-dark d-flex align-items-center" aria-label="Favorite"
-                                        data-favorite-id="1"><i class="ri-heart-line heart-empty"></i> <i
+                                        data-favorite-id="1"><i class="ri-heart-fill heart-empty" style="color: red;" ></i> <i
                                             class="ri-heart-fill heart-fill"></i> <span
-                                            class="ps-2 fw-medium">0</span></a></li>
+                                            class="ps-2 fw-medium" id="NumberofFavoritesForSong">0</span></a></li>
 
                                 <li><span class="text-dark d-flex align-items-center"><i
                                             class="ri-star-fill text-warning"></i> <span

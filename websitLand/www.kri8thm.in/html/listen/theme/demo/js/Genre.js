@@ -1,11 +1,12 @@
+var User = JSON.parse(localStorage.getItem('User'));
+
 $(document).ready(function () {
-    GetAllSongs((data)=>{
-        for(item of data){
+    GetAllSongs((data) => {
+        for (item of data) {
             AddSongForArtist(item)
         }
     })
 })
-
 
 
 function AddSongForArtist(data) {
@@ -26,7 +27,7 @@ function AddSongForArtist(data) {
     // Create the cover image
     var coverImg = document.createElement('img'); // need to change
     coverImg.src = 'images/cover/small/8.jpg';
-    coverImg.alt = 'Sadness'; 
+    coverImg.alt = 'Sadness';
 
     // Create the play button
     var playButtonLink = document.createElement('a');
@@ -58,7 +59,13 @@ function AddSongForArtist(data) {
     titleLink.href = 'song-details.html';
     titleLink.className = 'list__title text-truncate';
     titleLink.textContent = data.name;
- 
+    titleLink.onclick = () => {
+        getSongByName((item) => {
+            navigateToPageSongDetails(item)
+        }, data.name)
+        console.log('Title link clicked');
+        // Add your code here to handle the click event for the title link
+    };
     // Create the subtitle paragraph
     var subtitleP = document.createElement('p');
     subtitleP.className = 'list__subtitle text-truncate';
@@ -67,7 +74,13 @@ function AddSongForArtist(data) {
     var artistLink = document.createElement('a');
     artistLink.href = 'artist-details.html';
     artistLink.textContent = data.artistName;
-
+    artistLink.onclick = () => {
+        getArtistByName((item) => {
+            navigateToPageArtistDetails(item)
+        }, data.artistName)
+        console.log('Title link clicked');
+        // Add your code here to handle the click event for the title link
+    };
     // Append the artist link to the subtitle paragraph
     subtitleP.appendChild(artistLink);
 
@@ -105,9 +118,32 @@ function AddSongForArtist(data) {
     favoriteButtonLink.className = 'd-inline-flex';
     favoriteButtonLink.setAttribute('aria-label', 'Favorite');
     favoriteButtonLink.setAttribute('data-favorite-id', '8');
-
+    favoriteButtonLink.onclick = () => { // set favorite song to user
+        if (heartEmptyIcon.style.color == "red") {
+            DeleteFavoriteSongToUser((d) => {
+                heartEmptyIcon.className = 'ri-heart-line heart-empty';
+                heartEmptyIcon.style.color = ""
+            }, User.id, data.id)
+        }
+        else {
+            PutFavoriteSongToUser((d) => {
+                heartEmptyIcon.className = 'ri-heart-fill heart-empty';
+                heartEmptyIcon.style.color = "red"
+            }, User.id, data.id)
+        }
+    }
     var heartEmptyIcon = document.createElement('i');
-    heartEmptyIcon.className = 'ri-heart-line heart-empty';
+    GetFavoriteSongByUserId((d) => { // checking if the song is in the favorit of the user
+        heartEmptyIcon.className = 'ri-heart-line heart-empty';
+        for (item of d) {
+            if (item.name == data.name) {
+                heartEmptyIcon.className = 'ri-heart-fill heart-empty';
+                heartEmptyIcon.style.color = "red"
+                break;
+            }
+        }
+    }, User.id)
+
 
     var heartFillIcon = document.createElement('i');
     heartFillIcon.className = 'ri-heart-fill heart-fill';

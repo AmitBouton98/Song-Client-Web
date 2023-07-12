@@ -83,7 +83,6 @@ function UpdateUserDetails(callback, first, last, email,id) {
     }, NotFound);
     return false;
 }
-'https://localhost:7281/api/UserMusics/Put?id=9&password=string&passwordToChange=amit'
 function ChangePassowrdForUser(callback, id, OldPassowrd,NewPassword) {
     ajaxCall("PUT", `${api}/UserMusics/Put?id=${id}&password=${OldPassowrd}&passwordToChange=${NewPassword}`, "", function (data) {
         callback(data)
@@ -91,6 +90,24 @@ function ChangePassowrdForUser(callback, id, OldPassowrd,NewPassword) {
     }, ()=>{
         swal.fire("Password Changed", "failed", "error");
     });
+    return false;
+}
+function GetFavoriteSongByUserId(callback, UserId) {
+    ajaxCall("GET", `${api}/SongMusics/GetFavoriteSongByUserId/UserId/${UserId}`, "", function (data) {
+        callback(data)
+    }, NotFound);
+    return false;
+}
+function PutFavoriteSongToUser(callback, UserId,SongId) {
+    ajaxCall("PUT", `${api}/SongMusics/Put?UserId=${UserId}&SongId=${SongId}`, "", function (data) {
+        callback(data)
+    }, NotFound);
+    return false;
+}
+function DeleteFavoriteSongToUser(callback, UserId,SongId) {
+    ajaxCall("DELETE", `${api}/SongMusics/Delete?UserId=${UserId}&SongId=${SongId}`, "", function (data) {
+        callback(data)
+    }, NotFound);
     return false;
 }
 function NotFound(error) {

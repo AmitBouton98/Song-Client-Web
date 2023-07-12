@@ -8,15 +8,15 @@
 //         }
 //     },data.artistName)
 // });
-function LoadArtistPage(){
+function LoadArtistPage() {
     var data = JSON.parse(localStorage.getItem('ArtistDetails'));
     AddInfoArtist(data)
-    GetSongsForArtis((songs)=>{
+    GetSongsForArtis((songs) => {
         console.log(songs)
-        for(item of songs){
+        for (item of songs) {
             AddSongForArtist(item)
         }
-    },data.artistName)
+    }, data.artistName)
 }
 function AddInfoArtist(data) {
     // ul is to add the info down to the name
@@ -29,7 +29,7 @@ function AddInfoArtist(data) {
     listeners.innerHTML = "<b>listeners :</b> " + data.listeners
 
     let playcount = document.createElement("li")
-    playcount.innerHTML =  "<b>playcount :</b> " + data.playcount
+    playcount.innerHTML = "<b>playcount :</b> " + data.playcount
 
     // need to add likes
     ul.appendChild(published)
@@ -46,11 +46,11 @@ function AddInfoArtist(data) {
     let ArtistLikes = document.getElementById("ArtistLikes")
     ArtistLikes.textContent = data.likes
 
-    GetNumberOfPlayedForGivenArtist((item)=>{
+    GetNumberOfPlayedForGivenArtist((item) => {
         console.log(item)
         document.getElementById("PlayNumberForArtist").innerHTML = item
-    },data.artistName)
-    
+    }, data.artistName)
+
 
 }
 function AddSongForArtist(data) {
@@ -71,7 +71,7 @@ function AddSongForArtist(data) {
     // Create the cover image
     var coverImg = document.createElement('img'); // need to change
     coverImg.src = 'images/cover/small/8.jpg';
-    coverImg.alt = 'Sadness'; 
+    coverImg.alt = 'Sadness';
 
     // Create the play button
     var playButtonLink = document.createElement('a');
@@ -103,13 +103,13 @@ function AddSongForArtist(data) {
     titleLink.href = 'song-details.html';
     titleLink.className = 'list__title text-truncate';
     titleLink.textContent = data.name;
-    titleLink.addEventListener("click",()=>{
-        getSongByName((item)=>{
+    titleLink.onclick = () => {
+        getSongByName((item) => {
             navigateToPageSongDetails(item)
-        },data.name)
-            console.log('Title link clicked');
-            // Add your code here to handle the click event for the title link
-        });
+        }, data.name)
+        console.log('Title link clicked');
+        // Add your code here to handle the click event for the title link
+    };
     // Create the subtitle paragraph
     var subtitleP = document.createElement('p');
     subtitleP.className = 'list__subtitle text-truncate';
@@ -150,9 +150,32 @@ function AddSongForArtist(data) {
     favoriteButtonLink.className = 'd-inline-flex';
     favoriteButtonLink.setAttribute('aria-label', 'Favorite');
     favoriteButtonLink.setAttribute('data-favorite-id', '8');
-
+    favoriteButtonLink.onclick = () => { // set favorite song to user
+        if (heartEmptyIcon.style.color == "red") {
+            DeleteFavoriteSongToUser((d) => {
+                heartEmptyIcon.className = 'ri-heart-line heart-empty';
+                heartEmptyIcon.style.color = ""
+            }, User.id, data.id)
+        }
+        else {
+            PutFavoriteSongToUser((d) => {
+                heartEmptyIcon.className = 'ri-heart-fill heart-empty';
+                heartEmptyIcon.style.color = "red"
+            }, User.id, data.id)
+        }
+    }
     var heartEmptyIcon = document.createElement('i');
-    heartEmptyIcon.className = 'ri-heart-line heart-empty';
+    GetFavoriteSongByUserId((d) => { // checking if the song is in the favorit of the user
+        heartEmptyIcon.className = 'ri-heart-line heart-empty';
+        for (item of d) {
+            if (item.name == data.name) {
+                heartEmptyIcon.className = 'ri-heart-fill heart-empty';
+                heartEmptyIcon.style.color = "red"
+                break;
+            }
+        }
+    }, User.id)
+
 
     var heartFillIcon = document.createElement('i');
     heartFillIcon.className = 'ri-heart-fill heart-fill';

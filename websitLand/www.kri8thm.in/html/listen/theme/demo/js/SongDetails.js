@@ -19,10 +19,9 @@ function AddInfoSong(data) {
 
     let id = document.createElement("li")
     id.innerHTML = "<b>Id :</b> " + data.id
-    GetTheNumberOfAppearanceInUserByGivenSong((num)=>{
-        let likes = document.createElement("li")
-        likes.innerHTML =  "<b>Followers(favorites) :</b> " + num
-        ul.appendChild(likes)
+    GetTheNumberOfAppearanceInUserByGivenSong((num)=>{ // write the number of favorite for song (ליד הכמות השמעות)
+        let NumberofFavoritesForSong = document.getElementById("NumberofFavoritesForSong")
+        NumberofFavoritesForSong.innerHTML = num
     },data.id)
 
 

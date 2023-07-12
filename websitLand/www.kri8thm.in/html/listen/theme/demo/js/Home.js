@@ -1,3 +1,9 @@
+var User = JSON.parse(localStorage.getItem('User'));
+$(document).ready(function () {
+    document.getElementById("FirstNameToShow").innerHTML = User.first
+    document.getElementById("FirstAndLastNameToShow").innerHTML = User.first +" " + User.last
+
+});
 
 
 function LoadHome(){
@@ -145,10 +151,16 @@ function CreateLargeMusic(data) {
     var coverLabelLi1 = document.createElement('li');
     var badgeSpan1 = document.createElement('span');
     badgeSpan1.className = 'badge rounded-pill bg-danger';
-    var heartIcon = document.createElement('i'); // need to check if the user like this music or not
-    heartIcon.className = 'ri-heart-fill';
+    GetFavoriteSongByUserId((d)=>{ // checking if the song is in the favorit of the user
+        for(item of d){
+            if(item.name == data.name){
+                var heartIcon = document.createElement('i');
+                heartIcon.className = 'ri-heart-fill';
+                badgeSpan1.appendChild(heartIcon);
+            }
+        }
+    },User.id)
 
-    badgeSpan1.appendChild(heartIcon);
     coverLabelLi1.appendChild(badgeSpan1);
     coverLabelUl.appendChild(coverLabelLi1);
 
@@ -195,13 +207,25 @@ function CreateLargeMusic(data) {
     coverTitleLink.href = 'song-details.html';
     coverTitleLink.className = 'cover__title text-truncate';
     coverTitleLink.textContent = data.name
-
+    coverTitleLink.onclick = () => {
+        getSongByName((item) => {
+            navigateToPageSongDetails(item)
+        }, data.name)
+        console.log('Title link clicked');
+        // Add your code here to handle the click event for the title link
+    };
     var coverSubtitleP = document.createElement('p');
     coverSubtitleP.className = 'cover__subtitle text-truncate';
     var artistDetailsLink = document.createElement('a');
     artistDetailsLink.href = 'artist-details.html';
     artistDetailsLink.textContent = data.artistName
-
+    artistDetailsLink.onclick = () => {
+        getArtistByName((item) => {
+            navigateToPageArtistDetails(item)
+        }, data.artistName)
+        console.log('Title link clicked');
+        // Add your code here to handle the click event for the title link
+    };
     coverSubtitleP.appendChild(artistDetailsLink);
     coverFootDiv.appendChild(coverTitleLink);
     coverFootDiv.appendChild(coverSubtitleP);
