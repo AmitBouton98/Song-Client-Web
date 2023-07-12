@@ -13,25 +13,25 @@ function ajaxCall(method, api, data, successCB, errorCB) {
     });
 
 }
-function getSongByName(callback,name) {
+function getSongByName(callback, name) {
     ajaxCall("GET", `${api}/SongMusics/GetSongByName/name/${name}`, "", function (data) {
         callback(data)
     }, NotFound);
     return false;
 }
-function getSongsByText(callback,text) {
+function getSongsByText(callback, text) {
     ajaxCall("GET", `${api}/SongMusics/GetSongByText/text/${text}`, "", function (data) {
         callback(data)
     }, NotFound);
     return false;
 }
-function getArtistByName(callback,name) {
+function getArtistByName(callback, name) {
     ajaxCall("GET", `${api}/ArtistMusics/GetArtistByName/name/${name}`, "", function (data) {
         callback(data)
     }, NotFound);
     return false;
 }
-function GetSongsForArtis(callback,artistName) {
+function GetSongsForArtis(callback, artistName) {
     ajaxCall("GET", `${api}/SongMusics/GetByArtistName/artistName/${artistName}`, "", function (data) {
         callback(data)
     }, NotFound);
@@ -49,26 +49,51 @@ function GetTop10GlobalSongs(callback) {
     }, NotFound);
     return false;
 }
-function GetNumberOfListenersToMusic(callback,SongId) {
+function GetNumberOfListenersToMusic(callback, SongId) {
     ajaxCall("GET", `${api}/SongMusics/GetTheNumberPlayedForGivenSong/SongId/${SongId}`, "", function (data) {
         callback(data)
     }, NotFound);
     return false;
 }
 GetNumberOfPlayedForGivenArtist
-function GetTheNumberOfAppearanceInUserByGivenSong(callback,SongId) {
+function GetTheNumberOfAppearanceInUserByGivenSong(callback, SongId) {
     ajaxCall("GET", `${api}/SongMusics/GetTheNumberOfAppearanceInUserByGivenSong/SongId/${SongId}`, "", function (data) {
         callback(data)
     }, NotFound);
     return false;
 }
-function GetNumberOfPlayedForGivenArtist(callback,ArtistName) {
+function GetNumberOfPlayedForGivenArtist(callback, ArtistName) {
     ajaxCall("GET", `${api}/ArtistMusics/GetNumberOfPlayedForGivenArtist/ArtistName/${ArtistName}`, "", function (data) {
         callback(data)
     }, NotFound);
     return false;
 }
-
-function NotFound(error){
-    console.log("Not found")
+function UpdateUserDetails(callback, first, last, email,id) {
+    let User = {
+        id: id,
+        first: first,
+        last: last,
+        email: email,
+        password: "string",
+        imgUrl: "string", // need to check how to chenge it
+        registrationDate: "2023-07-12T08:22:14.348Z" // random date
+    }
+    ajaxCall("POST", `${api}/UserMusics`, JSON.stringify(User), function (data) {
+        callback(data)
+    }, NotFound);
+    return false;
+}
+'https://localhost:7281/api/UserMusics/Put?id=9&password=string&passwordToChange=amit'
+function ChangePassowrdForUser(callback, id, OldPassowrd,NewPassword) {
+    ajaxCall("PUT", `${api}/UserMusics/Put?id=${id}&password=${OldPassowrd}&passwordToChange=${NewPassword}`, "", function (data) {
+        callback(data)
+        swal.fire("Password Changed", "Secessfuly", "success");
+    }, ()=>{
+        swal.fire("Password Changed", "failed", "error");
+    });
+    return false;
+}
+function NotFound(error) {
+    // console.log("Not found")
+    console.log(error.responseText)
 }

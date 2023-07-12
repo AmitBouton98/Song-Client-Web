@@ -129,7 +129,7 @@ function CreateLargeMusic(data) {
 
     var coverDiv = document.createElement('div');
     coverDiv.className = 'cover cover--round';
-    coverDiv.setAttribute('data-song-id', '1');
+    coverDiv.setAttribute('data-song-id', '2'); // here is to change th song itself (מה שמתנגן)
     coverDiv.setAttribute('data-song-name', 'I love you mummy');
     coverDiv.setAttribute('data-song-artist', 'Arebica Luna');
     coverDiv.setAttribute('data-song-album', 'Mummy');
