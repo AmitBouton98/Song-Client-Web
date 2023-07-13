@@ -70,8 +70,8 @@ function AddSongForArtist(data) {
 
     // Create the cover image
     var coverImg = document.createElement('img'); // need to change
-    coverImg.src = 'images/cover/small/11.jpg';
-    coverImg.alt = 'Sadness';
+    coverImg.src = data.urlLink;
+    coverImg.alt = data.name;
 
     // Create the play button
     var playButtonLink = document.createElement('a');
@@ -79,7 +79,11 @@ function AddSongForArtist(data) {
     playButtonLink.className = 'btn btn-play btn-sm btn-default btn-icon rounded-pill';
     playButtonLink.setAttribute('data-play-id', '8');
     playButtonLink.setAttribute('aria-label', 'Play pause');
-
+    playButtonLink.onclick = () => {
+        AddPlayedForSongByGivenUserId((status) => {
+            console.log(status)
+        }, data.id, User.id)
+    }
     var playButtonIconPlay = document.createElement('i');
     playButtonIconPlay.className = 'ri-play-fill icon-play';
 

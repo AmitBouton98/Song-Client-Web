@@ -1,13 +1,13 @@
+var data = JSON.parse(localStorage.getItem('SongDetails'));
 $(document).ready(function () {
-    var data = JSON.parse(localStorage.getItem('SongDetails'));
     AddInfoSong(data)
 });
 function AddInfoSong(data) {
     // number of play
     let PlayNumberForSong = document.getElementById("PlayNumberForSong")
-    GetSongsForArtis((d)=>{ // adding the number of played for the song
+    GetSongsForArtis((d) => { // adding the number of played for the song
         PlayNumberForSong.innerHTML = d
-    },data.id)
+    }, data.id)
     // song name
     let InfoSongName = document.getElementById("InfoSongName")
     InfoSongName.innerHTML = data.name
@@ -18,10 +18,10 @@ function AddInfoSong(data) {
 
     let id = document.createElement("li")
     id.innerHTML = "<b>Id :</b> " + data.id
-    GetTheNumberOfAppearanceInUserByGivenSong((num)=>{ // write the number of favorite for song (ליד הכמות השמעות)
+    GetTheNumberOfAppearanceInUserByGivenSong((num) => { // write the number of favorite for song (ליד הכמות השמעות)
         let NumberofFavoritesForSong = document.getElementById("NumberofFavoritesForSong")
         NumberofFavoritesForSong.innerHTML = num
-    },data.id)
+    }, data.id)
 
 
     ul.appendChild(id)
@@ -32,24 +32,26 @@ function AddInfoSong(data) {
     let SongLyricsDetails = document.getElementById("SongLyricsDetails")
     SongLyricsDetails.innerHTML = data.lyriclink
 
-    GetNumberOfListenersToMusic((num)=>{
+    GetNumberOfListenersToMusic((num) => {
         console.log(num)
         document.getElementById("ListenMusic").innerHTML = num
-    },data.id)
+    }, data.id)
 
     // changing the info when play
     var listDiv = document.getElementById("SongPlayDetails");
-    listDiv.setAttribute('data-song-id', '11'); 
+    listDiv.setAttribute('data-song-id', '11');
     listDiv.setAttribute('data-song-name', data.name);
-    listDiv.setAttribute('data-song-artist',data.artistName);
+    listDiv.setAttribute('data-song-artist', data.artistName);
     listDiv.setAttribute('data-song-album', 'Sadness');
     listDiv.setAttribute('data-song-url', 'audio/ringtone-8.mp3');
-    listDiv.setAttribute('data-song-cover', 'images/cover/small/11.jpg'); 
+    listDiv.setAttribute('data-song-cover', 'images/cover/small/11.jpg');
     let btnPlay = document.getElementById("SongPlay")
-    btnPlay.onclick = ()=>{
-        AddPlayedForSongByGivenUserId((status)=>{
+    btnPlay.onclick = () => {
+        AddPlayedForSongByGivenUserId((status) => {
             console.log(status)
-        },data.id,User.id)
+        }, data.id, User.id)
     }
-
+    let ImgSongUrl = document.getElementById("ImgSongUrl")
+    console.log(data)
+    ImgSongUrl.src = data.urlLink
 }

@@ -9,12 +9,14 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="random_songs.js"></script>
     <script src="ajaxCalls.js"></script>
-    <script defer type="text/javascript">
-        
-        const api = "https://localhost:7281/api"
-        function load() {
 
-            // for (item of Arr) {
+    <script defer type="text/javascript">
+
+        const api = "https://localhost:7281/api"
+        const apiKey = 'AIzaSyB2VcxkLp-3FQye8OFr5xwTvZjPqzUZ0Mo';
+        // web for api : https://console.cloud.google.com/apis/credentials?cloudshell=true&orgonly=true&project=tru-392715&supportedpurview=project
+        function load() {
+            // for (item of Arr) { // add artist details
             //     Get((data) => {
             //         PostArtist((postdata) => {
             //             console.log(postdata)
@@ -22,13 +24,65 @@
             //     },item.artist)
             // }
 
-            // for (item of Arr) {
+            // for (item of Arr) { //  add song details
             //      PostSong((data) => {
             //         console.log(data)
             //     }, "0",item.artist,item.song,"0",item.text,"0")
             // }
-        }
 
+
+            // const searchQuery = 'Pretenders	Dragway 42';
+            // let VideoId = getVideoId(searchQuery, apiKey)
+            // let VideoUrl = getVideoUrl(searchQuery, apiKey)
+
+            // playVideo(VideoId);
+
+
+            // })
+
+            // changing the youtube id and url song for all the songs
+            // GetAllSongs((data) => { // changing the url for all the songs
+            //     for (item of data) {
+            //         if (item.youtubeId == '1') {
+            //             getVideoId(item)
+
+            //         }
+            //     }
+            // })
+
+        }
+        function ChnageYoutubeId(SongId, YoutubeId) {
+            ajaxCall("PUT", `${api}/SongMusics/ChangeYoutubeIdSong?SongId=${SongId}&YoutubeId=${YoutubeId}`, "", function (data) {
+                console.log("good job")
+            }, () => {
+                console.log("failed to change youtubeId")
+            });
+            return false;
+        }
+        function getSongByName(callback, name) {
+            ajaxCall("GET", `${api}/SongMusics/GetSongByName/name/${name}`, "", function (data) {
+                callback(data)
+            }, () => {
+                console.log('failed')
+            });
+            return false;
+        }
+        function GetAllSongs(callback) {
+            ajaxCall("GET", `${api}/SongMusics`, "", function (data) {
+                callback(data)
+            }, () => {
+                console.log("failed")
+            });
+            return false;
+        }
+        function ChangeUrlByGivenSongId(SongId, Url) {
+            ajaxCall("PUT", `${api}/SongMusics/ChangeSongUrl?SongId=${SongId}&Url=${Url}`, "", function (data) {
+                console.log("good job")
+            }, () => {
+                console.log("failed to change url")
+            });
+            return false;
+        }
         function Get(callback, artist) {
             ajaxCall("Get", `https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artist}&api_key=458ecbf52daa3d11632dfc7fd9cb1d3f&format=json`, "", function (data) {
                 //swal.fire("Update Sucsessfully!", "", "success");
@@ -37,6 +91,33 @@
                 console.log("error")
             });
             return false;
+        }
+ 
+        function getVideoId(SongData) {
+            const apiUrl = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(SongData.artistName + " " + SongData.name)}&key=${apiKey}`;
+
+            fetch(apiUrl, {
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.items && data.items.length > 0) {
+                        const videoId = data.items[0].id.videoId;
+                        console.log('Video ID:', videoId);
+                        ChnageYoutubeId(SongData.id, videoId)
+                        const videoUrl = data.items[1].snippet.thumbnails.medium.url;
+                        console.log('Video URL:', videoUrl);
+                        ChangeUrlByGivenSongId(SongData.id, videoUrl)
+                        // return videoId
+                    } else {
+                        console.log('No search results found.');
+                    }
+                })
+                .catch(error => {
+                    console.log('Error:', error);
+                });
         }
         async function PostArtist(callback, name, content, published, listeners, playcount) {
             newArtist = {
@@ -72,11 +153,13 @@
             });
             return false;
         }
+
     </script>
+
 </head>
 
 <body onload="load()">
-
+    <div id="player"></div>
 
 </body>
 

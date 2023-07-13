@@ -1,18 +1,42 @@
 var User = JSON.parse(localStorage.getItem('User'));
+var apiKey = 'AIzaSyAu-HyPrbv66uCgbXS7lvlyQpSCC7gq7Ho';
 $(document).ready(function () {
     document.getElementById("FirstNameToShow").innerHTML = User.first
-    document.getElementById("FirstAndLastNameToShow").innerHTML = User.first +" " + User.last
+    document.getElementById("FirstAndLastNameToShow").innerHTML = User.first + " " + User.last
 
 });
 
 
-function LoadHome(){
-    GetTop10GlobalSongs((data)=>{
-        for(item of data){
+function LoadHome() {
+    GetTop10GlobalSongs((data) => {
+        for (item of data) {
             CreateLargeMusic(item)
         }
     })
 }
+function getVideoUrl(query) {
+    const apiUrl = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&key=${apiKey}`;
+
+    fetch(apiUrl, {
+        headers: {
+            'Accept': 'application/json'
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.items && data.items.length > 0) {
+                const videoUrl = data.items[1].snippet.thumbnails.medium.url;
+                console.log('Video URL:', videoUrl);
+                return videoUrl
+            } else {
+                console.log('No search results found.');
+            }
+        })
+        .catch(error => {
+            console.log('Error:', error);
+        });
+}
+
 // Event handler for button click
 function buttonClickHandler(btn) {
     // Check which button was clicked by examining the event target
@@ -68,7 +92,7 @@ function CreateElemFromReasrch(data, WhereToInster, song) {
 
     // Create the cover image element
     var coverImg = document.createElement('img');
-    song == false ? coverImg.src = 'images/cover/small/11.jpg' :coverImg.src = 'images/cover/large/12.jpg' ; // img of the song in the search
+    song == false ? coverImg.src = data.urlLink : coverImg.src = 'images/cover/large/12.jpg'; // img of the song in the search
     // coverImg.alt = data.name; 
 
     // Append the cover image to the cover link
@@ -151,15 +175,15 @@ function CreateLargeMusic(data) {
     var coverLabelLi1 = document.createElement('li');
     var badgeSpan1 = document.createElement('span');
     badgeSpan1.className = 'badge rounded-pill bg-danger';
-    GetFavoriteSongByUserId((d)=>{ // checking if the song is in the favorit of the user
-        for(item of d){
-            if(item.name == data.name){
+    GetFavoriteSongByUserId((d) => { // checking if the song is in the favorit of the user
+        for (item of d) {
+            if (item.name == data.name) {
                 var heartIcon = document.createElement('i');
                 heartIcon.className = 'ri-heart-fill';
                 badgeSpan1.appendChild(heartIcon);
             }
         }
-    },User.id)
+    }, User.id)
 
     coverLabelLi1.appendChild(badgeSpan1);
     coverLabelUl.appendChild(coverLabelLi1);
@@ -180,17 +204,19 @@ function CreateLargeMusic(data) {
     var coverImageDiv = document.createElement('div');
     coverImageDiv.className = 'cover__image';
     var coverImage = document.createElement('img');
-    coverImage.src = 'images/cover/large/11.jpg';
-    coverImage.alt = 'I love you mummy';
+    // console.log(getVideoUrl('Pretenders	Dragway 42')) // need to get the url
+    coverImage.src = data.urlLink ;
+    // coverImage.src = 'images/cover/large/11.jpg';
+    coverImage.alt = data.name;
 
     var btnPlay = document.createElement('button');
     btnPlay.type = 'button';
     btnPlay.className = 'btn btn-play btn-default btn-icon rounded-pill';
     btnPlay.setAttribute('data-play-id', '1');
-    btnPlay.onclick = ()=>{
-        AddPlayedForSongByGivenUserId((status)=>{
+    btnPlay.onclick = () => {
+        AddPlayedForSongByGivenUserId((status) => {
             console.log(status)
-        },data.id,User.id)
+        }, data.id, User.id)
     }
 
     var playIcon = document.createElement('i');
@@ -245,6 +271,6 @@ function navigateToPageArtistDetails(data) {
 }
 function navigateToPageSongDetails(data) {
     console.log(data.lyriclink)
-    var SongDetails = { id: data.id, artistName: data.artistName, name: data.name, likes: data.likes, lyriclink: data.lyricLink, playLink: data.playLink };
+    var SongDetails = { id: data.id, artistName: data.artistName, name: data.name, likes: data.likes, lyriclink: data.lyricLink, urlLink: data.urlLink, youtubeId : data.youtubeId };
     localStorage.setItem('SongDetails', JSON.stringify(SongDetails));
 }

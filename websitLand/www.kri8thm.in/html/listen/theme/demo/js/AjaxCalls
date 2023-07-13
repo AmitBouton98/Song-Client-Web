@@ -134,6 +134,22 @@ function GetAllFavoriteSongForGivenUserId(callback, UserId) {
     }, NotFound);
     return false;
 }
+function ChangeUrlByGivenSongId(callback, SongId, Url) {
+    ajaxCall("PUT", `${api}/SongMusics/ChangeSongUrl?SongId=${SongId}&Url=${Url}`, "", function (data) {
+        callback(data)
+    }, ()=>{
+        console.log("failed to change url")
+    });
+    return false;
+}
+function ChnageYoutubeId(callback, SongId, YoutubeId) {
+    ajaxCall("PUT", `${api}/SongMusics/ChangeYoutubeIdSong?SongId=${SongId}&YoutubeId=${YoutubeId}`, "", function (data) {
+        callback(data)
+    }, ()=>{
+        console.log("failed to change youtubeId")
+    });
+    return false;
+}
 function NotFound(error) {
     console.log("Not found")
     console.log(error.responseText)
