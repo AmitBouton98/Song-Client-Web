@@ -110,7 +110,31 @@ function DeleteFavoriteSongToUser(callback, UserId,SongId) {
     }, NotFound);
     return false;
 }
+function GetFavoriteArtistByUserId(callback, UserId) {
+    ajaxCall("GET", `${api}/ArtistMusics/GetFavoriteArtistByUserId/UserId/${UserId}`, "", function (data) {
+        callback(data)
+    }, NotFound);
+    return false;
+}
+function GetAllArtists(callback) {
+    ajaxCall("GET", `${api}/ArtistMusics`, "", function (data) {
+        callback(data)
+    }, NotFound);
+    return false;
+}
+function AddPlayedForSongByGivenUserId(callback, SongId,UserId) {
+    ajaxCall("PUT", `${api}/SongMusics/CreateOrUpdateNumberOfPlayed?SongId=${SongId}&UserId=${UserId}`, "", function (data) {
+        callback(data)
+    }, NotFound);
+    return false;
+}
+function GetAllFavoriteSongForGivenUserId(callback, UserId) {
+    ajaxCall("GET", `${api}/SongMusics/GetFavoriteSongByUserId/UserId/${UserId}`, "", function (data) {
+        callback(data)
+    }, NotFound);
+    return false;
+}
 function NotFound(error) {
-    // console.log("Not found")
+    console.log("Not found")
     console.log(error.responseText)
 }

@@ -1,32 +1,38 @@
 var User = JSON.parse(localStorage.getItem('User'));
 
-$(document).ready(function () {
+// $(document).ready(function () {
+//     GetAllSongs((data) => {
+//         for (item of data) {
+//             AddSongForArtist(item)
+//         }
+//     })
+// })
+function LoadGenerePage(){
     GetAllSongs((data) => {
         for (item of data) {
             AddSongForArtist(item)
         }
     })
-})
-
+}
 
 function AddSongForArtist(data) {
     // Create the outer div with the appropriate classes
     var listDiv = document.createElement('div');
     listDiv.className = 'list__item';
-    listDiv.setAttribute('data-song-id', '8');
-    listDiv.setAttribute('data-song-name', 'Sadness inside');
-    listDiv.setAttribute('data-song-artist', 'Karen Jennings');
+    listDiv.setAttribute('data-song-id', '11'); // changed for the img when play
+    listDiv.setAttribute('data-song-name', data.name);
+    listDiv.setAttribute('data-song-artist',data.artistName);
     listDiv.setAttribute('data-song-album', 'Sadness');
     listDiv.setAttribute('data-song-url', 'audio/ringtone-8.mp3');
-    listDiv.setAttribute('data-song-cover', 'images/cover/small/8.jpg');
+    listDiv.setAttribute('data-song-cover', 'images/cover/small/11.jpg'); // changed for the img when play
 
     // Create the cover div
     var coverDiv = document.createElement('div');
     coverDiv.className = 'list__cover';
 
     // Create the cover image
-    var coverImg = document.createElement('img'); // need to change
-    coverImg.src = 'images/cover/small/8.jpg';
+    var coverImg = document.createElement('img'); 
+    coverImg.src = 'images/cover/small/11.jpg'; // img of the song
     coverImg.alt = 'Sadness';
 
     // Create the play button

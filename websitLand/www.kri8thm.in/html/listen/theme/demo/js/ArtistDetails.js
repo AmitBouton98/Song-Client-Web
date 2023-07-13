@@ -57,12 +57,12 @@ function AddSongForArtist(data) {
     // Create the outer div with the appropriate classes
     var listDiv = document.createElement('div');
     listDiv.className = 'list__item';
-    listDiv.setAttribute('data-song-id', '8');
-    listDiv.setAttribute('data-song-name', 'Sadness inside');
-    listDiv.setAttribute('data-song-artist', 'Karen Jennings');
+    listDiv.setAttribute('data-song-id', '11');
+    listDiv.setAttribute('data-song-name', data.name);
+    listDiv.setAttribute('data-song-artist', data.artistName);
     listDiv.setAttribute('data-song-album', 'Sadness');
     listDiv.setAttribute('data-song-url', 'audio/ringtone-8.mp3');
-    listDiv.setAttribute('data-song-cover', 'images/cover/small/8.jpg');
+    listDiv.setAttribute('data-song-cover', 'images/cover/small/11.jpg');
 
     // Create the cover div
     var coverDiv = document.createElement('div');
@@ -70,7 +70,7 @@ function AddSongForArtist(data) {
 
     // Create the cover image
     var coverImg = document.createElement('img'); // need to change
-    coverImg.src = 'images/cover/small/8.jpg';
+    coverImg.src = 'images/cover/small/11.jpg';
     coverImg.alt = 'Sadness';
 
     // Create the play button
@@ -89,7 +89,11 @@ function AddSongForArtist(data) {
     // Append the play button icons to the play button link
     playButtonLink.appendChild(playButtonIconPlay);
     playButtonLink.appendChild(playButtonIconPause);
-
+    playButtonLink.onclick = ()=>{
+        AddPlayedForSongByGivenUserId((status)=>{
+            console.log(status)
+        },data.id,User.id)
+    }
     // Append the cover image and play button link to the cover div
     coverDiv.appendChild(coverImg);
     coverDiv.appendChild(playButtonLink);

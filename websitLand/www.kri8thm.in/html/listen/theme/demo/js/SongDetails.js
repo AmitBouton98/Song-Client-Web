@@ -1,7 +1,6 @@
 $(document).ready(function () {
     var data = JSON.parse(localStorage.getItem('SongDetails'));
     AddInfoSong(data)
-
 });
 function AddInfoSong(data) {
     // number of play
@@ -37,4 +36,20 @@ function AddInfoSong(data) {
         console.log(num)
         document.getElementById("ListenMusic").innerHTML = num
     },data.id)
+
+    // changing the info when play
+    var listDiv = document.getElementById("SongPlayDetails");
+    listDiv.setAttribute('data-song-id', '11'); 
+    listDiv.setAttribute('data-song-name', data.name);
+    listDiv.setAttribute('data-song-artist',data.artistName);
+    listDiv.setAttribute('data-song-album', 'Sadness');
+    listDiv.setAttribute('data-song-url', 'audio/ringtone-8.mp3');
+    listDiv.setAttribute('data-song-cover', 'images/cover/small/11.jpg'); 
+    let btnPlay = document.getElementById("SongPlay")
+    btnPlay.onclick = ()=>{
+        AddPlayedForSongByGivenUserId((status)=>{
+            console.log(status)
+        },data.id,User.id)
+    }
+
 }

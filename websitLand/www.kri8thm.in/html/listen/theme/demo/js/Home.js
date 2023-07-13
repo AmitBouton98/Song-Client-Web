@@ -68,7 +68,7 @@ function CreateElemFromReasrch(data, WhereToInster, song) {
 
     // Create the cover image element
     var coverImg = document.createElement('img');
-    coverImg.src = 'images/cover/small/6.jpg'; // need to change!
+    song == false ? coverImg.src = 'images/cover/small/11.jpg' :coverImg.src = 'images/cover/large/12.jpg' ; // img of the song in the search
     // coverImg.alt = data.name; 
 
     // Append the cover image to the cover link
@@ -135,12 +135,12 @@ function CreateLargeMusic(data) {
 
     var coverDiv = document.createElement('div');
     coverDiv.className = 'cover cover--round';
-    coverDiv.setAttribute('data-song-id', '2'); // here is to change th song itself (מה שמתנגן)
-    coverDiv.setAttribute('data-song-name', 'I love you mummy');
-    coverDiv.setAttribute('data-song-artist', 'Arebica Luna');
+    coverDiv.setAttribute('data-song-id', '11'); // here is to change th song itself (מה שמתנגן)
+    coverDiv.setAttribute('data-song-name', data.name);
+    coverDiv.setAttribute('data-song-artist', data.artistName);
     coverDiv.setAttribute('data-song-album', 'Mummy');
     coverDiv.setAttribute('data-song-url', 'audio/ringtone-1.mp3');
-    coverDiv.setAttribute('data-song-cover', 'images/cover/small/1.jpg');
+    coverDiv.setAttribute('data-song-cover', 'images/cover/small/11.jpg');
 
     var coverHeadDiv = document.createElement('div');
     coverHeadDiv.className = 'cover__head';
@@ -180,13 +180,18 @@ function CreateLargeMusic(data) {
     var coverImageDiv = document.createElement('div');
     coverImageDiv.className = 'cover__image';
     var coverImage = document.createElement('img');
-    coverImage.src = 'images/cover/large/1.jpg';
+    coverImage.src = 'images/cover/large/11.jpg';
     coverImage.alt = 'I love you mummy';
 
     var btnPlay = document.createElement('button');
     btnPlay.type = 'button';
     btnPlay.className = 'btn btn-play btn-default btn-icon rounded-pill';
     btnPlay.setAttribute('data-play-id', '1');
+    btnPlay.onclick = ()=>{
+        AddPlayedForSongByGivenUserId((status)=>{
+            console.log(status)
+        },data.id,User.id)
+    }
 
     var playIcon = document.createElement('i');
     playIcon.className = 'ri-play-fill icon-play';
