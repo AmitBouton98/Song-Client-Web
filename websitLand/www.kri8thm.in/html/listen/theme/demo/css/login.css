@@ -7,7 +7,68 @@
     gap: 10px;
 }
 
-#files {
+.swal2-title {
+    color: black !important;
+}
+
+.g-12-1 {
+    grid-template-columns: 12fr 1fr;
+}
+
+.vertical_align {
+    align-items: center;
+}
+
+.horizantal_align {
+    justify-content: center;
+    text-align: center;
+}
+
+
+input:focus:invalid {
+    border: 2px dashed var(--swiper-theme-color) !important;
+    animation: shake 0.2s ease-in-out;
+}
+
+.Valid {
+    color: var(--bs-green);
+}
+
+.inValid {
+    color: var(--swiper-theme-color);
+}
+
+/* input:invalid {
+    border: 2px dashed var(--swiper-theme-color) !important;
+} */
+
+input:valid {
+    border: 2px dashed var(--bs-green) !important;
+}
+
+input {
+    position: relative;
+}
+
+@keyframes shake {
+    0% {
+        margin-left: 0rem;
+    }
+
+    25% {
+        margin-left: 0.5rem;
+    }
+
+    75% {
+        margin-left: -0.5rem;
+    }
+
+    100% {
+        margin-left: 0rem;
+    }
+}
+
+#profile_pic {
     width: 100%;
     max-width: 100%;
     color: #444;
@@ -17,7 +78,7 @@
     border: 1px solid rgba(8, 8, 8, 0.288);
 }
 
-#files::file-selector-button {
+#profile_pic::file-selector-button {
     margin-right: 20px;
     border: none;
     background: #084cdf;
@@ -28,6 +89,6 @@
     transition: background .2s ease-in-out;
 }
 
-#files::file-selector-button:hover {
+#profile_pic::file-selector-button:hover {
     background: #0d45a5;
 }

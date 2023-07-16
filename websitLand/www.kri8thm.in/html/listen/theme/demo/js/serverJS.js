@@ -1,30 +1,47 @@
-api = "";
-//  just copyed
-function registerUser(callback) {
-  NewUser = {
-    first: $("#FirstRegister").val(),
-    last: $("#LastRegister").val(),
-    id: "",
-    country: $("#CountryRegister").val(),
-    email: $("#EmailRegister").val(),
-    password: $("#PasswordRegister").val(),
-    PhoneNumber: $("#PhoneRegister").val(),
-    Profile_img: radios,
-  };
+const api = "https://localhost:7281/api";
+
+function register_user_to_server(user_obj) {
+  console.log(user_obj);
   ajaxCall(
-    "POST",
-    `${api}/WebUsers`,
-    JSON.stringify(NewUser),
-    function (data) {
-      swal.fire("Registered to the server!", "Great Job", "success");
-      setTimeout(function () {
-        signInUser(data);
-        //signInUser(NewUser);
-      }, 1500); // 1.5 seconds delay
-      callback(data);
+    "post",
+    `${api}/UserMusics`,
+    JSON.stringify(user_obj),
+    (response) => {
+      Swal.fire({
+        icon: "info",
+        title: `Status code: ${response.status}`,
+        text: `Server message: ${response}`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
     },
-    errorRG
+    (resolve) => {
+      // in time it retyrn 0 then goes here because of that we need to do theis
+      Swal.fire({
+        icon: "info",
+        title: `Status code: ${resolve.status}`,
+        text: `Server message: ${resolve}`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
   );
-  // to prevent refreshing the page evrey time
+}
+
+function upload_user_profile_pic(data) {
+  for (const value of data.values()) {
+    console.log(value);
+  }
+  $.ajax({
+    type: "POST",
+    url: `${api}/Upload`,
+    contentType: false,
+    processData: false,
+    data: data,
+    success: (suc) => {
+      console.log(suc);
+    },
+    error: (error) => console.log(error),
+  });
   return false;
 }
