@@ -42,6 +42,15 @@ input:focus:invalid {
     opacity: 1;
 }
 
+
+.disable-valid-css {
+    border: none !important;
+}
+
+.disable-valid-css:valid {
+    border: none !important;
+}
+
 .Valid {
     color: var(--bs-green);
 }

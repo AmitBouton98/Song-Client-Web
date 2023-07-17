@@ -1,4 +1,8 @@
 $(document).ready(function () {
+  const user_info = JSON.parse(sessionStorage.getItem("user"));
+  if (user_info != undefined) {
+    goToWebsite();
+  }
   $("#forget-btn").on("click", function () {
     goToForgetCard();
   });
@@ -9,11 +13,23 @@ $(document).ready(function () {
   $(".fa-solid").on("click", function () {
     changeTheEye(this);
   });
+  $("#Confirm-email-form").submit(function () {
+    sendUniqueKey();
+    return false;
+  });
+  $("#login-form").submit(function () {
+    loginToSite();
+    return false;
+  });
 });
-
+function loginToSite() {
+  const user_email = $("#email").val();
+  const user_password = $("#password").val();
+  loginUser(user_email, user_password);
+}
 function goToForgetCard() {
   document
-    .getElementById("Confirm-email")
+    .getElementById("Confirm-email-form")
     .classList.replace("hide-card", "show-card");
   document
     .getElementById("login-card")
@@ -21,7 +37,7 @@ function goToForgetCard() {
 }
 function goToLoginCrard() {
   document
-    .getElementById("Confirm-email")
+    .getElementById("Confirm-email-form")
     .classList.replace("show-card", "hide-card");
   document
     .getElementById("login-card")
@@ -29,8 +45,14 @@ function goToLoginCrard() {
 }
 //sent the unique key for the user
 function sendUniqueKey() {
-  // sesseion storage user
-  const user_email = document.getElementById("email-confirm").innerText;
-  sessionStorage.setItem("user_email", user_email);
   // get_User_reset_premiosn
+  get_reset_permission($("#email-confirm").val(), goToChangePassword);
+}
+
+function goToChangePassword() {
+  window.location.replace("./forgetPassword.html");
+}
+
+function goToWebsite() {
+  window.location.replace("./home.html");
 }
