@@ -206,7 +206,7 @@ function AddSongForArtist(data) {
 
     // Create the duration
     var durationListItem = document.createElement('li');
-    durationListItem.textContent = ''; // need to find the time *********
+    durationListItem.textContent = data.duration; // time of the video
 
     // Create the dropdown menu
     var dropdownMenu = document.createElement('ul');
