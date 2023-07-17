@@ -335,28 +335,28 @@ function onPlaybackQualityChange(event) {
 
 }
 
-function onPlayerProgress(event) {
-    // Update progress time and timeline
-    var currentTime = player.getCurrentTime(); // Retrieves the time  the video play now
-    var duration = player.getDuration(); // Retrieves the total time of the video
-    var buffered = player.getVideoLoadedFraction() * duration;
-    var played = currentTime;
+// function onPlayerProgress(event) {
+//     // Update progress time and timeline
+//     var currentTime = player.getCurrentTime(); // Retrieves the time  the video play now
+//     var duration = player.getDuration(); // Retrieves the total time of the video
+//     var buffered = player.getVideoLoadedFraction() * duration;
+//     var played = currentTime;
 
-    playedProgress.value = played;
-    bufferedProgress.value = buffered;
-    progressSlider.value = played;
+//     playedProgress.value = played;
+//     bufferedProgress.value = buffered;
+//     progressSlider.value = played;
 
-    var playedWidth = (played / duration) * 100;
-    var bufferedWidth = (buffered / duration) * 100;
-    timeline.style.width = playedWidth + '%';
-    bufferedProgress.style.width = bufferedWidth + '%';
-}
+//     var playedWidth = (played / duration) * 100;
+//     var bufferedWidth = (buffered / duration) * 100;
+//     timeline.style.width = playedWidth + '%';
+//     bufferedProgress.style.width = bufferedWidth + '%';
+// }
 
 function onSliderChange() {
     // Seek to the specified time when slider value changes
     var currentTime = progressSlider.value;
     player.seekTo(currentTime);
-    document.getElementById('durationTime').innerHTML = formatTime(player.getDuration() - currentTime)
+    document.getElementById('durationTime').innerHTML = formatTime(player.getDuration() - currentTime) // no need
 }
 
 
@@ -391,7 +391,8 @@ function formatTime(duration) {
     return formattedMinutes + ":" + formattedSeconds;
 
 }
-function updateTimeDisplay() {
+// happend every 1 sec (interval)
+function updateTimeDisplay() { 
 
     var currentTime = player.getCurrentTime(); // Retrieves the time the video is currently playing
     var duration = player.getDuration(); // Retrieves the total duration of the video
@@ -436,7 +437,7 @@ function PlayButtonOnClick(data) {
             'onReady': onPlayerReady,
             'onStateChange': onPlayerStateChange,
             'onPlaybackQualityChange': onPlaybackQualityChange,
-            'onProgress': onPlayerProgress,
+            // 'onProgress': onPlayerProgress,
             'onError': onPlayerError
         }
     });
