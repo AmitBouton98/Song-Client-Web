@@ -1,7 +1,6 @@
 const api = "https://localhost:7281/api";
 
 function register_user_to_server(user_obj) {
-  console.log(user_obj);
   ajaxCall(
     "post",
     `${api}/UserMusics`,
@@ -44,4 +43,24 @@ function upload_user_profile_pic(data) {
     error: (error) => console.log(error),
   });
   return false;
+}
+function get_reset_permission(email) {
+  ajaxCall(
+    "post",
+    `${api}/UserMusics`,
+    JSON.stringify(user_obj),
+    (response) => {
+      sessionStorage.setItem("user", JSON.stringify(response));
+    },
+    (resolve) => {
+      // in time it retyrn 0 then goes here because of that we need to do theis
+      Swal.fire({
+        icon: "info",
+        title: `Status code: ${resolve.status}`,
+        text: `Server message: ${resolve}`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+  );
 }
