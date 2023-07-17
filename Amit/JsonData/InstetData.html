@@ -15,19 +15,21 @@
         const api = "https://localhost:7281/api"
         const apiKey = 'AIzaSyB2VcxkLp-3FQye8OFr5xwTvZjPqzUZ0Mo';
         // web for api : https://console.cloud.google.com/apis/credentials?cloudshell=true&orgonly=true&project=tru-392715&supportedpurview=project
+
         function load() {
+
             // for (item of Arr) { // add artist details
             //     Get((data) => {
             //         PostArtist((postdata) => {
             //             console.log(postdata)
-            //         }, data.artist.name, data.artist.bio.content, data.artist.bio.published, data.artist.stats.listeners, data.artist.stats.playcount)
-            //     },item.artist)
+            //         }, data.artist.name, data.artist.bio.summary, data.artist.bio.published, data.artist.stats.listeners, data.artist.stats.playcount)
+            //     },item.song_artist)
             // }
 
             // for (item of Arr) { //  add song details
             //      PostSong((data) => {
             //         console.log(data)
-            //     }, "0",item.artist,item.song,"0",item.text,"0")
+            //     }, "0",item.song_artist,item.song_name,"0",item.song_text,item.youtube_url,item.youtube_id,convertDurationToTime(item.duration))
             // }
 
 
@@ -51,6 +53,24 @@
             // })
 
         }
+        // this funtion is to convert from duratio time format : PT3M53S(example)  to time format min:sec
+        function convertDurationToTime(duration) {
+            const regex = /PT(?:(\d+)M)?(?:(\d+)S)?/;
+            const matches = duration.match(regex);
+
+            if (!matches) {
+                throw new Error('Invalid duration format.');
+            }
+
+            const minutes = parseInt(matches[1] || 0);
+            const seconds = parseInt(matches[2] || 0);
+
+            const formattedMinutes = String(minutes).padStart(2, '0');
+            const formattedSeconds = String(seconds).padStart(2, '0');
+
+            return `${formattedMinutes}:${formattedSeconds}`;
+        }
+
         function ChnageYoutubeId(SongId, YoutubeId) {
             ajaxCall("PUT", `${api}/SongMusics/ChangeYoutubeIdSong?SongId=${SongId}&YoutubeId=${YoutubeId}`, "", function (data) {
                 console.log("good job")
@@ -92,7 +112,7 @@
             });
             return false;
         }
- 
+
         function getVideoId(SongData) {
             const apiUrl = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(SongData.artistName + " " + SongData.name)}&key=${apiKey}`;
 
@@ -136,14 +156,17 @@
             });
             return false;
         }
-        async function PostSong(callback, id, artist, name, likes, lyric, play) {
+
+        async function PostSong(callback, id, artistName, name, likes, lyricLink, urlLink, youtubeId, duration) {
             newSong = {
                 Id: id,
-                ArtistName: artist,
+                ArtistName: artistName,
                 Name: name,
                 Likes: likes,
-                LyricLink: lyric,
-                PlayLink: play
+                LyricLink: lyricLink,
+                UrlLink: urlLink,
+                YoutubeId: youtubeId,
+                Duration: duration
             }
             ajaxCall("POST", `${api}/SongMusics`, JSON.stringify(newSong), function (data) {
 
@@ -155,12 +178,100 @@
         }
 
     </script>
+    <style>
+        #play-pause-btn {
+            width: 50px;
+            height: 50px;
+            background-color: #f00;
+        }
+
+        #play-pause-btn.play {
+            background-color: #0f0;
+        }
+
+        #progressBar {
+            width: 100%;
+            height: 5px;
+            background-color: #ccc;
+            cursor: pointer;
+        }
+
+        #progress {
+            width: 0;
+            height: 100%;
+            background-color: #f00;
+        }
+    </style>
 
 </head>
 
 <body onload="load()">
-    <div id="player"></div>
+    <!-- <div id="player"></div>
+    <button id="playBtn">Play</button>
+    <button id="pauseBtn">Pause</button>
+    <div id="progressBar">
+        <div id="progress"></div>
+    </div>
 
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+    <script>
+        var player;
+        var playBtn = document.getElementById('playBtn');
+        var pauseBtn = document.getElementById('pauseBtn');
+        var progressBar = document.getElementById('progressBar');
+        var progress = document.getElementById('progress');
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '390',
+                width: '640',
+                videoId: 'M7lc1UVf-VE',
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            playBtn.addEventListener('click', playVideo);
+            pauseBtn.addEventListener('click', pauseVideo);
+
+            progressBar.addEventListener('click', seekTo);
+
+            // Update progress bar continuously
+            setInterval(updateProgressBar, 200);
+        }
+
+        function onPlayerStateChange(event) {
+            // Handle player state changes if needed
+        }
+
+        function playVideo() {
+            player.playVideo();
+        }
+
+        function pauseVideo() {
+            player.pauseVideo();
+        }
+
+        function seekTo(event) {
+            var progressBarWidth = progressBar.offsetWidth;
+            var clickPosition = event.offsetX;
+            var seekTime = (clickPosition / progressBarWidth) * player.getDuration();
+            player.seekTo(seekTime, true);
+        }
+
+        function updateProgressBar() {
+            var currentTime = player.getCurrentTime();
+            var duration = player.getDuration();
+            var progressPercentage = (currentTime / duration) * 100;
+            progress.style.width = progressPercentage + '%';
+        }
+
+
+    </script> -->
 </body>
 
 </html>

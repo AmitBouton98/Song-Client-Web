@@ -1,6 +1,9 @@
 var User = JSON.parse(localStorage.getItem('User'));
 var apiKey = 'AIzaSyAu-HyPrbv66uCgbXS7lvlyQpSCC7gq7Ho';
+var player
 $(document).ready(function () {
+    document.getElementById('clear_playlist').click();
+
     document.getElementById("FirstNameToShow").innerHTML = User.first
     document.getElementById("FirstAndLastNameToShow").innerHTML = User.first + " " + User.last
 
@@ -159,11 +162,13 @@ function CreateLargeMusic(data) {
 
     var coverDiv = document.createElement('div');
     coverDiv.className = 'cover cover--round';
-    coverDiv.setAttribute('data-song-id', '11'); // here is to change th song itself (מה שמתנגן)
+    coverDiv.setAttribute('data-song-id', '0'); // here is to change th song itself (מה שמתנגן)
     coverDiv.setAttribute('data-song-name', data.name);
     coverDiv.setAttribute('data-song-artist', data.artistName);
-    coverDiv.setAttribute('data-song-album', 'Mummy');
-    coverDiv.setAttribute('data-song-url', 'audio/ringtone-1.mp3');
+    // coverDiv.setAttribute('data-song-album', 'Mummy');
+    // Uncaught (in promise) DOMException: Failed to load because no supported source was found.
+    // coverDiv.setAttribute('data-song-url', 'audio/ringtone-1.mp3'); 
+    // coverDiv.setAttribute('data-song-url', 'https://www.youtube.com/embed/tgbNymZ7vqY');
     coverDiv.setAttribute('data-song-cover', 'images/cover/small/11.jpg');
 
     var coverHeadDiv = document.createElement('div');
@@ -205,7 +210,7 @@ function CreateLargeMusic(data) {
     coverImageDiv.className = 'cover__image';
     var coverImage = document.createElement('img');
     // console.log(getVideoUrl('Pretenders	Dragway 42')) // need to get the url
-    coverImage.src = data.urlLink ;
+    coverImage.src = data.urlLink;
     // coverImage.src = 'images/cover/large/11.jpg';
     coverImage.alt = data.name;
 
@@ -214,16 +219,19 @@ function CreateLargeMusic(data) {
     btnPlay.className = 'btn btn-play btn-default btn-icon rounded-pill';
     btnPlay.setAttribute('data-play-id', '1');
     btnPlay.onclick = () => {
-        AddPlayedForSongByGivenUserId((status) => {
-            console.log(status)
-        }, data.id, User.id)
+        PlayButtonOnClick(data)
     }
 
     var playIcon = document.createElement('i');
     playIcon.className = 'ri-play-fill icon-play';
-
+    playIcon.onclick = () => {
+        playVideo
+    }
     var pauseIcon = document.createElement('i');
     pauseIcon.className = 'ri-pause-fill icon-pause';
+    pauseIcon.onclick = () => {
+        pauseBtn
+    }
 
     btnPlay.appendChild(playIcon);
     btnPlay.appendChild(pauseIcon);
@@ -242,6 +250,7 @@ function CreateLargeMusic(data) {
         getSongByName((item) => {
             navigateToPageSongDetails(item)
         }, data.name)
+        // coverTitleLink.href = 'song-details.html';
         console.log('Title link clicked');
         // Add your code here to handle the click event for the title link
     };
@@ -264,13 +273,162 @@ function CreateLargeMusic(data) {
     coverDiv.appendChild(coverFootDiv);
     swiperSlide.appendChild(coverDiv);
     document.getElementById("LargeMusicTop10").appendChild(swiperSlide)
+
+
+
 }
+
+var playButton = document.getElementById('PlayButton');
+var bufferedProgress = document.getElementById('bufferedProgress');
+var playedProgress = document.getElementById('playedProgress');
+var progressSlider = document.getElementById('progressSlider');
+var timeline = document.getElementById('timeline');
+var volumeSlider = document.getElementById('VolumeSlider');
+function onVolumeChange() {
+    // Change the volume when slider value changes
+    var volume = volumeSlider.value;
+    player.setVolume(volume);
+}
+function onPlayerReady(event) {
+    // Player is ready
+    var duration = player.getDuration();
+    console.log(duration)
+    progressSlider.max = duration;
+    playedProgress.max = duration;
+    bufferedProgress.max = duration;
+
+    playButton.onclick = togglePlay;
+    progressSlider.addEventListener('input', onSliderChange);
+    volumeSlider.addEventListener('input', onVolumeChange);
+    document.getElementById('durationTime').innerHTML = formatTime(duration)
+    timeUpdateInterval = setInterval(updateTimeDisplay, 1000);
+
+}
+
+
+function onPlayerStateChange(event) {
+    // Player state changed
+    if (event.data === YT.PlayerState.PLAYING) {
+        // Video is playing
+        playButton.innerHTML = 'Pause'; // Update button text
+        // playButton.className = 'ri-pause-fill icon-pause';
+    } else {
+        // Video is paused or ended
+        playButton.innerHTML = 'Play'; // Update button text
+        // playButton.className = 'ri-play-fill icon-play';
+    }
+
+}
+
+function onPlaybackQualityChange(event) {
+    // Quality of playback has changed
+    console.log('Playback quality changed');
+}
+
+function onPlayerProgress(event) {
+    // Update progress time and timeline
+    var currentTime = player.getCurrentTime(); // Retrieves the time  the video play now
+    var duration = player.getDuration(); // Retrieves the total time of the video
+    var buffered = player.getVideoLoadedFraction() * duration;
+    var played = currentTime;
+
+    playedProgress.value = played;
+    bufferedProgress.value = buffered;
+    progressSlider.value = played;
+
+    var playedWidth = (played / duration) * 100;
+    var bufferedWidth = (buffered / duration) * 100;
+    timeline.style.width = playedWidth + '%';
+    bufferedProgress.style.width = bufferedWidth + '%';
+
+}
+
+function onSliderChange() {
+    // Seek to the specified time when slider value changes
+    var currentTime = progressSlider.value;
+    player.seekTo(currentTime);
+    document.getElementById('durationTime').innerHTML = formatTime(player.getDuration() - currentTime)
+}
+
+
+
+function togglePlay() {
+    if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+        player.pauseVideo();
+    } else {
+        player.playVideo();
+    }
+}
+
+function playVideo() {
+    player.playVideo();
+}
+
+function pauseVideo() {
+    player.pauseVideo();
+}
+
+function formatTime(duration) {
+    var minutes = Math.floor(duration / 60);
+    var seconds = Math.floor(duration % 60);
+
+    // Add leading zeros if necessary
+    var formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
+    var formattedSeconds = seconds < 10 ? "0" + seconds : seconds;
+
+    return formattedMinutes + ":" + formattedSeconds;
+
+}
+function updateTimeDisplay() {
+    var currentTime = player.getCurrentTime(); // Retrieves the time the video is currently playing
+    var duration = player.getDuration(); // Retrieves the total duration of the video
+    var remainingTime = duration - currentTime; // Calculates the remaining time
+
+    document.getElementById('durationTime').innerHTML = formatTime(remainingTime);
+}
+function onPlayerError() {
+    // here is if there is error with the song
+    player.destroy()
+}
+function PlayButtonOnClick(data) {
+    document.getElementById('clear_playlist').click(); // need to check what happen if i delete this element
+
+    if (player && player.getPlayerState() === YT.PlayerState.PLAYING) {
+        player.stopVideo(); // Stop the currently playing video
+        player.destroy(); // destroy the old vidio
+
+    }
+
+    console.log(document.getElementById('playerR'))
+
+    AddPlayedForSongByGivenUserId((status) => {
+        // console.log(status)
+    }, data.id, User.id);
+    player = new YT.Player('playerR', {
+        height: '0',
+        width: '0',
+        videoId: data.youtubeId,
+        playerVars: {
+            autoplay: 1, // Enable autoplay
+        },
+        events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange,
+            'onPlaybackQualityChange': onPlaybackQualityChange,
+            'onProgress': onPlayerProgress,
+            'onError': onPlayerError
+        }
+    });
+}
+
+
+
 function navigateToPageArtistDetails(data) {
     var ArtistDetails = { artistName: data.artistName, content: data.content, published: data.published, listeners: data.listeners, playcount: data.playcount, likes: data.likes };
     localStorage.setItem('ArtistDetails', JSON.stringify(ArtistDetails));
 }
 function navigateToPageSongDetails(data) {
     console.log(data.lyriclink)
-    var SongDetails = { id: data.id, artistName: data.artistName, name: data.name, likes: data.likes, lyriclink: data.lyricLink, urlLink: data.urlLink, youtubeId : data.youtubeId };
+    var SongDetails = { id: data.id, artistName: data.artistName, name: data.name, likes: data.likes, lyriclink: data.lyricLink, urlLink: data.urlLink, youtubeId: data.youtubeId };
     localStorage.setItem('SongDetails', JSON.stringify(SongDetails));
 }

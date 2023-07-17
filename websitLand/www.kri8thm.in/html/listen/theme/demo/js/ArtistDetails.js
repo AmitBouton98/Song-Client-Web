@@ -10,6 +10,7 @@
 // });
 function LoadArtistPage() {
     var data = JSON.parse(localStorage.getItem('ArtistDetails'));
+    document.getElementById('clear_playlist').click();
     AddInfoArtist(data)
     GetSongsForArtis((songs) => {
         console.log(songs)
@@ -57,11 +58,11 @@ function AddSongForArtist(data) {
     // Create the outer div with the appropriate classes
     var listDiv = document.createElement('div');
     listDiv.className = 'list__item';
-    listDiv.setAttribute('data-song-id', '11');
+    listDiv.setAttribute('data-song-id', '0');
     listDiv.setAttribute('data-song-name', data.name);
     listDiv.setAttribute('data-song-artist', data.artistName);
-    listDiv.setAttribute('data-song-album', 'Sadness');
-    listDiv.setAttribute('data-song-url', 'audio/ringtone-8.mp3');
+    // listDiv.setAttribute('data-song-album', 'Sadness');
+    // listDiv.setAttribute('data-song-url', 'audio/ringtone-8.mp3');
     listDiv.setAttribute('data-song-cover', 'images/cover/small/11.jpg');
 
     // Create the cover div
@@ -77,27 +78,35 @@ function AddSongForArtist(data) {
     var playButtonLink = document.createElement('a');
     // playButtonLink.href = 'javascript:void(0);';
     playButtonLink.className = 'btn btn-play btn-sm btn-default btn-icon rounded-pill';
-    playButtonLink.setAttribute('data-play-id', '8');
+    playButtonLink.setAttribute('data-play-id', '0');
     playButtonLink.setAttribute('aria-label', 'Play pause');
     playButtonLink.onclick = () => {
+        document.getElementById('clear_playlist').click();
         AddPlayedForSongByGivenUserId((status) => {
             console.log(status)
         }, data.id, User.id)
     }
     var playButtonIconPlay = document.createElement('i');
     playButtonIconPlay.className = 'ri-play-fill icon-play';
-
+    playButtonIconPlay.onclick = () => {
+        playVideo
+    }
     var playButtonIconPause = document.createElement('i');
     playButtonIconPause.className = 'ri-pause-fill icon-pause';
+    playButtonIconPause.onclick = () => {
+        pauseBtn
+    }
+
+
+
 
     // Append the play button icons to the play button link
     playButtonLink.appendChild(playButtonIconPlay);
     playButtonLink.appendChild(playButtonIconPause);
-    playButtonLink.onclick = ()=>{
-        AddPlayedForSongByGivenUserId((status)=>{
-            console.log(status)
-        },data.id,User.id)
+    playButtonLink.onclick = () => {
+        PlayButtonOnClick(data)
     }
+
     // Append the cover image and play button link to the cover div
     coverDiv.appendChild(coverImg);
     coverDiv.appendChild(playButtonLink);
@@ -197,7 +206,7 @@ function AddSongForArtist(data) {
 
     // Create the duration
     var durationListItem = document.createElement('li');
-    durationListItem.textContent = '04:43'; // need to find the time *********
+    durationListItem.textContent = ''; // need to find the time *********
 
     // Create the dropdown menu
     var dropdownMenu = document.createElement('ul');
