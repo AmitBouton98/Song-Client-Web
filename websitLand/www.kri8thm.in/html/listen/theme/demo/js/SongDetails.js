@@ -28,8 +28,11 @@ function AddInfoSong(data) {
         NumberofFavoritesForSong.innerHTML = num
     }, data.id)
 
+    let Url = document.createElement("li")
+    Url.innerHTML = `<a href="https://www.youtube.com/watch?v=${data.youtubeId}"><b>Youtube link</b> </a>`
 
     ul.appendChild(id)
+    ul.appendChild(Url)
 
     let SongArtistDetails = document.getElementById("SongArtistDetails")
     SongArtistDetails.innerHTML = data.artistName

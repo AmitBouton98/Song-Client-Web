@@ -150,6 +150,18 @@ function ChnageYoutubeId(callback, SongId, YoutubeId) {
     });
     return false;
 }
+function GetNumberOfUsers(callback) {
+    ajaxCall("GET", `${api}/UserMusics/GetNumberOfUsers`, "", function (data) {
+        callback(data)
+    }, NotFound);
+    return false;
+}
+function GetNumberOfSongs(callback) {
+    ajaxCall("GET", `${api}/SongMusics/GetNumberOfSongs`, "", function (data) {
+        callback(data)
+    }, NotFound);
+    return false;
+}
 function NotFound(error) {
     console.log("Not found")
     console.log(error.responseText)

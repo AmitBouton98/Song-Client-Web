@@ -10,12 +10,12 @@ var User = JSON.parse(localStorage.getItem('User'));
  function LoadGenerePage() {
     GetAllSongs((data) => {
         for (item of data) {
-            AddSongForArtist(item)
+            AddSongToPage(item,"SongS")
         }
     })
 }
 
-function AddSongForArtist(data) {
+function AddSongToPage(data,ToWhereAppand) {
     // Create the outer div with the appropriate classes
     var listDiv = document.createElement('div');
     listDiv.className = 'list__item';
@@ -32,9 +32,8 @@ function AddSongForArtist(data) {
 
     // Create the cover image
     var coverImg = document.createElement('img');
-    coverImg.src = data.urlLink
-    // coverImg.src = 'images/cover/small/11.jpg'; // img of the song
-    coverImg.alt = 'Sadness';
+    coverImg.src = data.urlLink; // img of the song
+    coverImg.alt = data.name;
 
     // Create the play button
     var playButtonLink = document.createElement('a');
@@ -286,5 +285,6 @@ function AddSongForArtist(data) {
     listDiv.appendChild(contentDiv);
     listDiv.appendChild(optionsList);
 
-    document.getElementById("SongS").appendChild(listDiv)
+    document.getElementById(ToWhereAppand).appendChild(listDiv)
+    // document.getElementById("SongS").appendChild(listDiv)
 }
