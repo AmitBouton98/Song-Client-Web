@@ -14,7 +14,7 @@ function LoadArtistPage() {
     AddInfoArtist(data)
     GetSongsForArtis((songs) => {
         for (item of songs) {
-            AddSongToPage(item,"SongForArtist")
+            AddSongToPage(item,"SongForArtist") 
         }
     }, data.artistName)
 }

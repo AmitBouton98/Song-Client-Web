@@ -405,6 +405,13 @@ function onPlayerError() {
     player.destroy()
 }
 function PlayButtonOnClick(data) {
+    AddPlayedForSongByGivenUserId((status) => {
+        if (window.location.href.includes('song-details.html')) {
+            document.getElementById("ListenMusic").innerHTML = Number(document.getElementById("ListenMusic").innerHTML) + 1
+        }
+        // console.log(status)
+    }, data.id, User.id)
+
     document.getElementById('clear_playlist').click(); // need to check what happen if i delete this element
 
     if (player && player.getPlayerState() === YT.PlayerState.PLAYING) {
@@ -415,9 +422,9 @@ function PlayButtonOnClick(data) {
 
     console.log(document.getElementById('playerR'))
 
-    AddPlayedForSongByGivenUserId((status) => {
-        // console.log(status)
-    }, data.id, User.id);
+    // AddPlayedForSongByGivenUserId((status) => {
+    //     // console.log(status)
+    // }, data.id, User.id);
     player = new YT.Player('playerR', {
         height: '0',
         width: '0',

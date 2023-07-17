@@ -81,26 +81,7 @@ function AddInfoSong(data) {
     listDiv.setAttribute('data-song-cover', 'images/cover/small/11.jpg');
     let btnPlay = document.getElementById("SongPlay")
     btnPlay.onclick = () => {
-        AddPlayedForSongByGivenUserId((status) => {
-            document.getElementById("ListenMusic").innerHTML = Number(document.getElementById("ListenMusic").innerHTML)+1 
-
-            // console.log(status)
-        }, data.id, User.id)
-        player = new YT.Player('playerR', {
-            height: '0',
-            width: '0',
-            videoId: data.youtubeId,
-            playerVars: {
-                autoplay: 1, // Enable autoplay
-            },
-            events: {
-                'onReady': onPlayerReady,
-                'onStateChange': onPlayerStateChange,
-                'onPlaybackQualityChange': onPlaybackQualityChange,
-                'onProgress': onPlayerProgress
-            }
-        });
-        console.log("here")
+        PlayButtonOnClick(data) 
     }
 
     let ImgSongUrl = document.getElementById("ImgSongUrl")
