@@ -45,6 +45,32 @@ function AddInfoSong(data) {
         document.getElementById("ListenMusic").innerHTML = num
     }, data.id)
 
+    let FavoriteSongsNum = document.getElementById("FavoriteSongsNum")
+    GetFavoriteSongByUserId((d)=>{
+        for(item of d){
+            if(item.id == data.id){
+                FavoriteSongsNum.style.color = "red"
+                FavoriteSongsNum.className = 'ri-heart-fill heart-empty';
+            }
+        }
+    },User.id)
+    FavoriteSongsNum.onclick = () => { // set favorite song to user
+        if (FavoriteSongsNum.style.color == "red") {
+            DeleteFavoriteSongToUser((d) => {
+                FavoriteSongsNum.className = 'ri-heart-line heart-empty';
+                FavoriteSongsNum.style.color = ""
+                document.getElementById("NumberofFavoritesForSong").innerHTML = Number(document.getElementById("NumberofFavoritesForSong").innerHTML)-1 
+            }, User.id, data.id)
+        }
+        else {
+            PutFavoriteSongToUser((d) => {
+                FavoriteSongsNum.className = 'ri-heart-fill heart-empty';
+                FavoriteSongsNum.style.color = "red"
+                document.getElementById("NumberofFavoritesForSong").innerHTML = Number(document.getElementById("NumberofFavoritesForSong").innerHTML)+1 
+            }, User.id, data.id)
+        }
+    }
+
     // changing the info when play
     var listDiv = document.getElementById("SongPlayDetails");
     listDiv.setAttribute('data-song-id', '0');
@@ -56,6 +82,8 @@ function AddInfoSong(data) {
     let btnPlay = document.getElementById("SongPlay")
     btnPlay.onclick = () => {
         AddPlayedForSongByGivenUserId((status) => {
+            document.getElementById("ListenMusic").innerHTML = Number(document.getElementById("ListenMusic").innerHTML)+1 
+
             // console.log(status)
         }, data.id, User.id)
         player = new YT.Player('playerR', {

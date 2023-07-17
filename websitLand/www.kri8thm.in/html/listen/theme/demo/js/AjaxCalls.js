@@ -55,9 +55,15 @@ function GetNumberOfListenersToMusic(callback, SongId) {
     }, NotFound);
     return false;
 }
-GetNumberOfPlayedForGivenArtist
+
 function GetTheNumberOfAppearanceInUserByGivenSong(callback, SongId) {
     ajaxCall("GET", `${api}/SongMusics/GetTheNumberOfAppearanceInUserByGivenSong/SongId/${SongId}`, "", function (data) {
+        callback(data)
+    }, NotFound);
+    return false;
+}
+function GetTheNumberOfAppearanceInUserByGivenArtist(callback, ArtistName) {
+    ajaxCall("GET", `${api}/ArtistMusics/GetTheNumberOfAppearanceInUserByGivenArtist/ArtistName/${ArtistName}`, "", function (data) {
         callback(data)
     }, NotFound);
     return false;
@@ -158,6 +164,18 @@ function GetNumberOfUsers(callback) {
 }
 function GetNumberOfSongs(callback) {
     ajaxCall("GET", `${api}/SongMusics/GetNumberOfSongs`, "", function (data) {
+        callback(data)
+    }, NotFound);
+    return false;
+}
+function PutFavoriteArtistToUser(callback, UserId,Artist) {
+    ajaxCall("PUT", `${api}/ArtistMusics/Put?UserId=${UserId}&ArtistName=${Artist}`, "", function (data) {
+        callback(data)
+    }, NotFound);
+    return false;
+}
+function DeleteFavoriteArtistToUser(callback, UserId,Artist) {
+    ajaxCall("DELETE", `${api}/ArtistMusics/Delete?UserId=${UserId}&ArtistName=${Artist}`, "", function (data) {
         callback(data)
     }, NotFound);
     return false;

@@ -46,11 +46,39 @@ function AddInfoArtist(data) {
     let ArtistLikes = document.getElementById("ArtistLikes")
     ArtistLikes.textContent = data.likes
 
-    GetNumberOfPlayedForGivenArtist((item) => {
-        console.log(item)
-        document.getElementById("PlayNumberForArtist").innerHTML = item
+    GetNumberOfPlayedForGivenArtist((num) => {
+        console.log(num)
+        document.getElementById("PlayNumberForArtist").innerHTML = num
     }, data.artistName)
+    GetTheNumberOfAppearanceInUserByGivenArtist((num)=>{
+        document.getElementById("FavoritesArtist").innerHTML = num
+    },data.artistName)
 
+    let heartFavorite = document.getElementById("AddArtistToFavorite")
+    GetFavoriteArtistByUserId((d)=>{
+        for(item of d){
+            if(item.artistName == data.artistName){
+                heartFavorite.style.color = "red"
+                heartFavorite.className = 'ri-heart-fill heart-empty';
+            }
+        }
+    },User.id)
+    heartFavorite.onclick = () => { // set favorite song to user
+        if (heartFavorite.style.color == "red") {
+            DeleteFavoriteArtistToUser((d) => {
+                heartFavorite.className = 'ri-heart-line heart-empty';
+                heartFavorite.style.color = ""
+                document.getElementById("FavoritesArtist").innerHTML = Number(document.getElementById("FavoritesArtist").innerHTML)-1 
+            }, User.id, data.artistName)
+        }
+        else {
+            PutFavoriteArtistToUser((d) => {
+                heartFavorite.className = 'ri-heart-fill heart-empty';
+                heartFavorite.style.color = "red"
+                document.getElementById("FavoritesArtist").innerHTML = Number(document.getElementById("FavoritesArtist").innerHTML)+1 
+            }, User.id, data.artistName)
+        }
+    }
 
 }
 // function AddSongForArtist1(data) {
