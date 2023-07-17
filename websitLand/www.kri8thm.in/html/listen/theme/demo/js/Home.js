@@ -323,6 +323,7 @@ function onPlayerStateChange(event) {
 function onPlaybackQualityChange(event) {
     // Quality of playback has changed
     console.log('Playback quality changed');
+
 }
 
 function onPlayerProgress(event) {
@@ -340,7 +341,6 @@ function onPlayerProgress(event) {
     var bufferedWidth = (buffered / duration) * 100;
     timeline.style.width = playedWidth + '%';
     bufferedProgress.style.width = bufferedWidth + '%';
-
 }
 
 function onSliderChange() {
@@ -353,6 +353,7 @@ function onSliderChange() {
 
 
 function togglePlay() {
+
     if (player.getPlayerState() === YT.PlayerState.PLAYING) {
         player.pauseVideo();
     } else {
@@ -361,10 +362,12 @@ function togglePlay() {
 }
 
 function playVideo() {
+
     player.playVideo();
 }
 
 function pauseVideo() {
+
     player.pauseVideo();
 }
 
@@ -380,11 +383,13 @@ function formatTime(duration) {
 
 }
 function updateTimeDisplay() {
+
     var currentTime = player.getCurrentTime(); // Retrieves the time the video is currently playing
     var duration = player.getDuration(); // Retrieves the total duration of the video
     var remainingTime = duration - currentTime; // Calculates the remaining time
 
     document.getElementById('durationTime').innerHTML = formatTime(remainingTime);
+    progressSlider.value = currentTime // changing the progress slider for current time (every 1 sec)
 }
 function onPlayerError() {
     // here is if there is error with the song
