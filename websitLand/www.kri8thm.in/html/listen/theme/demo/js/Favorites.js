@@ -3,7 +3,7 @@ var data = JSON.parse(localStorage.getItem('User'));
 function LoadFavoritesPage(){
     GetAllFavoriteSongForGivenUserId((d)=>{
         for(item of d){
-            AddSongForArtist(item)
+            AddSongToPage(item,"SongS")
         }
     },data.id)
 }

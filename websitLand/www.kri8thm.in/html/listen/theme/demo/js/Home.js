@@ -123,21 +123,30 @@ function CreateElemFromReasrch(data, WhereToInster, song) {
     artistLink.textContent = data.artistName; // name of the artist
     if (song) {
         // add the artist to local storage !
-        listDiv.addEventListener('click', function (event) {
+        artistLink.onclick = function (event) {
             // event.preventDefault();
             navigateToPageArtistDetails(data)
             console.log('Title link clicked');
             // Add your code here to handle the click event for the title link
-        });
+        };
     }
     else {
         // add the song to local storage !
-        listDiv.addEventListener('click', function (event) {
+        titleLink.onclick = function (event) {
             // event.preventDefault();
             navigateToPageSongDetails(data) // need to add ************
             console.log('Title link clicked');
             // Add your code here to handle the click event for the title link
-        });
+        };
+        getArtistByName((d) => {
+            // add the artist to local storage !
+            artistLink.onclick = function (event) {
+                // event.preventDefault();
+                navigateToPageArtistDetails(d)
+                console.log('Title link clicked');
+                // Add your code here to handle the click event for the title link
+            };
+        }, data.artistName)
     }
 
     // Append the artist link to the subtitle paragraph
@@ -429,6 +438,7 @@ function PlayButtonOnClick(data) {
 
 
 function navigateToPageArtistDetails(data) {
+    console.log(data)
     var ArtistDetails = { artistName: data.artistName, content: data.content, published: data.published, listeners: data.listeners, playcount: data.playcount, likes: data.likes };
     localStorage.setItem('ArtistDetails', JSON.stringify(ArtistDetails));
 }
