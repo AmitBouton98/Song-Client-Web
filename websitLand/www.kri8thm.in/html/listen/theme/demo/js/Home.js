@@ -447,7 +447,9 @@ function PlayButtonOnClick(data) {
 
 function navigateToPageArtistDetails(data) {
     console.log(data)
-    var ArtistDetails = { artistName: data.artistName, content: data.content, published: data.published, listeners: data.listeners, playcount: data.playcount, likes: data.likes };
+    // var ArtistDetails = { artistName: data.artistName, content: data.content, published: data.published, listeners: data.listeners, playcount: data.playcount, likes: data.likes };
+    var ArtistDetails = { artistName: data.artistName, likes: data.likes };
+
     localStorage.setItem('ArtistDetails', JSON.stringify(ArtistDetails));
 }
 function navigateToPageSongDetails(data) {

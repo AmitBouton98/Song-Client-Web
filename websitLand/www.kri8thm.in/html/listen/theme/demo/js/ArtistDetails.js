@@ -9,16 +9,29 @@
 //     },data.artistName)
 // });
 function LoadArtistPage() {
-    var data = JSON.parse(localStorage.getItem('ArtistDetails'));
+    var Artist = JSON.parse(localStorage.getItem('ArtistDetails'));
     document.getElementById('clear_playlist').click();
-    AddInfoArtist(data)
-    GetSongsForArtis((songs) => {
-        for (item of songs) {
-            AddSongToPage(item,"SongForArtist") 
+    //}, data.artist.name, data.artist.bio.summary, data.artist.bio.published, data.artist.stats.listeners, data.artist.stats.playcount)
+    GetArtistInfo((d)=>{
+        let data = {
+            artistName: d.artist.name,
+            content: d.artist.bio.summary,
+            likes: 0,
+            listeners: d.artist.stats.listeners,
+            playcount: d.artist.stats.playcount,
+            published: d.artist.bio.published, // need to check how to chenge it
         }
-    }, data.artistName)
+        console.log(data)
+        AddInfoArtist(data)
+        GetSongsForArtis((songs) => {
+            for (item of songs) {
+                AddSongToPage(item,"SongForArtist") 
+            }
+        }, data.artistName)
+    },Artist.artistName)
 }
 function AddInfoArtist(data) {
+    console.log(data)
     // ul is to add the info down to the name
     let ul = document.getElementById("InfoArtistLi")
 

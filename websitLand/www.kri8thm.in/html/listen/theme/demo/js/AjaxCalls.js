@@ -11,7 +11,15 @@ function ajaxCall(method, api, data, successCB, errorCB) {
         success: successCB, // the success callback function
         error: errorCB // the error callback function
     });
-
+}
+function GetArtistInfo(callback, artist) {
+    ajaxCall("Get", `https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artist}&api_key=458ecbf52daa3d11632dfc7fd9cb1d3f&format=json`, "", function (data) {
+        //swal.fire("Update Sucsessfully!", "", "success");
+        callback(data);
+    }, (data) => {
+        console.log("error")
+    });
+    return false;
 }
 function getSongByName(callback, name) {
     ajaxCall("GET", `${api}/SongMusics/GetSongByName/name/${name}`, "", function (data) {
