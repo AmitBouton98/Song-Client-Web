@@ -92,7 +92,6 @@ function AddInfoArtist(data) {
             }, User.id, data.artistName)
         }
     }
-
 }
 // function AddSongForArtist1(data) {
 //     // Create the outer div with the appropriate classes

@@ -165,6 +165,7 @@ function CreateElemFromReasrch(data, WhereToInster, song) {
 
     div.appendChild(colDiv);
 }
+
 function CreateLargeMusic(data) {
     var swiperSlide = document.createElement('div');
     swiperSlide.className = 'swiper-slide';
@@ -282,8 +283,6 @@ function CreateLargeMusic(data) {
     coverDiv.appendChild(coverFootDiv);
     swiperSlide.appendChild(coverDiv);
     document.getElementById("LargeMusicTop10").appendChild(swiperSlide)
-
-
 
 }
 
