@@ -113,3 +113,12 @@ input {
 #profile_pic::file-selector-button:hover {
     background: #0d45a5;
 }
+
+#go-back-to-login {
+    cursor: pointer;
+}
+
+#forget-btn {
+    cursor: pointer;
+
+}
