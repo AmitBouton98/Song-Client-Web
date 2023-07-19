@@ -9,12 +9,12 @@ function register_user_to_server(user_obj) {
       Swal.fire({
         icon: "info",
         title: `Status code: ${response.status}`,
-        text: `Server message: you registered successfully`,
+        text: `Server message: ${response.responseText}`,
         showConfirmButton: false,
         timer: 1500,
       });
       setTimeout(() => {
-        window.location.replace("../login.html");
+        window.location.replace("./login.html");
       }, 1500);
     },
     (resolve) => {
@@ -22,10 +22,13 @@ function register_user_to_server(user_obj) {
       Swal.fire({
         icon: "info",
         title: `Status code: ${resolve.status}`,
-        text: `Server message: you cannot register the user already exist`,
+        text: `Server message: ${resolve.responseText}`,
         showConfirmButton: false,
         timer: 1500,
       });
+      setTimeout(() => {
+        window.location.replace("./login.html");
+      }, 1500);
     }
   );
 }
@@ -53,24 +56,24 @@ function get_reset_permission(email, callbackfunction) {
     `${api}/UserMusics/GetByemail/email/${email}`,
     null,
     (response) => {
-      sessionStorage.setItem("user", JSON.stringify(response));
-      setTimeout(() => {
-        callbackfunction();
-      }, 1600);
+      sessionStorage.setItem("User", JSON.stringify(response));
       Swal.fire({
         icon: "info",
-        title: `Status code: ${response.status}`,
-        text: `Server message: ${response}`,
+        title: `check your email for the unique key`,
+        text: `Server message: you have premission to reset password email send  to ${response.emial}`,
         showConfirmButton: false,
         timer: 1500,
       });
+      setTimeout(() => {
+        callbackfunction();
+      }, 1600);
     },
     (resolve) => {
       // in time it retyrn 0 then goes here because of that we need to do theis
       Swal.fire({
         icon: "info",
         title: `Status code: ${resolve.status}`,
-        text: `Server message: ${resolve}`,
+        text: `Server message: ${resolve.responseText}`,
         showConfirmButton: false,
         timer: 1500,
       });
@@ -83,7 +86,7 @@ function change_user_password(uniquekey, email, password) {
     `${api}/UserMusics/CheckIfKeyCorrect?key=${uniquekey}&email=${email}&password=${password}`,
     null,
     (response) => {
-      sessionStorage.setItem("user", JSON.stringify(response));
+      sessionStorage.setItem("User", JSON.stringify(response));
       console.log(response);
       Swal.fire({
         icon: "success",
@@ -98,7 +101,7 @@ function change_user_password(uniquekey, email, password) {
       Swal.fire({
         icon: "info",
         title: `Status code: ${resolve.status}`,
-        text: `Server message: ${resolve}`,
+        text: `Server message: ${resolve.responseText}`,
         showConfirmButton: false,
         timer: 1500,
       });
@@ -111,7 +114,7 @@ function loginUser(email, password) {
     `${api}/UserMusics/CheckIfExists?email=${email}&password=${password}`,
     null,
     (response) => {
-      sessionStorage.setItem("user", JSON.stringify(response));
+      sessionStorage.setItem("User", JSON.stringify(response));
       Swal.fire({
         icon: "success",
         title: `Correct info`,
@@ -128,7 +131,7 @@ function loginUser(email, password) {
       Swal.fire({
         icon: "info",
         title: `Status code: ${resolve.status}`,
-        text: `Server message: ${resolve}`,
+        text: `Server message: ${resolve.responseText}`,
         showConfirmButton: false,
         timer: 1500,
       });
