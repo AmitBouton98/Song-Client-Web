@@ -1,4 +1,4 @@
-var User = JSON.parse(localStorage.getItem('User'));
+var User = JSON.parse(sessionStorage.getItem('User'));
 var apiKey = 'AIzaSyAu-HyPrbv66uCgbXS7lvlyQpSCC7gq7Ho';
 var player
 $(document).ready(function () {
@@ -450,10 +450,10 @@ function navigateToPageArtistDetails(data) {
     // var ArtistDetails = { artistName: data.artistName, content: data.content, published: data.published, listeners: data.listeners, playcount: data.playcount, likes: data.likes };
     var ArtistDetails = { artistName: data.artistName, likes: data.likes };
 
-    localStorage.setItem('ArtistDetails', JSON.stringify(ArtistDetails));
+    sessionStorage.setItem('ArtistDetails', JSON.stringify(ArtistDetails));
 }
 function navigateToPageSongDetails(data) {
     console.log(data.lyriclink)
     var SongDetails = { id: data.id, artistName: data.artistName, name: data.name, likes: data.likes, lyriclink: data.lyricLink, urlLink: data.urlLink, youtubeId: data.youtubeId };
-    localStorage.setItem('SongDetails', JSON.stringify(SongDetails));
+    sessionStorage.setItem('SongDetails', JSON.stringify(SongDetails));
 }

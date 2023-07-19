@@ -3,7 +3,7 @@
 //     AddInfoSong(data)
 // });
 function LoadSongDetailsPage() {
-    var data = JSON.parse(localStorage.getItem('SongDetails'));
+    var data = JSON.parse(sessionStorage.getItem('SongDetails'));
     // console.log(data)
     AddInfoSong(data)
 }

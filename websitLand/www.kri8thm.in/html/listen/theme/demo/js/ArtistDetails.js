@@ -9,7 +9,7 @@
 //     },data.artistName)
 // });
 function LoadArtistPage() {
-    var Artist = JSON.parse(localStorage.getItem('ArtistDetails'));
+    var Artist = JSON.parse(sessionStorage.getItem('ArtistDetails'));
     document.getElementById('clear_playlist').click();
     //}, data.artist.name, data.artist.bio.summary, data.artist.bio.published, data.artist.stats.listeners, data.artist.stats.playcount)
     GetArtistInfo((d)=>{

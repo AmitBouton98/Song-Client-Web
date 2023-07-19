@@ -1,4 +1,4 @@
-var User = JSON.parse(localStorage.getItem('User'));
+var User = JSON.parse(sessionStorage.getItem('User'));
 
 // $(document).ready(function () {
 //     GetAllSongs((data) => {

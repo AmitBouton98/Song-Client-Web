@@ -1,5 +1,5 @@
 function LoadProfile(){
-    var data = JSON.parse(localStorage.getItem('User'));
+    var data = JSON.parse(sessionStorage.getItem('User'));
     LoadProfileDetails(data)
 }
 

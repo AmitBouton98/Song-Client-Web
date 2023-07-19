@@ -1,4 +1,4 @@
-var data = JSON.parse(localStorage.getItem('User'));
+var data = JSON.parse(sessionStorage.getItem('User'));
 
 function LoadFavoritesPage(){
     GetAllFavoriteSongForGivenUserId((d)=>{
