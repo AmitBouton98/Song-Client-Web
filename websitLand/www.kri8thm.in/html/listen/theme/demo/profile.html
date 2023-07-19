@@ -38,7 +38,6 @@
     <script src="js/AjaxCalls.js"></script>
     <script src="js/Home.js"></script>
     <script src="js/Profile.js"></script>
-    <script defer src="./js/Registr.js"></script>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css">
     <link rel="stylesheet" href="css/login.css">
@@ -219,84 +218,90 @@
                         </div>
                         <div class="plan__data">
                             <div class="px-4 pt-2 pe-xl-0 pt-sm-0 mt-4 mb-3 my-sm-0 w-100">
-                                <div class="d-flex align-items-center mb-4">
-                                    <div class="avatar avatar--xl">
-                                        <div class="avatar__image"><img class="user-image" src="images/users/thumb.jpg"
-                                                alt="user"></div>
-                                    </div>
-                                    <div id="upload-input">
-                                        <label for="profile_pic" class="form-label fw-medium">Change image
-                                            <span></span></label>
-                                        <input class="disable-valid-css" type="file" id="profile_pic" name="file"
-                                            accept=".png, .jpg" />
-                                    </div>
-                                </div>
-                                <div class="row g-4">
-                                    <div class="col-sm-6"><label for="f_name"
-                                            class="form-label fw-medium disable-valid-css">First
-                                            name</label> <input required type="text" id="FirstNameUser"
-                                            class="form-control" value="Androws"></div>
-                                    <div class="col-sm-6"><label for="l_name" class="form-label fw-medium">Last
-                                            name</label> <input required type="text" id="LastNameUser"
-                                            class="form-control" value="Kinny"></div>
-                                    <!-- i set visibility to be hidden for changepassword location -->
-                                    <!-- <div class="col-sm-6"><label for="location" class="form-label fw-medium"></label>
-                                        <input type="text" id="location" class="form-control disable-valid-css"
-                                            value="Australia" style="visibility: hidden;">
-                                    </div> -->
-                                    <div class="col-sm-6"><label for="password" class="form-label fw-medium">Password
-                                            <span style="color: red;">*</span></label>
-                                        <div class="row-grid g-12-1 vertical_align horizantal_align">
-                                            <input type="password" id="password" class="form-control"
-                                                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$"
-                                                oninvalid="this.setCustomValidity('Enter a valid password')">
-                                            <i class="fa-solid fa-eye" style="color: #0e5ce1;" data-eye="password"></i>
+                                <form action="#" id="change_user_data_form">
+
+                                    <div class="d-flex align-items-center mb-4">
+                                        <div class="avatar avatar--xl">
+                                            <div class="avatar__image"><img class="user-image"
+                                                    src="images/users/thumb.jpg" alt="user"></div>
                                         </div>
-                                        <ul class="validate-list" style="padding: .4375rem .9375rem;">
-                                            <li class="inValid" id="password-pattern1">At least length 8 chars </li>
-                                            <li class="inValid" id="password-pattern2">At least One number </li>
-                                            <li class="inValid" id="password-pattern3">At least One small latter </li>
-                                            <li class="inValid" id="password-pattern4">At least One capital latter </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-sm-6"><label for="c_password" class="form-label fw-medium">Confirm
-                                            Password <span style="color: red;">*</span></label>
-                                        <div class="row-grid g-12-1 vertical_align horizantal_align"><input
-                                                type="password" id="c_password" class="form-control">
-                                            <i class="fa-solid fa-eye" style="color: #0e5ce1;"
-                                                data-eye="c_password"></i>
+                                        <div id="upload-input">
+                                            <label for="profile_pic" class="form-label fw-medium">Change image
+                                                <span></span></label>
+                                            <input class="disable-valid-css" type="file" id="profile_pic" name="file"
+                                                accept=".png, .jpg" />
                                         </div>
                                     </div>
-                                    <!-- <div class="col-12"><label for="about" class="form-label fw-medium">About</label>
-                                        <textarea name="about" id="about" cols="30" rows="5"
-                                            class="form-control">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vero aspernatur veniam eum distinctio repudiandae. Nihil cum quas dolores. Beatae odio temporibus quisquam quae! Possimus repellat sapiente incidunt.</textarea>
-                                    </div> -->
-                                    <div class="col-6"></div>
-                                    <div class="col-6 text-end"><button type="button" class="btn btn-primary"
-                                            id="SaveProfileDetails">Save
-                                            changes</button></div>
-                                    <!-- <div class="col-6"><button type="button" class="btn btn-primary"
-                                            id="ChangePasswordUser">Change password</button></div> -->
-                                </div>
+                                    <div class="row g-4">
+                                        <div class="col-sm-6"><label for="f_name"
+                                                class="form-label fw-medium disable-valid-css">First
+                                                name <span style="color: red;">*</span></label> <input required
+                                                type="text" id="firstName" class="form-control" value="Androws"></div>
+                                        <div class="col-sm-6"><label for="l_name" class="form-label fw-medium">Last
+                                                name <span style="color: red;">*</span></label> <input required
+                                                type="text" id="lastName" class="form-control" value="Kinny"></div>
+                                        <!-- i set visibility to be hidden for changepassword location -->
+                                        <!-- <div class="col-sm-6"><label for="location" class="form-label fw-medium"></label>
+                                            <input type="text" id="location" class="form-control disable-valid-css"
+                                                value="Australia" style="visibility: hidden;">
+                                        </div> -->
+                                        <div class="col-sm-6"><label for="old_password" class="form-label fw-medium">Old
+                                                Password </label>
+                                            <div class="row-grid g-12-1 vertical_align horizantal_align"><input
+                                                    type="password" id="old_password" class="form-control">
+                                                <i class="fa-solid fa-eye" style="color: #0e5ce1;"
+                                                    data-eye="old_password"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6"><label for="password" class="form-label fw-medium ">New
+                                                password
+                                            </label>
+                                            <div class="row-grid g-12-1 vertical_align horizantal_align">
+                                                <input type="password" id="password" class="form-control"
+                                                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$"
+                                                    oninvalid="this.setCustomValidity('Enter a valid password')">
+                                                <i class="fa-solid fa-eye" style="color: #0e5ce1;"
+                                                    data-eye="password"></i>
+                                            </div>
+                                            <ul class="validate-list" style="padding: .4375rem .9375rem;">
+                                                <li class="inValid" id="password-pattern1">At least length 8 chars </li>
+                                                <li class="inValid" id="password-pattern2">At least One number </li>
+                                                <li class="inValid" id="password-pattern3">At least One small latter
+                                                </li>
+                                                <li class="inValid" id="password-pattern4">At least One capital latter
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <!-- <div class="col-12"><label for="about" class="form-label fw-medium">About</label>
+                                            <textarea name="about" id="about" cols="30" rows="5"
+                                                class="form-control">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vero aspernatur veniam eum distinctio repudiandae. Nihil cum quas dolores. Beatae odio temporibus quisquam quae! Possimus repellat sapiente incidunt.</textarea>
+                                        </div> -->
+                                        <div class="col-6"></div>
+                                        <div class="col-6 text-end"><input type="submit" class="btn btn-primary"
+                                                id="SaveProfileDetails" value="save changes"></div>
+                                        <!-- <div class="col-6"><button type="button" class="btn btn-primary"
+                                                id="ChangePasswordUser">Change password</button></div> -->
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <footer id="footer">
-                <div class="container">
-                    <div class="text-center mb-4"><a href="mailto:info@listenapp.com"
-                            class="display-5 email">info@listenapp.com</a></div>
-                    <div class="app-btn-group pt-2"><a href="#" class="btn btn-lg btn-primary">
-                            <div class="btn__wrap"><i class="ri-google-play-fill"></i> <span class="ms-2">Google
-                                    Play</span></div>
-                        </a><a href="#" class="btn btn-lg btn-primary">
-                            <div class="btn__wrap"><i class="ri-app-store-fill"></i> <span class="ms-2">App Store</span>
-                            </div>
-                        </a></div>
-                </div>
-            </footer>
-        </main>
+    </div>
+    <footer id="footer">
+        <div class="container">
+            <div class="text-center mb-4"><a href="mailto:info@listenapp.com"
+                    class="display-5 email">info@listenapp.com</a></div>
+            <div class="app-btn-group pt-2"><a href="#" class="btn btn-lg btn-primary">
+                    <div class="btn__wrap"><i class="ri-google-play-fill"></i> <span class="ms-2">Google
+                            Play</span></div>
+                </a><a href="#" class="btn btn-lg btn-primary">
+                    <div class="btn__wrap"><i class="ri-app-store-fill"></i> <span class="ms-2">App Store</span>
+                    </div>
+                </a></div>
+        </div>
+    </footer>
+    </main>
     </div>
     <div id="player">
         <div class="container">

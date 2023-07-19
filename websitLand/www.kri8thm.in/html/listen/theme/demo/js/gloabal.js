@@ -22,6 +22,7 @@ function checkPasswordMatch() {
     document.getElementById("c_password").setCustomValidity("Invalid field.");
   }
 }
+
 // get the current date as yyy-mm-dd
 function getCurrentDate() {
   return new Date().toJSON().slice(0, 10);

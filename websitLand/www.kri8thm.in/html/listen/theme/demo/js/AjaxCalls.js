@@ -169,13 +169,13 @@ function UpdateUserDetails(callback, first, last, email, id) {
   );
   return false;
 }
-function ChangePassowrdForUser(callback, id, OldPassowrd, NewPassword) {
+function ChangePassowrdForUser(id, OldPassowrd, NewPassword) {
   ajaxCall(
     "PUT",
     `${api}/UserMusics/Put?id=${id}&password=${OldPassowrd}&passwordToChange=${NewPassword}`,
     "",
     function (data) {
-      callback(data);
+      callback();
       swal.fire("Password Changed", "Secessfuly", "success");
     },
     () => {
