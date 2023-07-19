@@ -35,7 +35,7 @@ function registerUser() {
     password: $("#password").val(),
     imgUrl: file_flag
       ? `${$("#email").val()}.${image_extension}`
-      : `defualt.${image_extension}`,
+      : `default.${image_extension}`, // updated now
     registrationDate: getCurrentDate(),
   };
   // send the user to the server
