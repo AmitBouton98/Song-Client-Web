@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  const user_info = JSON.parse(sessionStorage.getItem("user"));
+  const user_info = JSON.parse(sessionStorage.getItem("User"));
   if (user_info != undefined) {
     goToWebsite();
   }

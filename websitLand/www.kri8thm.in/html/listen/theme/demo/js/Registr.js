@@ -27,7 +27,7 @@ function registerUser() {
     ? $("#profile_pic")[0].files[0].name.split(".").pop()
     : "png";
   // the id and the image path is automatic generated
-  const user_boj = {
+  const user_obj = {
     id: "-1",
     first: $("#firstName").val(),
     last: $("#lastName").val(),
@@ -39,10 +39,9 @@ function registerUser() {
     registrationDate: getCurrentDate(),
   };
   // send the user to the server
-  register_user_to_server(user_boj);
+  register_user_to_server(user_obj);
   // send the picture of the user to the server
   if (file_flag) upload_image($("#email").val(), image_extension);
-  //   location.replace("./home.html");
 }
 
 //upload the file to the server
@@ -55,6 +54,5 @@ function upload_image(userEmail, image_extension) {
     // the form data funciton give us the appilty to assign new name to the fiel
     data.append("file", file, `${userEmail}.${image_extension}`);
   }
-  console.log(data);
   upload_user_profile_pic(data);
 }

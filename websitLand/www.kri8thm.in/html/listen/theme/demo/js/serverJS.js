@@ -9,17 +9,20 @@ function register_user_to_server(user_obj) {
       Swal.fire({
         icon: "info",
         title: `Status code: ${response.status}`,
-        text: `Server message: ${response}`,
+        text: `Server message: you registered successfully`,
         showConfirmButton: false,
         timer: 1500,
       });
+      setTimeout(() => {
+        window.location.replace("../login.html");
+      }, 1500);
     },
     (resolve) => {
       // in time it retyrn 0 then goes here because of that we need to do theis
       Swal.fire({
         icon: "info",
         title: `Status code: ${resolve.status}`,
-        text: `Server message: ${resolve}`,
+        text: `Server message: you cannot register the user already exist`,
         showConfirmButton: false,
         timer: 1500,
       });
@@ -109,7 +112,6 @@ function loginUser(email, password) {
     null,
     (response) => {
       sessionStorage.setItem("user", JSON.stringify(response));
-      console.log(response);
       Swal.fire({
         icon: "success",
         title: `Correct info`,
