@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script language="javascript" type="text/javascript" src="jquery-1.8.2.js"></script>
+    <script defer>
+        $('a.play-video').click(function () {
+            $('.youtube-video')[0].contentWindow.postMessage('{"event":"command","func":"' + 'playVideo' + '","args":""}', '*');
+        });
+
+        $('a.stop-video').click(function () {
+            $('.youtube-video')[0].contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
+        });
+
+        $('a.pause-video').click(function () {
+            $('.youtube-video')[0].contentWindow.postMessage('{"event":"command","func":"' + 'pauseVideo' + '","args":""}', '*');
+        });
+    </script>
+</head>
+
+<body>
+    <audio id="audioPlayer" controls>
+        Your browser does not support the audio element.
+    </audio>
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+    <script src=".//JsonData/random_songs.js"></script>
+    <script>
+        x = 170;
+        i = 1;
+        str = "[";
+        Arr.forEach((element) => {
+            if (i > 170) {
+                str = str + "\"" + element["artist"] + " " + element["song"] + "\"" + ",";
+            }
+            i++;
+        });
+        str = str + "]"
+        console.log(str)
+
+        const audioUrl = `https://www.youtube.com/watch?v=k4lp2LA0GWM`;
+
+        // Set the audio URL and play
+        const audioPlayer = document.getElementById('audioPlayer');
+        audioPlayer.src = audioUrl;
+
+        //  i = 1;
+        //     Arr.forEach((element) => {
+        //         if (i > 170) {
+        //             console.log(i + " " + element["artist"] + " " + element["song"]);
+        //         }
+        //         i++;
+        //     });
+    </script>
+    <div><a href="#" class="play-video">Play Video</a></div>
+    <div><a href="#" class="stop-video">Stop Video</a></div>
+    <div><a href="#" class="pause-video">Pause Video</a></div>
+
+    <iframe class="youtube-video" width="560" height="315"
+        src="https://www.youtube.com/embed/T-Y5DniaWu4?autoplay=1&mute=0&controls=0&enablejsapi=1&enablejsapi=1&version=3&playerapiid=ytplayer"
+        allow='autoplay' frameborder="0" allowfullscreen></iframe>
+
+</body>
+
+</html>
