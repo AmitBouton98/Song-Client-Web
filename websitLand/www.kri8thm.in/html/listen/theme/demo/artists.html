@@ -29,6 +29,9 @@
     <![endif]-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="js/ajaxCall.js"></script>
+    <script src="js/serverJS.js"></script>
+    <script src="js/gloabal.js"></script>
     <script defer src="js/Home.js"></script>
     <script src="js/AjaxCalls.js"></script>
     <script src="js/Artists.js"></script>
@@ -40,7 +43,8 @@
     <div id="loader">
         <div class="loader">
             <div class="loader__eq mx-auto"><span></span> <span></span> <span></span> <span></span> <span></span>
-                <span></span></div><span class="loader__text mt-2">Loading</span>
+                <span></span>
+            </div><span class="loader__text mt-2">Loading</span>
         </div>
     </div>
     <div id="wrapper">
@@ -107,10 +111,14 @@
                                 class="form-control form-control-sm"></form>
                         <div id="search_results" class="search pb-3"> // is the search bar (history and more)
                             <div class="search__head">
-                                <div class="search__head__filter"><button type="button"
-                                        class="btn btn-sm btn-light-primary" onclick="buttonClickHandler(this)">Song name</button> <button type="button" class="btn btn-sm btn-light-primary"
-                                        onclick="buttonClickHandler(this)">Artist name</button> <button type="button"
-                                        class="btn btn-sm btn-light-primary" onclick="buttonClickHandler(this)">Song text</button> </div>
+                                <div class="search__head__filter">
+                                    <button type="button" class="btn btn-sm btn-light-primary"
+                                        onclick="buttonClickHandler(this)">Song name</button>
+                                    <button type="button" class="btn btn-sm btn-light-primary"
+                                        onclick="buttonClickHandler(this)">Artist name</button>
+                                    <button type="button" class="btn btn-sm btn-light-primary"
+                                        onclick="buttonClickHandler(this)">Song text</button>
+                                </div>
                             </div>
                             <div class="search__body" data-scroll="true">
                                 <div class="mb-4">
@@ -118,13 +126,13 @@
                                             class="search__title">Artists</span></div>
                                     <div class="row g-4 list" id="ArtistListSearch">
                                         <!-- <div class="col-xl-3 col-md-4 col-sm-6">
-                                            <div class="list__item"><a href="artist-details.html"
-                                                    class="list__cover"><img src="images/cover/large/5.jpg"
-                                                        alt="Jina Moore"></a>
-                                                <div class="list__content"><a href="artist-details.html"
-                                                        class="list__title text-truncate">Jina Moore</a></div>
-                                            </div>
-                                        </div> -->
+                                                    <div class="list__item"><a href="artist-details.html"
+                                                            class="list__cover"><img src="images/cover/large/5.jpg"
+                                                                alt="Jina Moore"></a>
+                                                        <div class="list__content"><a href="artist-details.html"
+                                                                class="list__title text-truncate">Jina Moore</a></div>
+                                                    </div>
+                                                </div> -->
                                     </div>
                                 </div>
                                 <div class="mb-4">
@@ -132,15 +140,15 @@
                                             class="search__title">Songs</span></div>
                                     <div class="row g-4 list" id="SongListSearch">
                                         <!-- <div class="col-xl-3 col-md-4 col-sm-6">
-                                            <div class="list__item"><a href="song-details.html" class="list__cover"><img
-                                                        src="images/cover/small/6.jpg" alt="Hey not me"></a>
-                                                <div class="list__content"><a href="song-details.html"
-                                                        class="list__title text-truncate">Hey not me</a>
-                                                    <p class="list__subtitle text-truncate"><a
-                                                            href="artist-details.html">Rasomi Pelina</a></p>
-                                                </div>
-                                            </div>
-                                        </div> -->
+                                                    <div class="list__item"><a href="song-details.html" class="list__cover"><img
+                                                                src="images/cover/small/6.jpg" alt="Hey not me"></a>
+                                                        <div class="list__content"><a href="song-details.html"
+                                                                class="list__title text-truncate">Hey not me</a>
+                                                            <p class="list__subtitle text-truncate"><a
+                                                                    href="artist-details.html">Rasomi Pelina</a></p>
+                                                        </div>
+                                                    </div>
+                                                </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -148,16 +156,20 @@
                         <div class="d-flex align-items-center">
                             <div class="dropdown ms-3 ms-sm-4"><a href="javascript:void(0);" class="avatar header-text"
                                     role="button" id="user_menu" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <div class="avatar__image"><img src="images/users/thumb.jpg" alt="user"></div><span
-                                        class="ps-2 d-none d-sm-block" id="FirstNameToShow"></span>
+                                    <div class="avatar__image"><img class="user-image" src="images/users/thumb.jpg"
+                                            alt="user">
+                                    </div><span class="ps-2 d-none d-sm-block" id="FirstNameToShow"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-md dropdown-menu-end"
                                     aria-labelledby="user_menu">
                                     <li>
                                         <div class="py-2 px-3 avatar avatar--lg">
-                                            <div class="avatar__image"><img src="images/users/thumb.jpg" alt="user">
+                                            <div class="avatar__image"><img class="user-image"
+                                                    src="images/users/thumb.jpg" alt="user">
                                             </div>
-                                            <div class="avatar__content"><span class="avatar__title" id="FirstAndLastNameToShow"></span> <span class="avatar__subtitle">User</span></div>
+                                            <div class="avatar__content"><span class="avatar__title"
+                                                    id="FirstAndLastNameToShow"></span> <span
+                                                    class="avatar__subtitle">User</span></div>
                                         </div>
                                     </li>
                                     <li class="dropdown-divider"></li>
@@ -167,23 +179,26 @@
                                     <li><a class="dropdown-item d-flex align-items-center" href="favorites.html"><i
                                                 class="ri-heart-line fs-5"></i> <span class="ps-2">Favorites</span></a>
                                     </li>
-                                    <li><a class="dropdown-item d-flex align-items-center" href="settings.html"><i
-                                                class="ri-settings-line fs-5"></i> <span
-                                                class="ps-2">Settings</span></a></li>
-                                    <li><a class="dropdown-item d-flex align-items-center" href="plan.html"><i
-                                                class="ri-money-dollar-circle-line fs-5"></i> <span
-                                                class="ps-2">Plan</span></a></li>
+                                    <!-- <li><a class="dropdown-item d-flex align-items-center" href="settings.html"><i
+                                                        class="ri-settings-line fs-5"></i> <span
+                                                        class="ps-2">Settings</span></a></li>
+                                            <li><a class="dropdown-item d-flex align-items-center" href="plan.html"><i
+                                                        class="ri-money-dollar-circle-line fs-5"></i> <span
+                                                        class="ps-2">Plan</span></a></li> -->
                                     <li class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item d-flex align-items-center external text-danger"
-                                            href="index-2.html"><i class="ri-logout-circle-line fs-5"></i> <span
-                                                class="ps-2">Logout</span></a></li>
+                                    <li>
+                                        <p id="logout-btn"
+                                            class="dropdown-item d-flex align-items-center external text-danger">
+                                            <i class="ri-logout-circle-line fs-5"></i> <span class="ps-2">Logout</span>
+                                        </p>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </header>        
+        </header>
 
         <main id="page_content">
             <div class="hero" style="background-image: url(images/banner/artists.jpg);"></div>
@@ -245,16 +260,16 @@
                                     </div>
                                 </div>
                             </div> -->
-                            <div class="swiper-pagination"></div>
+                                <div class="swiper-pagination"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="section">
-                    <div class="section__head">
-                        <h3 class="mb-0">All <span class="text-primary">Artists</span></h3>
-                    </div>
-                    <div class="row g-4" id="AllArtists">
-                        <!-- <div class="col-6 col-xl-2 col-md-3 col-sm-4"><a href="artist-details.html"
+                    <div class="section">
+                        <div class="section__head">
+                            <h3 class="mb-0">All <span class="text-primary">Artists</span></h3>
+                        </div>
+                        <div class="row g-4" id="AllArtists">
+                            <!-- <div class="col-6 col-xl-2 col-md-3 col-sm-4"><a href="artist-details.html"
                                 class="cover cover--round">
                                 <div class="cover__image"><img src="images/cover/large/1.jpg" alt="Arebica Luna"></div>
                                 <div class="cover__foot"><span class="cover__title text-truncate">Arebica Luna</span>
@@ -366,25 +381,26 @@
                                 <div class="cover__foot"><span class="cover__title text-truncate">Karen Jennings</span>
                                 </div>
                             </a></div> -->
-                    </div>
-                    <!-- <div class="mt-5 text-center"><a href="javascript:void(0);" class="btn btn-primary">
+                        </div>
+                        <!-- <div class="mt-5 text-center"><a href="javascript:void(0);" class="btn btn-primary">
                             <div class="btn__wrap"><i class="ri-loader-3-fill"></i> <span>Load more</span></div>
                         </a></div> -->
+                    </div>
                 </div>
-            </div>
-            <footer id="footer">
-                <div class="container">
-                    <div class="text-center mb-4"><a href="mailto:info@listenapp.com"
-                            class="display-5 email">info@listenapp.com</a></div>
-                    <div class="app-btn-group pt-2"><a href="#" class="btn btn-lg btn-primary">
-                            <div class="btn__wrap"><i class="ri-google-play-fill"></i> <span class="ms-2">Google
-                                    Play</span></div>
-                        </a><a href="#" class="btn btn-lg btn-primary">
-                            <div class="btn__wrap"><i class="ri-app-store-fill"></i> <span class="ms-2">App Store</span>
-                            </div>
-                        </a></div>
-                </div>
-            </footer>
+                <footer id="footer">
+                    <div class="container">
+                        <div class="text-center mb-4"><a href="mailto:info@listenapp.com"
+                                class="display-5 email">info@listenapp.com</a></div>
+                        <div class="app-btn-group pt-2"><a href="#" class="btn btn-lg btn-primary">
+                                <div class="btn__wrap"><i class="ri-google-play-fill"></i> <span class="ms-2">Google
+                                        Play</span></div>
+                            </a><a href="#" class="btn btn-lg btn-primary">
+                                <div class="btn__wrap"><i class="ri-app-store-fill"></i> <span class="ms-2">App
+                                        Store</span>
+                                </div>
+                            </a></div>
+                    </div>
+                </footer>
         </main>
     </div>
     <!-- <div id="player">

@@ -8,6 +8,7 @@ $(document).ready(function () {
     window.location.replace("./login.html");
   }
   // cleare the cache dont delete this
+  //need to check on geners
   document.getElementById("clear_playlist").click();
   $("#logout-btn").on("click", logOut);
   document.getElementById("FirstNameToShow").innerHTML = User.first;

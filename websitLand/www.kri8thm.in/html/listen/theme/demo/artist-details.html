@@ -114,12 +114,14 @@
                                 class="form-control form-control-sm"></form>
                         <div id="search_results" class="search pb-3"> // is the search bar (history and more)
                             <div class="search__head">
-                                <div class="search__head__filter"><button type="button"
-                                        class="btn btn-sm btn-light-primary" onclick="buttonClickHandler(this)">Song
-                                        name</button> <button type="button" class="btn btn-sm btn-light-primary"
-                                        onclick="buttonClickHandler(this)">Artist name</button> <button type="button"
-                                        class="btn btn-sm btn-light-primary" onclick="buttonClickHandler(this)">Song
-                                        text</button> </div>
+                                <div class="search__head__filter">
+                                    <button type="button" class="btn btn-sm btn-light-primary"
+                                        onclick="buttonClickHandler(this)">Song name</button>
+                                    <button type="button" class="btn btn-sm btn-light-primary"
+                                        onclick="buttonClickHandler(this)">Artist name</button>
+                                    <button type="button" class="btn btn-sm btn-light-primary"
+                                        onclick="buttonClickHandler(this)">Song text</button>
+                                </div>
                             </div>
                             <div class="search__body" data-scroll="true">
                                 <div class="mb-4">
@@ -127,13 +129,13 @@
                                             class="search__title">Artists</span></div>
                                     <div class="row g-4 list" id="ArtistListSearch">
                                         <!-- <div class="col-xl-3 col-md-4 col-sm-6">
-                                            <div class="list__item"><a href="artist-details.html"
-                                                    class="list__cover"><img src="images/cover/large/5.jpg"
-                                                        alt="Jina Moore"></a>
-                                                <div class="list__content"><a href="artist-details.html"
-                                                        class="list__title text-truncate">Jina Moore</a></div>
-                                            </div>
-                                        </div> -->
+                                                    <div class="list__item"><a href="artist-details.html"
+                                                            class="list__cover"><img src="images/cover/large/5.jpg"
+                                                                alt="Jina Moore"></a>
+                                                        <div class="list__content"><a href="artist-details.html"
+                                                                class="list__title text-truncate">Jina Moore</a></div>
+                                                    </div>
+                                                </div> -->
                                     </div>
                                 </div>
                                 <div class="mb-4">
@@ -141,15 +143,15 @@
                                             class="search__title">Songs</span></div>
                                     <div class="row g-4 list" id="SongListSearch">
                                         <!-- <div class="col-xl-3 col-md-4 col-sm-6">
-                                            <div class="list__item"><a href="song-details.html" class="list__cover"><img
-                                                        src="images/cover/small/6.jpg" alt="Hey not me"></a>
-                                                <div class="list__content"><a href="song-details.html"
-                                                        class="list__title text-truncate">Hey not me</a>
-                                                    <p class="list__subtitle text-truncate"><a
-                                                            href="artist-details.html">Rasomi Pelina</a></p>
-                                                </div>
-                                            </div>
-                                        </div> -->
+                                                    <div class="list__item"><a href="song-details.html" class="list__cover"><img
+                                                                src="images/cover/small/6.jpg" alt="Hey not me"></a>
+                                                        <div class="list__content"><a href="song-details.html"
+                                                                class="list__title text-truncate">Hey not me</a>
+                                                            <p class="list__subtitle text-truncate"><a
+                                                                    href="artist-details.html">Rasomi Pelina</a></p>
+                                                        </div>
+                                                    </div>
+                                                </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -158,8 +160,8 @@
                             <div class="dropdown ms-3 ms-sm-4"><a href="javascript:void(0);" class="avatar header-text"
                                     role="button" id="user_menu" data-bs-toggle="dropdown" aria-expanded="false">
                                     <div class="avatar__image"><img class="user-image" src="images/users/thumb.jpg"
-                                            alt="user"></div><span class="ps-2 d-none d-sm-block"
-                                        id="FirstNameToShow"></span>
+                                            alt="user">
+                                    </div><span class="ps-2 d-none d-sm-block" id="FirstNameToShow"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-md dropdown-menu-end"
                                     aria-labelledby="user_menu">
@@ -180,16 +182,19 @@
                                     <li><a class="dropdown-item d-flex align-items-center" href="favorites.html"><i
                                                 class="ri-heart-line fs-5"></i> <span class="ps-2">Favorites</span></a>
                                     </li>
-                                    <li><a class="dropdown-item d-flex align-items-center" href="settings.html"><i
-                                                class="ri-settings-line fs-5"></i> <span
-                                                class="ps-2">Settings</span></a></li>
-                                    <li><a class="dropdown-item d-flex align-items-center" href="plan.html"><i
-                                                class="ri-money-dollar-circle-line fs-5"></i> <span
-                                                class="ps-2">Plan</span></a></li>
+                                    <!-- <li><a class="dropdown-item d-flex align-items-center" href="settings.html"><i
+                                                        class="ri-settings-line fs-5"></i> <span
+                                                        class="ps-2">Settings</span></a></li>
+                                            <li><a class="dropdown-item d-flex align-items-center" href="plan.html"><i
+                                                        class="ri-money-dollar-circle-line fs-5"></i> <span
+                                                        class="ps-2">Plan</span></a></li> -->
                                     <li class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item d-flex align-items-center external text-danger"
-                                            href="index-2.html"><i class="ri-logout-circle-line fs-5"></i> <span
-                                                class="ps-2">Logout</span></a></li>
+                                    <li>
+                                        <p id="logout-btn"
+                                            class="dropdown-item d-flex align-items-center external text-danger">
+                                            <i class="ri-logout-circle-line fs-5"></i> <span class="ps-2">Logout</span>
+                                        </p>
+                                    </li>
                                 </ul>
                             </div>
                         </div>

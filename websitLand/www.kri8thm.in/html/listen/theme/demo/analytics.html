@@ -157,8 +157,8 @@
                             <div class="dropdown ms-3 ms-sm-4"><a href="javascript:void(0);" class="avatar header-text"
                                     role="button" id="user_menu" data-bs-toggle="dropdown" aria-expanded="false">
                                     <div class="avatar__image"><img class="user-image" src="images/users/thumb.jpg"
-                                            alt="user"></div><span class="ps-2 d-none d-sm-block"
-                                        id="FirstNameToShow"></span>
+                                            alt="user">
+                                    </div><span class="ps-2 d-none d-sm-block" id="FirstNameToShow"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-md dropdown-menu-end"
                                     aria-labelledby="user_menu">
@@ -179,16 +179,19 @@
                                     <li><a class="dropdown-item d-flex align-items-center" href="favorites.html"><i
                                                 class="ri-heart-line fs-5"></i> <span class="ps-2">Favorites</span></a>
                                     </li>
-                                    <li><a class="dropdown-item d-flex align-items-center" href="settings.html"><i
+                                    <!-- <li><a class="dropdown-item d-flex align-items-center" href="settings.html"><i
                                                 class="ri-settings-line fs-5"></i> <span
                                                 class="ps-2">Settings</span></a></li>
                                     <li><a class="dropdown-item d-flex align-items-center" href="plan.html"><i
                                                 class="ri-money-dollar-circle-line fs-5"></i> <span
-                                                class="ps-2">Plan</span></a></li>
+                                                class="ps-2">Plan</span></a></li> -->
                                     <li class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item d-flex align-items-center external text-danger"
-                                            href="index-2.html"><i class="ri-logout-circle-line fs-5"></i> <span
-                                                class="ps-2">Logout</span></a></li>
+                                    <li>
+                                        <p id="logout-btn"
+                                            class="dropdown-item d-flex align-items-center external text-danger">
+                                            <i class="ri-logout-circle-line fs-5"></i> <span class="ps-2">Logout</span>
+                                        </p>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
