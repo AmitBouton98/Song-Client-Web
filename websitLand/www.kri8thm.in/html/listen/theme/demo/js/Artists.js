@@ -1,8 +1,8 @@
 var User = JSON.parse(sessionStorage.getItem("User"));
 
-$(document).ready(function () {
-  $("#logout-btn").on("click", logOut);
-});
+// $(document).ready(function () {
+//   $("#logout-btn").on("click", logOut);
+// });
 
 function LoadArtists() {
   GetFavoriteArtistByUserId((data) => {
@@ -40,10 +40,10 @@ function CreateFavoriteArtists(data) {
     // Add your code here to handle the click event for the title link
   };
 
-    // Create the image element with src "images/cover/large/5.jpg" and alt "Jina Moore"
-    var imageElement = document.createElement('img');
-    imageElement.src = data.artistUrl;
-    imageElement.alt = data.artistName;
+  // Create the image element with src "images/cover/large/5.jpg" and alt "Jina Moore"
+  var imageElement = document.createElement("img");
+  imageElement.src = data.artistUrl;
+  imageElement.alt = data.artistName;
 
   // Append the image element to the anchor tag
   anchorTag.appendChild(imageElement);
@@ -86,13 +86,13 @@ function CreateArtist(data) {
   var coverImageDiv = document.createElement("div");
   coverImageDiv.className = "cover__image";
 
-    // Create the image element with src "images/cover/large/1.jpg" and alt "Arebica Luna"
-    var imageElement = document.createElement('img');
-    // imageElement.src = 'images/cover/large/12.jpg';
-    // imageElement.alt = data.artistName;
-    imageElement.src = data.artistUrl;
-    imageElement.alt = data.artistName;
-    imageElement.classList.add('ArtistImg')
+  // Create the image element with src "images/cover/large/1.jpg" and alt "Arebica Luna"
+  var imageElement = document.createElement("img");
+  // imageElement.src = 'images/cover/large/12.jpg';
+  // imageElement.alt = data.artistName;
+  imageElement.src = data.artistUrl;
+  imageElement.alt = data.artistName;
+  imageElement.classList.add("ArtistImg");
 
   // Append the image element to the div with class "cover__image"
   coverImageDiv.appendChild(imageElement);
