@@ -794,7 +794,7 @@ $(document).ready(function () {
           e("[data-player-option=" + i.player + "]").addClass("active");
       }),
       (e.settings.defaults = {
-        dark: !1,
+        dark: 1,
         header: null,
         sidebar: null,
         player: null,
