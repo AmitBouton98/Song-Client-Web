@@ -175,7 +175,9 @@ function ChangePassowrdForUser(id, OldPassowrd, NewPassword) {
     `${api}/UserMusics/Put?id=${id}&password=${OldPassowrd}&passwordToChange=${NewPassword}`,
     "",
     function (data) {
-      callback();
+      setTimeout(() => {
+        window.location.reload();
+      }, 1600);
       swal.fire("Password Changed", "Secessfuly", "success");
     },
     () => {

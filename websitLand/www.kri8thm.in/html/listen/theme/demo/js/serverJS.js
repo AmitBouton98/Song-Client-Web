@@ -45,6 +45,9 @@ function update_user_to_server(user_obj) {
         showConfirmButton: false,
         timer: 1500,
       });
+      setTimeout(() => {
+        window.location.reload();
+      }, 1600);
     },
     (resolve) => {
       // in time it retyrn 0 then goes here because of that we need to do theis
@@ -55,14 +58,14 @@ function update_user_to_server(user_obj) {
         showConfirmButton: false,
         timer: 1500,
       });
+      setTimeout(() => {
+        window.location.reload();
+      }, 1600);
     }
   );
 }
 
 function upload_user_profile_pic(data) {
-  for (const value of data.values()) {
-    console.log(value);
-  }
   $.ajax({
     type: "POST",
     url: `${api}/Upload`,
@@ -70,11 +73,12 @@ function upload_user_profile_pic(data) {
     processData: false,
     data: data,
     success: (suc) => {
-      console.log(suc);
+      setTimeout(() => {
+        window.location.reload();
+      }, 1600);
     },
     error: (error) => console.log(error),
   });
-  return false;
 }
 function get_reset_permission(email, callbackfunction) {
   ajaxCall(
