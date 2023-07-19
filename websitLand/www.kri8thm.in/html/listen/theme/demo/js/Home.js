@@ -469,8 +469,3 @@ function navigateToPageSongDetails(data) {
   };
   sessionStorage.setItem("SongDetails", JSON.stringify(SongDetails));
 }
-
-function logOut() {
-  sessionStorage.removeItem("User");
-  window.location.replace("./login.html");
-}

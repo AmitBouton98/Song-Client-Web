@@ -11,6 +11,7 @@ $(document).ready(function () {
     checkPasswordValidation($("#password").val());
   });
 
+  $("#logout-btn").on("click", logOut);
   // the eye for the passwords
   $(".fa-solid").on("click", function () {
     changeTheEye(this);

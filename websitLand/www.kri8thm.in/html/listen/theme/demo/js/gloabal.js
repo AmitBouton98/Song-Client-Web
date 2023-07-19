@@ -70,3 +70,8 @@ function upload_image(userEmail, image_extension) {
   }
   upload_user_profile_pic(data);
 }
+
+function logOut() {
+  sessionStorage.removeItem("User");
+  window.location.replace("./login.html");
+}
