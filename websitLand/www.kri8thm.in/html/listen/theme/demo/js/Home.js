@@ -14,10 +14,6 @@ $(document).ready(function () {
   document.getElementById("FirstAndLastNameToShow").innerHTML =
     User.first + " " + User.last;
   getProfileImage(user_info.imgUrl, $(".user-image"));
-  //   //   console.log({ user_email, image_elms });
-  //   $(".user-image").each(function () {
-  //     $(this).attr("src", `${api}/Upload?fileName=${user_info.email}`);
-  //   });
 });
 
 function LoadHome() {
