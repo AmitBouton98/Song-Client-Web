@@ -1,4 +1,4 @@
-const api = "https://localhost:7281/api";
+// const api = "https://localhost:7281/api";
 
 function register_user_to_server(user_obj) {
   ajaxCall(
@@ -168,8 +168,8 @@ function loginUser(email, password) {
     }
   );
 }
-function getProfileImage(user_email, image_elms) {
+function getProfileImage(image_url, image_elms) {
   image_elms.each(function () {
-    $(this).attr("src", `${api}/Upload?fileName=${user_email}`);
+    $(this).attr("src", `${api}/Upload?fileName=${image_url}`);
   });
 }

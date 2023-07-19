@@ -27,15 +27,18 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://www.youtube.com/iframe_api"></script>
-    <script defer src="js/Home.js"></script>
     <script src="js/AjaxCalls.js"></script>
-    <script src="js/ArtistDetails.js"></script>
+    <script src="js/ajaxCall.js"></script>
+    <script src="js/serverJS.js"></script>
     <script src="js/Genre.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="js/gloabal.js"></script>
+    <script src="js/ArtistDetails.js"></script>
+    <script defer src="js/Home.js"></script>
 </head>
 
 <body onload="LoadArtistPage()">
@@ -43,7 +46,8 @@
     <div id="loader">
         <div class="loader">
             <div class="loader__eq mx-auto"><span></span> <span></span> <span></span> <span></span> <span></span>
-                <span></span></div><span class="loader__text mt-2">Loading</span>
+                <span></span>
+            </div><span class="loader__text mt-2">Loading</span>
         </div>
     </div>
     <div id="wrapper">
@@ -111,9 +115,11 @@
                         <div id="search_results" class="search pb-3"> // is the search bar (history and more)
                             <div class="search__head">
                                 <div class="search__head__filter"><button type="button"
-                                        class="btn btn-sm btn-light-primary" onclick="buttonClickHandler(this)">Song name</button> <button type="button" class="btn btn-sm btn-light-primary"
+                                        class="btn btn-sm btn-light-primary" onclick="buttonClickHandler(this)">Song
+                                        name</button> <button type="button" class="btn btn-sm btn-light-primary"
                                         onclick="buttonClickHandler(this)">Artist name</button> <button type="button"
-                                        class="btn btn-sm btn-light-primary" onclick="buttonClickHandler(this)">Song text</button> </div>
+                                        class="btn btn-sm btn-light-primary" onclick="buttonClickHandler(this)">Song
+                                        text</button> </div>
                             </div>
                             <div class="search__body" data-scroll="true">
                                 <div class="mb-4">
@@ -151,16 +157,20 @@
                         <div class="d-flex align-items-center">
                             <div class="dropdown ms-3 ms-sm-4"><a href="javascript:void(0);" class="avatar header-text"
                                     role="button" id="user_menu" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <div class="avatar__image"><img src="images/users/thumb.jpg" alt="user"></div><span
-                                        class="ps-2 d-none d-sm-block" id="FirstNameToShow"></span>
+                                    <div class="avatar__image"><img class="user-image" src="images/users/thumb.jpg"
+                                            alt="user"></div><span class="ps-2 d-none d-sm-block"
+                                        id="FirstNameToShow"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-md dropdown-menu-end"
                                     aria-labelledby="user_menu">
                                     <li>
                                         <div class="py-2 px-3 avatar avatar--lg">
-                                            <div class="avatar__image"><img src="images/users/thumb.jpg" alt="user">
+                                            <div class="avatar__image"><img class="user-image"
+                                                    src="images/users/thumb.jpg" alt="user">
                                             </div>
-                                            <div class="avatar__content"><span class="avatar__title" id="FirstAndLastNameToShow"></span> <span class="avatar__subtitle">User</span></div>
+                                            <div class="avatar__content"><span class="avatar__title"
+                                                    id="FirstAndLastNameToShow"></span> <span
+                                                    class="avatar__subtitle">User</span></div>
                                         </div>
                                     </li>
                                     <li class="dropdown-divider"></li>
@@ -182,24 +192,26 @@
                                                 class="ps-2">Logout</span></a></li>
                                 </ul>
                             </div>
-                        </div>                    </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </header>
-                <main id="page_content">
+        <main id="page_content">
             <div class="hero" style="background-image: url(images/banner/artists.jpg);"></div>
             <div class="under-hero container">
                 <div class="section">
                     <div class="row align-items-center">
                         <div class="col-xl-3 col-md-4">
                             <div class="cover cover--round">
-                                <div class="cover__image"><img id="ImgForArtistDetails" >
+                                <div class="cover__image"><img id="ImgForArtistDetails">
                                 </div>
                             </div>
                         </div>
                         <div class="col-1 d-none d-xl-block"></div>
                         <div class="col-md-8 mt-5 mt-md-0">
-                            <div class="d-flex flex-wrap mb-2"><span class="text-dark fs-4 fw-semi-bold pe-2" id="InfoArtistName">Here is the artist name</span>
+                            <div class="d-flex flex-wrap mb-2"><span class="text-dark fs-4 fw-semi-bold pe-2"
+                                    id="InfoArtistName">Here is the artist name</span>
 
                             </div>
                             <ul class="info-list info-list--dotted mb-3" id="InfoArtistLi">
@@ -207,7 +219,8 @@
                                 <li>245 Songs</li>
                                 <li>Apr 1, 1990</li> -->
                             </ul>
-                            <p class="mb-5 fw-semi-bold" id="InfoArtistContent">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus iste
+                            <p class="mb-5 fw-semi-bold" id="InfoArtistContent">Lorem ipsum dolor sit amet consectetur
+                                adipisicing elit. Voluptatibus iste
                                 fugit voluptatum dolorem assumenda deleniti, mollitia culpa facere. Velit nisi quidem
                                 nesciunt quae veritatis possimus cupiditate placeat officiis ab modi!</p>
                             <ul class="info-list">
@@ -216,16 +229,17 @@
                                             class="btn btn-icon btn-primary rounded-pill" data-collection-play-id="1"><i
                                                 class="ri-play-fill icon-play"></i> <i
                                                 class="ri-pause-fill icon-pause"></i></button> <label for="play_all"
-                                            class="ps-2 fw-semi-bold text-primary mb-0" style="cursor: pointer;" id="PlayNumberForArtist">0</label></div>
+                                            class="ps-2 fw-semi-bold text-primary mb-0" style="cursor: pointer;"
+                                            id="PlayNumberForArtist">0</label></div>
                                 </li>
                                 <li><a href="javascript:void(0);" role="button"
                                         class="text-dark d-flex align-items-center" aria-label="Favorite"
-                                        data-favorite-id="1"><i class="ri-heart-line heart-empty" id="AddArtistToFavorite"></i> <i
-                                            class="ri-heart-fill heart-fill" ></i> <span
+                                        data-favorite-id="1"><i class="ri-heart-line heart-empty"
+                                            id="AddArtistToFavorite"></i> <i class="ri-heart-fill heart-fill"></i> <span
                                             class="ps-2 fw-medium" id="FavoritesArtist">0</span></a></li>
                                 <li><span class="text-dark d-flex align-items-center"><i
-                                            class="ri-star-fill text-warning"></i> <span
-                                            class="ps-2 fw-medium" id="ArtistLikes">0</span></span></li>
+                                            class="ri-star-fill text-warning"></i> <span class="ps-2 fw-medium"
+                                            id="ArtistLikes">0</span></span></li>
 
                             </ul>
                         </div>
@@ -332,14 +346,16 @@
     </div>
     <div id="player">
         <div class="container">
-            <div class="player-container" >
+            <div class="player-container">
                 <div id="playerR"></div>
-                <div class="player-progress"><progress id="bufferedProgress" class="amplitude-buffered-progress player-progress__bar"
-                        value="0"></progress><progress id="playedProgress"
-                        class="amplitude-song-played-progress player-progress__bar"></progress><input id="progressSlider"  type="range"
-                        class="amplitude-song-slider player-progress__slider" aria-label="Progress slider">
-                        <div id="timeline" class="player-progress__timeline"></div>
-                    </div>
+                <div class="player-progress"><progress id="bufferedProgress"
+                        class="amplitude-buffered-progress player-progress__bar" value="0"></progress><progress
+                        id="playedProgress"
+                        class="amplitude-song-played-progress player-progress__bar"></progress><input
+                        id="progressSlider" type="range" class="amplitude-song-slider player-progress__slider"
+                        aria-label="Progress slider">
+                    <div id="timeline" class="player-progress__timeline"></div>
+                </div>
                 <div class="cover d-flex align-items-center">
                     <div class="cover__image"><img data-amplitude-song-info="cover_art_url"
                             src="images/cover/small/1.jpg" alt=""></div>
@@ -354,16 +370,18 @@
                             class="ri-repeat-2-fill fs-5"></i></button> <button type="button"
                         class="amplitude-prev btn btn-icon" aria-label="Backward"><i
                             class="ri-skip-back-mini-fill"></i></button> -->
-                             <button id="PlayButton" type="button"
+                    <button id="PlayButton" type="button"
                         class="amplitude-play-pause btn btn-icon btn-default rounded-pill" aria-label="Play pause"><i
-                            class="ri-play-fill icon-play" id="playBtn"></i> <i id="pauseBtn" class="ri-pause-fill icon-pause"></i></button>
+                            class="ri-play-fill icon-play" id="playBtn"></i> <i id="pauseBtn"
+                            class="ri-pause-fill icon-pause"></i></button>
                     <!-- <button type="button" class="amplitude-next btn btn-icon" aria-label="Forward"><i
                             class="ri-skip-forward-mini-fill"></i></button> <button type="button"
                         class="amplitude-shuffle amplitude-shuffle-off btn btn-icon ms-4 d-none d-md-block"
                         aria-label="Shuffle"><i class="ri-shuffle-fill fs-5"></i></button> -->
                 </div>
                 <div class="player-info">
-                    <div class="me-4 d-none d-xl-block"><span class="amplitude-current-minutes" id="durationTime">00:00</span>
+                    <div class="me-4 d-none d-xl-block"><span class="amplitude-current-minutes"
+                            id="durationTime">00:00</span>
                         <!-- :<span class="amplitude-current-seconds"></span> /
                              <span class="amplitude-duration-minutes" id="durationTime"></span>
                              :<span class="amplitude-duration-seconds"></span> -->
