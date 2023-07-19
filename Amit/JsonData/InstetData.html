@@ -16,13 +16,13 @@
         const apiKey = 'AIzaSyB2VcxkLp-3FQye8OFr5xwTvZjPqzUZ0Mo';
         // web for api : https://console.cloud.google.com/apis/credentials?cloudshell=true&orgonly=true&project=tru-392715&supportedpurview=project
 
-        function load() {
+         function load() {
 
             // for (item of Arr) { // add artist details
             //     Get((data) => {
             //         PostArtist((postdata) => {
             //             console.log(postdata)
-            //         }, data.artist.name, data.artist.bio.summary, data.artist.bio.published, data.artist.stats.listeners, data.artist.stats.playcount)
+            //         }, data.artist.name)
             //     },item.song_artist)
             // }
 
@@ -51,8 +51,14 @@
             //         }
             //     }
             // })
-
+            // GetAllArtists((a) => {
+            //     for (item of a) {
+            //         console.log(item)
+            //         GetArtistUrl(item.artistName)
+            //     }
+            // })
         }
+
         // this funtion is to convert from duratio time format : PT3M53S(example)  to time format min:sec
         function convertDurationToTime(duration) {
             const regex = /PT(?:(\d+)M)?(?:(\d+)S)?/;
@@ -139,17 +145,50 @@
                     console.log('Error:', error);
                 });
         }
-        async function PostArtist(callback, name, content, published, listeners, playcount) {
+
+        async function GetAllArtists(callback) {
+            ajaxCall("get", `${api}/ArtistMusics`, "", function (data) {
+                callback(data)
+            }, (err) => { console.log(err) });
+            return false;
+        }
+        async function GetArtistUrl( artistName) {
+
+            const apiUrl = `https://api.spotify.com/v1/search?type=artist&q=${encodeURIComponent(artistName)}&decorate_restrictions=false&best_match=true&include_external=audio&limit=1`;
+            // the access token i got from here (amit) ->  https://open.spotify.com/get_access_token?reason=transport&productType=web_player&_authfailed=1
+            const accessToken = 'BQDLEaQk8X6dkOWhYOOIG-QV87ADN_sasXT-s5DiHSD8HnvepNu0sfF05D2eOFZGScajTwvBBMDHyEOfrudsZM_K-hikAgUkBPoNXuo67TINt3N_7VnmD71X14iDbFM0QalwEeFfRFsB96DGt1xTwMxC-nWASOuqN3wAuQrHa1-Efb0pAuG5NuJFiWkSunpRiYFM2seVpavewS3fuvUTYIkgRP2vxH-HEXnB9Eval7_Za6tz0breGApWB8ERCNuQEP8DX2aYZkFsWhBY3E6JAVxJ7bngRoohUfi_MOkefW2fjrr84sOSl0bW5XTGscDK8BDH3-bDNZdP2vqw8t77jG867lww';// access token
+
+            fetch(apiUrl, {
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    ChangeArtistUrl(artistName, data.best_match.items[0].images[1].url)
+                    console.log("done")
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
+
+            return false;
+        }
+        async function ChangeArtistUrl(ArtistName, ArtistUrl) {
+            ajaxCall("PUT", `${api}/ArtistMusics/UpdateArtistUrl?ArtistName=${ArtistName}&ArtistUrl=${ArtistUrl}`, "", function (data) {
+                console.log("changed")
+            }, () => {
+                console.log("failed to change url")
+            });
+            return false;
+        }
+        async function PostArtist(callback, artistName) {
             newArtist = {
-                ArtistName: name,
-                Content: content,
-                Published: published,
-                Listeners: listeners,
-                Playcount: playcount,
-                Likes: "0"
+                ArtistName: artistName,
+                Likes: "0",
+                ArtistUrl: "0"
             }
             ajaxCall("POST", `${api}/ArtistMusics`, JSON.stringify(newArtist), function (data) {
-
                 callback(data);
             }, (data) => {
                 console.log(data)

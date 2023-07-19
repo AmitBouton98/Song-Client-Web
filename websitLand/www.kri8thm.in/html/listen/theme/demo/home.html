@@ -29,8 +29,8 @@
     <![endif]-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://www.youtube.com/iframe_api"></script>
-    <script defer src="js/Home.js"></script>
     <script src="js/AjaxCalls.js"></script>
+    <script defer src="js/Home.js"></script>
     <!-- <script src="js/PlayVideo"></script> -->
 </head>
 
@@ -195,7 +195,7 @@
                 <div class="section">
                     <div class="section__head">
                         <div class="flex-grow-1"><span class="section__subtitle"> Listen top 10 musics</span>
-                            <h3 class="mb-0">Top <span class="text-primary">10</span></h3>
+                            <h3 class="mb-0">Top global <span class="text-primary">10 songs</span></h3>
                         </div><a href="genres.html" class="btn btn-link">View All</a>
                     </div>
                     <div class="swiper-carousel swiper-carousel-button">
@@ -208,7 +208,7 @@
                         <div class="swiper-button-next btn-default rounded-pill"></div>
                     </div>
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="section col-xl-6">
                         <div class="section__head">
                             <div class="flex-grow-1">
@@ -983,17 +983,17 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="section">
+                </div> -->
+                <div class="section" id="SongsUserMightLike">
                     <div class="section__head">
-                        <div class="flex-grow-1"><span class="section__subtitle">New to listen</span>
-                            <h3 class="mb-0">New <span class="text-primary">Releases</span></h3>
-                        </div><a href="songs.html" class="btn btn-link">View All</a>
+                        <div class="flex-grow-1"><span class="section__subtitle">Songs you might like</span>
+                            <h3 class="mb-0">Some Songs You Can <span class="text-primary">hear</span></h3>
+                        </div><a href="genres.html" class="btn btn-link">View All</a>
                     </div>
                     <div class="swiper-carousel swiper-carousel-button">
                         <div class="swiper" data-swiper-slides="5" data-swiper-autoplay="true">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
+                            <div class="swiper-wrapper" id="6SongsUserMightLike">
+                                <!-- <div class="swiper-slide">
                                     <div class="cover cover--round" data-song-id="1" data-song-name="I love you mummy"
                                         data-song-artist="Arebica Luna" data-song-album="Mummy"
                                         data-song-url="audio/ringtone-1.mp3" data-song-cover="images/cover/small/1.jpg">
@@ -1044,26 +1044,6 @@
                                                 <li><span class="badge rounded-pill bg-info"><i
                                                             class="ri-vip-crown-fill"></i></span></li>
                                             </ul>
-                                            <div class="cover__options dropstart d-inline-flex ms-auto"><a
-                                                    class="dropdown-link" href="javascript:void(0);" role="button"
-                                                    data-bs-toggle="dropdown" aria-label="Cover options"
-                                                    aria-expanded="false"><i class="ri-more-2-fill"></i></a>
-                                                <ul class="dropdown-menu dropdown-menu-sm">
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"
-                                                            role="button" data-favorite-id="2">Favorite</a></li>
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"
-                                                            role="button" data-playlist-id="2">Add to playlist</a></li>
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"
-                                                            role="button" data-queue-id="2">Add to queue</a></li>
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"
-                                                            role="button" data-next-id="2">Next to play</a></li>
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"
-                                                            role="button">Share</a></li>
-                                                    <li class="dropdown-divider"></li>
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"
-                                                            role="button" data-play-id="2">Play</a></li>
-                                                </ul>
-                                            </div>
                                         </div>
                                         <div class="cover__image"><img src="images/cover/large/2.jpg"
                                                 alt="Shack your butty"> <button type="button"
@@ -1245,7 +1225,7 @@
                                                     href="artist-details.html">Rasomi Pelina</a></p>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <div class="swiper-button-prev btn-default rounded-pill"></div>
@@ -1254,14 +1234,14 @@
                 </div>
                 <div class="section">
                     <div class="section__head">
-                        <div class="flex-grow-1"><span class="section__subtitle">Best to listen</span>
-                            <h3 class="mb-0">Featured <span class="text-primary">Artists</span></h3>
+                        <div class="flex-grow-1"><span class="section__subtitle">watch top 10 artists                        </span>
+                            <h3 class="mb-0">Top 10 <span class="text-primary">Artists</span></h3>
                         </div><a href="artists.html" class="btn btn-link">View All</a>
                     </div>
                     <div class="swiper-carousel swiper-carousel-button">
                         <div class="swiper" data-swiper-slides="6" data-swiper-autoplay="true">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
+                            <div class="swiper-wrapper" id="Top10Artists">
+                                <!-- <div class="swiper-slide">
                                     <div class="avatar avatar--xxl d-block text-center">
                                         <div class="avatar__image"><a href="artist-details.html"><img
                                                     src="images/cover/large/1.jpg" alt="Arebica Luna"></a></div><a
@@ -1331,7 +1311,7 @@
                                             href="artist-details.html" class="avatar__title mt-3">Nutty Nina</a>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="swiper-pagination"></div>
                         </div>
                     </div>

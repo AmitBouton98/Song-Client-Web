@@ -178,76 +178,76 @@ function AddSongToPage(data,ToWhereAppand) {
     var durationListItem = document.createElement('li');
     durationListItem.textContent = data.duration; // time of the video
     // Create the dropdown menu
-    var dropdownMenu = document.createElement('ul');
-    dropdownMenu.className = 'dropdown-menu dropdown-menu-sm';
+    // var dropdownMenu = document.createElement('ul');
+    // dropdownMenu.className = 'dropdown-menu dropdown-menu-sm';
 
-    // Create the dropdown menu items
-    var dropdownMenuItem1 = document.createElement('li');
-    var dropdownMenuItem2 = document.createElement('li');
-    var dropdownMenuItem3 = document.createElement('li');
-    var dropdownMenuItem4 = document.createElement('li');
-    var dropdownMenuItem5 = document.createElement('li');
-    var dropdownMenuItemDivider = document.createElement('li');
-    var dropdownMenuItem6 = document.createElement('li');
+    // // Create the dropdown menu items
+    // var dropdownMenuItem1 = document.createElement('li');
+    // var dropdownMenuItem2 = document.createElement('li');
+    // var dropdownMenuItem3 = document.createElement('li');
+    // var dropdownMenuItem4 = document.createElement('li');
+    // var dropdownMenuItem5 = document.createElement('li');
+    // var dropdownMenuItemDivider = document.createElement('li');
+    // var dropdownMenuItem6 = document.createElement('li');
 
-    // Create the "Add to playlist" link
-    var addToPlaylistLink = document.createElement('a');
-    addToPlaylistLink.className = 'dropdown-item';
-    addToPlaylistLink.href = 'javascript:void(0);';
-    addToPlaylistLink.setAttribute('role', 'button');
-    addToPlaylistLink.setAttribute('data-playlist-id', '8');
-    addToPlaylistLink.textContent = 'Add to playlist';
+    // // Create the "Add to playlist" link
+    // var addToPlaylistLink = document.createElement('a');
+    // addToPlaylistLink.className = 'dropdown-item';
+    // addToPlaylistLink.href = 'javascript:void(0);';
+    // addToPlaylistLink.setAttribute('role', 'button');
+    // addToPlaylistLink.setAttribute('data-playlist-id', '8');
+    // addToPlaylistLink.textContent = 'Add to playlist';
 
-    // Create the "Add to queue" link
-    var addToQueueLink = document.createElement('a');
-    addToQueueLink.className = 'dropdown-item';
-    addToQueueLink.href = 'javascript:void(0);';
-    addToQueueLink.setAttribute('role', 'button');
-    addToQueueLink.setAttribute('data-queue-id', '8');
-    addToQueueLink.textContent = 'Add to queue';
+    // // Create the "Add to queue" link
+    // var addToQueueLink = document.createElement('a');
+    // addToQueueLink.className = 'dropdown-item';
+    // addToQueueLink.href = 'javascript:void(0);';
+    // addToQueueLink.setAttribute('role', 'button');
+    // addToQueueLink.setAttribute('data-queue-id', '8');
+    // addToQueueLink.textContent = 'Add to queue';
 
-    // Create the "Next to play" link
-    var nextToPlayLink = document.createElement('a');
-    nextToPlayLink.className = 'dropdown-item';
-    nextToPlayLink.href = 'javascript:void(0);';
-    nextToPlayLink.setAttribute('role', 'button');
-    nextToPlayLink.setAttribute('data-next-id', '8');
-    nextToPlayLink.textContent = 'Next to play';
+    // // Create the "Next to play" link
+    // var nextToPlayLink = document.createElement('a');
+    // nextToPlayLink.className = 'dropdown-item';
+    // nextToPlayLink.href = 'javascript:void(0);';
+    // nextToPlayLink.setAttribute('role', 'button');
+    // nextToPlayLink.setAttribute('data-next-id', '8');
+    // nextToPlayLink.textContent = 'Next to play';
 
-    // Create the "Share" link
-    var shareLink = document.createElement('a');
-    shareLink.className = 'dropdown-item';
-    shareLink.href = 'javascript:void(0);';
-    shareLink.setAttribute('role', 'button');
-    shareLink.textContent = 'Share';
+    // // Create the "Share" link
+    // var shareLink = document.createElement('a');
+    // shareLink.className = 'dropdown-item';
+    // shareLink.href = 'javascript:void(0);';
+    // shareLink.setAttribute('role', 'button');
+    // shareLink.textContent = 'Share';
 
-    // Create the dropdown menu divider
-    var dropdownMenuDivider = document.createElement('li');
-    dropdownMenuDivider.className = 'dropdown-divider';
+    // // Create the dropdown menu divider
+    // var dropdownMenuDivider = document.createElement('li');
+    // dropdownMenuDivider.className = 'dropdown-divider';
 
-    // Create the "Play" link
-    var playLink = document.createElement('a');
-    playLink.className = 'dropdown-item';
-    playLink.href = 'javascript:void(0);';
-    playLink.setAttribute('role', 'button');
-    playLink.setAttribute('data-play-id', '8');
-    playLink.textContent = 'Play';
-
-    // Append the dropdown menu items to the dropdown menu
-    dropdownMenuItem1.appendChild(addToPlaylistLink);
-    dropdownMenuItem2.appendChild(addToQueueLink);
-    dropdownMenuItem3.appendChild(nextToPlayLink);
-    dropdownMenuItem4.appendChild(shareLink);
-    dropdownMenuItem5.appendChild(dropdownMenuDivider);
-    dropdownMenuItem6.appendChild(playLink);
+    // // Create the "Play" link
+    // var playLink = document.createElement('a');
+    // playLink.className = 'dropdown-item';
+    // playLink.href = 'javascript:void(0);';
+    // playLink.setAttribute('role', 'button');
+    // playLink.setAttribute('data-play-id', '8');
+    // playLink.textContent = 'Play';
 
     // Append the dropdown menu items to the dropdown menu
-    dropdownMenu.appendChild(dropdownMenuItem1);
-    dropdownMenu.appendChild(dropdownMenuItem2);
-    dropdownMenu.appendChild(dropdownMenuItem3);
-    dropdownMenu.appendChild(dropdownMenuItem4);
-    dropdownMenu.appendChild(dropdownMenuItem5);
-    dropdownMenu.appendChild(dropdownMenuItem6);
+    // dropdownMenuItem1.appendChild(addToPlaylistLink);
+    // dropdownMenuItem2.appendChild(addToQueueLink);
+    // dropdownMenuItem3.appendChild(nextToPlayLink);
+    // dropdownMenuItem4.appendChild(shareLink);
+    // dropdownMenuItem5.appendChild(dropdownMenuDivider);
+    // dropdownMenuItem6.appendChild(playLink);
+
+    // Append the dropdown menu items to the dropdown menu
+    // dropdownMenu.appendChild(dropdownMenuItem1);
+    // dropdownMenu.appendChild(dropdownMenuItem2);
+    // dropdownMenu.appendChild(dropdownMenuItem3);
+    // dropdownMenu.appendChild(dropdownMenuItem4);
+    // dropdownMenu.appendChild(dropdownMenuItem5);
+    // dropdownMenu.appendChild(dropdownMenuItem6);
 
     // Create the dropdown toggle
     var dropdownToggle = document.createElement('a');
@@ -272,13 +272,13 @@ function AddSongToPage(data,ToWhereAppand) {
     dropdownWrapper.appendChild(dropdownToggle);
 
     // Append the dropdown menu to the dropdown wrapper
-    dropdownWrapper.appendChild(dropdownMenu);
+    // dropdownWrapper.appendChild(dropdownMenu);
 
     // Append the option list items and the dropdown wrapper to the options list
     optionsList.appendChild(optionListItem1);
     optionsList.appendChild(optionListItem2);
     optionsList.appendChild(durationListItem);
-    optionsList.appendChild(dropdownWrapper);
+    // optionsList.appendChild(dropdownWrapper);
 
     // Append the cover div, content div, and options list to the list div
     listDiv.appendChild(coverDiv);

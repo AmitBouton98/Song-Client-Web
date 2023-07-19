@@ -29,6 +29,10 @@ function LoadArtistPage() {
             }
         }, data.artistName)
     },Artist.artistName)
+    let ImgForArtistDetails = document.getElementById('ImgForArtistDetails')
+    ImgForArtistDetails.src = Artist.artistUrl
+    ImgForArtistDetails.classList.add('ArtistImg')
+    console.log(ImgForArtistDetails)
 }
 function AddInfoArtist(data) {
     console.log(data)
