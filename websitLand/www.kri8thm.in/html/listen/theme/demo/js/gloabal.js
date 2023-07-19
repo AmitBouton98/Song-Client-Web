@@ -22,6 +22,7 @@ function checkPasswordMatch() {
     document.getElementById("c_password").setCustomValidity("Invalid field.");
   }
 }
+
 // get the current date as yyy-mm-dd
 function getCurrentDate() {
   return new Date().toJSON().slice(0, 10);
@@ -55,4 +56,22 @@ function checkPasswordValidation(text) {
     document.getElementById("password-pattern4").classList.remove("Valid");
     document.getElementById("password-pattern4").classList.add("inValid");
   }
+}
+
+//upload the file to the server
+function upload_image(userEmail, image_extension) {
+  var data = new FormData();
+  var file = $("#profile_pic").get(0).files[0];
+  // Add the uploaded file to the form data collection
+  if (file != undefined) {
+    // it always will be one file for every user
+    // the form data funciton give us the appilty to assign new name to the fiel
+    data.append("file", file, `${userEmail}.${image_extension}`);
+  }
+  upload_user_profile_pic(data);
+}
+
+function logOut() {
+  sessionStorage.removeItem("User");
+  window.location.replace("./login.html");
 }

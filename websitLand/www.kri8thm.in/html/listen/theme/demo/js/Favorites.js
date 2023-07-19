@@ -1,9 +1,13 @@
-var data = JSON.parse(sessionStorage.getItem('User'));
+var data = JSON.parse(sessionStorage.getItem("User"));
 
-function LoadFavoritesPage(){
-    GetAllFavoriteSongForGivenUserId((d)=>{
-        for(item of d){
-            AddSongToPage(item,"SongS")
-        }
-    },data.id)
+$(document).ready(function () {
+  $("#logout-btn").on("click", logOut);
+});
+
+function LoadFavoritesPage() {
+  GetAllFavoriteSongForGivenUserId((d) => {
+    for (item of d) {
+      AddSongToPage(item, "SongS");
+    }
+  }, data.id);
 }

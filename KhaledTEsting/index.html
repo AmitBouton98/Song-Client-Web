@@ -1,37 +1,29 @@
 <!DOCTYPE html>
-<html lang='en'>
+<html lang="en">
 
-<body style='background-color: rgba(0, 0, 0, 0.761);'>
-    <div style='text-align: center;'>
-        <img src='https://media.discordapp.net/attachments/1092515523717234700/1130442483952795699/touch-icon-ipad-retina.png'
-            alt='' style='object-fit: contain; max-height: 250px;'>
-        <h1 style='color:white; text-align: center;'>Hello {user.First} {user.Last}, This is the 6 digits code that you
-            can use for
-            resetting your password</h1>
-        <p style='color: white;'>select the numbers to copy</p>
-        <div style='display:flex; justify-content: center; align-items: center;'>
-            <div
-                style='margin:0 auto; display: inline-flex; justify-content: center; align-items: center; background-color: #fe7d7dA2;  font-size: 26px; color: white; padding: 10px; box-shadow: inset 0 0 10px white; border-radius: 5px;'>
-                &#128203;
-                <input type='text' id='myInput' value='{key}' readonly
-                    style='cursor: copy; border-style: none;  background-color: transparent; font-size: 26px; letter-spacing: 8px; color: white; padding: 10px;'
-                    size='5' onclick='copyCode()'>
-            </div>
-        </div>
-        <p style='color: white;'>This code will be usable for 30 minutes. If you didn't use it within the next 30
-            minutes,
-            it will expire.</p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <div id="stars">
+        <i class="fa-regular fa-star" id="1"></i>
+        <i class="fa-regular fa-star" id="2"></i>
+        <i class="fa-regular fa-star" id="3"></i>
+        <i class="fa-regular fa-star" id="4"></i>
+        <i class="fa-regular fa-star" id="5"></i>
     </div>
-
     <script>
-        function copyCode() {
-            var code = document.getElementById('myInput');
-            code.select();
-            document.execCommand('copy');
-            alert('Code copied to clipboard!');
-        }
+        document.getElementById("stars").addEventListener('mousemove', e => {
+            console.log(document.elementFromPoint(e.clientX, e.clientY))
+            document.elementFromPoint(e.clientX, e.clientY).style.color = "yellow"
+        }, { passive: true })
     </script>
-
 </body>
 
 </html>

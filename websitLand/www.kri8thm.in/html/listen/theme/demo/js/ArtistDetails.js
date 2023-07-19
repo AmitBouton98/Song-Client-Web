@@ -1,97 +1,108 @@
-// $(document).ready(function () {
-//     var data = JSON.parse(localStorage.getItem('ArtistDetails'));
-//     AddInfoArtist(data)
-//     GetSongsForArtis((songs)=>{
-//         console.log(songs)
-//         for(item of songs){
-//             AddSongForArtist(item)
-//         }
-//     },data.artistName)
-// });
+$(document).ready(function () {
+  //     var data = JSON.parse(localStorage.getItem('ArtistDetails'));
+  //     AddInfoArtist(data)
+  //     GetSongsForArtis((songs)=>{
+  //         console.log(songs)
+  //         for(item of songs){
+  //             AddSongForArtist(item)
+  //         }
+  //     },data.artistName)
+  $("#logout-btn").on("click", logOut);
+});
 function LoadArtistPage() {
-    var Artist = JSON.parse(sessionStorage.getItem('ArtistDetails'));
-    document.getElementById('clear_playlist').click();
-    //}, data.artist.name, data.artist.bio.summary, data.artist.bio.published, data.artist.stats.listeners, data.artist.stats.playcount)
-    GetArtistInfo((d)=>{
-        let data = {
-            artistName: d.artist.name,
-            content: d.artist.bio.summary,
-            likes: 0,
-            listeners: d.artist.stats.listeners,
-            playcount: d.artist.stats.playcount,
-            published: d.artist.bio.published, // need to check how to chenge it
-        }
-        console.log(data)
-        AddInfoArtist(data)
-        GetSongsForArtis((songs) => {
-            for (item of songs) {
-                AddSongToPage(item,"SongForArtist") 
-            }
-        }, data.artistName)
-    },Artist.artistName)
+  var Artist = JSON.parse(sessionStorage.getItem("ArtistDetails"));
+  document.getElementById("clear_playlist").click();
+  //}, data.artist.name, data.artist.bio.summary, data.artist.bio.published, data.artist.stats.listeners, data.artist.stats.playcount)
+  GetArtistInfo((d) => {
+    let data = {
+      artistName: d.artist.name,
+      content: d.artist.bio.summary,
+      likes: 0,
+      listeners: d.artist.stats.listeners,
+      playcount: d.artist.stats.playcount,
+      published: d.artist.bio.published, // need to check how to chenge it
+    };
+    console.log(data);
+    AddInfoArtist(data);
+    GetSongsForArtis((songs) => {
+      for (item of songs) {
+        AddSongToPage(item, "SongForArtist");
+      }
+    }, data.artistName);
+  }, Artist.artistName);
 }
 function AddInfoArtist(data) {
-    console.log(data)
-    // ul is to add the info down to the name
-    let ul = document.getElementById("InfoArtistLi")
+  console.log(data);
+  // ul is to add the info down to the name
+  let ul = document.getElementById("InfoArtistLi");
 
-    let published = document.createElement("li")
-    published.textContent = data.published
+  let published = document.createElement("li");
+  published.textContent = data.published;
 
-    let listeners = document.createElement("li")
-    listeners.innerHTML = "<b>listeners :</b> " + data.listeners
+  let listeners = document.createElement("li");
+  listeners.innerHTML = "<b>listeners :</b> " + data.listeners;
 
-    let playcount = document.createElement("li")
-    playcount.innerHTML = "<b>playcount :</b> " + data.playcount
+  let playcount = document.createElement("li");
+  playcount.innerHTML = "<b>playcount :</b> " + data.playcount;
 
-    // need to add likes
-    ul.appendChild(published)
-    ul.appendChild(listeners)
-    ul.appendChild(playcount)
-    // artist name
-    let InfoArtistName = document.getElementById("InfoArtistName")
-    InfoArtistName.textContent = data.artistName
-    // artist content
-    let InfoArtistContent = document.getElementById("InfoArtistContent")
-    InfoArtistContent.innerHTML = data.content
+  // need to add likes
+  ul.appendChild(published);
+  ul.appendChild(listeners);
+  ul.appendChild(playcount);
+  // artist name
+  let InfoArtistName = document.getElementById("InfoArtistName");
+  InfoArtistName.textContent = data.artistName;
+  // artist content
+  let InfoArtistContent = document.getElementById("InfoArtistContent");
+  InfoArtistContent.innerHTML = data.content;
 
-    // artist likes
-    let ArtistLikes = document.getElementById("ArtistLikes")
-    ArtistLikes.textContent = data.likes
+  // artist likes
+  let ArtistLikes = document.getElementById("ArtistLikes");
+  ArtistLikes.textContent = data.likes;
 
-    GetNumberOfPlayedForGivenArtist((num) => {
-        console.log(num)
-        document.getElementById("PlayNumberForArtist").innerHTML = num
-    }, data.artistName)
-    GetTheNumberOfAppearanceInUserByGivenArtist((num)=>{
-        document.getElementById("FavoritesArtist").innerHTML = num
-    },data.artistName)
+  GetNumberOfPlayedForGivenArtist((num) => {
+    console.log(num);
+    document.getElementById("PlayNumberForArtist").innerHTML = num;
+  }, data.artistName);
+  GetTheNumberOfAppearanceInUserByGivenArtist((num) => {
+    document.getElementById("FavoritesArtist").innerHTML = num;
+  }, data.artistName);
 
-    let heartFavorite = document.getElementById("AddArtistToFavorite")
-    GetFavoriteArtistByUserId((d)=>{
-        for(item of d){
-            if(item.artistName == data.artistName){
-                heartFavorite.style.color = "red"
-                heartFavorite.className = 'ri-heart-fill heart-empty';
-            }
-        }
-    },User.id)
-    heartFavorite.onclick = () => { // set favorite song to user
-        if (heartFavorite.style.color == "red") {
-            DeleteFavoriteArtistToUser((d) => {
-                heartFavorite.className = 'ri-heart-line heart-empty';
-                heartFavorite.style.color = ""
-                document.getElementById("FavoritesArtist").innerHTML = Number(document.getElementById("FavoritesArtist").innerHTML)-1 
-            }, User.id, data.artistName)
-        }
-        else {
-            PutFavoriteArtistToUser((d) => {
-                heartFavorite.className = 'ri-heart-fill heart-empty';
-                heartFavorite.style.color = "red"
-                document.getElementById("FavoritesArtist").innerHTML = Number(document.getElementById("FavoritesArtist").innerHTML)+1 
-            }, User.id, data.artistName)
-        }
+  let heartFavorite = document.getElementById("AddArtistToFavorite");
+  GetFavoriteArtistByUserId((d) => {
+    for (item of d) {
+      if (item.artistName == data.artistName) {
+        heartFavorite.style.color = "red";
+        heartFavorite.className = "ri-heart-fill heart-empty";
+      }
     }
+  }, User.id);
+  heartFavorite.onclick = () => {
+    // set favorite song to user
+    if (heartFavorite.style.color == "red") {
+      DeleteFavoriteArtistToUser(
+        (d) => {
+          heartFavorite.className = "ri-heart-line heart-empty";
+          heartFavorite.style.color = "";
+          document.getElementById("FavoritesArtist").innerHTML =
+            Number(document.getElementById("FavoritesArtist").innerHTML) - 1;
+        },
+        User.id,
+        data.artistName
+      );
+    } else {
+      PutFavoriteArtistToUser(
+        (d) => {
+          heartFavorite.className = "ri-heart-fill heart-empty";
+          heartFavorite.style.color = "red";
+          document.getElementById("FavoritesArtist").innerHTML =
+            Number(document.getElementById("FavoritesArtist").innerHTML) + 1;
+        },
+        User.id,
+        data.artistName
+      );
+    }
+  };
 }
 // function AddSongForArtist1(data) {
 //     // Create the outer div with the appropriate classes
@@ -124,7 +135,7 @@ function AddInfoArtist(data) {
 //         AddPlayedForSongByGivenUserId((status) => {
 //             console.log(status)
 //         }, data.id, User.id)
-        
+
 //     }
 //     var playButtonIconPlay = document.createElement('i');
 //     playButtonIconPlay.className = 'ri-play-fill icon-play';
@@ -136,9 +147,6 @@ function AddInfoArtist(data) {
 //     playButtonIconPause.onclick = () => {
 //         pauseBtn
 //     }
-
-
-
 
 //     // Append the play button icons to the play button link
 //     playButtonLink.appendChild(playButtonIconPlay);
@@ -170,8 +178,6 @@ function AddInfoArtist(data) {
 //     // Create the subtitle paragraph
 //     var subtitleP = document.createElement('p');
 //     subtitleP.className = 'list__subtitle text-truncate';
-
-
 
 //     // Append the title link and subtitle paragraph to the content div
 //     contentDiv.appendChild(titleLink);
@@ -232,7 +238,6 @@ function AddInfoArtist(data) {
 //             }
 //         }
 //     }, User.id)
-
 
 //     var heartFillIcon = document.createElement('i');
 //     heartFillIcon.className = 'ri-heart-fill heart-fill';

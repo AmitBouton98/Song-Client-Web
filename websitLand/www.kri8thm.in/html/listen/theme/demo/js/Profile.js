@@ -1,49 +1,74 @@
+// gloabal before this js
+$(document).ready(function () {
+  const user_info = JSON.parse(sessionStorage.getItem("User"));
+  if (user_info == undefined) {
+    window.location.replace("./login.html");
+  }
+  getProfileImage(user_info.imgUrl, $(".user-image"));
+  $("#password").on("input", function () {
+    this.setCustomValidity("");
+    // input the password text in the validator
+    checkPasswordValidation($("#password").val());
+  });
+
+  $("#logout-btn").on("click", logOut);
+  // the eye for the passwords
+  $(".fa-solid").on("click", function () {
+    changeTheEye(this);
+  });
+});
+
 function LoadProfile() {
-  var data = JSON.parse(sessionStorage.getItem('User'));
-  LoadProfileDetails(data)
+  var data = JSON.parse(sessionStorage.getItem("User"));
+  LoadProfileDetails(data);
 }
 
 function LoadProfileDetails(data) {
+  $("#firstName").val(data.first);
+  $("#lastName").val(data.last);
 
-  let FirstNameUser = document.getElementById("FirstNameUser")
-  FirstNameUser.value = data.first
-  let LastNameUser = document.getElementById("LastNameUser")
-  LastNameUser.value = data.last
-  let EmailUser = document.getElementById("EmailUser")
-  EmailUser.value = data.email
-  let SaveProfileDetails = document.getElementById("SaveProfileDetails")
+  let SaveProfileDetails = document.getElementById("SaveProfileDetails");
   SaveProfileDetails.onclick = () => {
-    UpdateUserDetails((item) => {
-      console.log(item)
-    }, document.getElementById("FirstNameUser").value, document.getElementById("LastNameUser").value, document.getElementById("EmailUser").value, data.id)
-  }
-  let ChangePasswordUser = document.getElementById("ChangePasswordUser")
-  ChangePasswordUser.onclick = () => {
-    // show new window for update password with button save
-    SwalChangePassword(data)
-    // create procedure for it
-  }
+    updateINFO;
+  };
+  $("#change_user_data_form").submit(function () {
+    updateINFO(data);
+    return false;
+  });
 }
-function SwalChangePassword(data) {
-  Swal.fire({
-    title: 'Change password',
-    html: `<input type="password" id="OldPassowrd" class="swal2-input" placeholder="Old password">
-        <input type="password" id="NewPassword" class="swal2-input" placeholder="New password">`,
-    confirmButtonText: 'Save changes',
-    focusConfirm: false,
-    preConfirm: () => {
-      const OldPassowrd = Swal.getPopup().querySelector('#OldPassowrd').value
-      const NewPassword = Swal.getPopup().querySelector('#NewPassword').value
-      if (!OldPassowrd || !NewPassword) {
-        Swal.showValidationMessage(`Please enter login and password`)
-      }
-      return { OldPassowrd: OldPassowrd, NewPassword: NewPassword }
-    }
-  }).then((result) => {
-    ChangePassowrdForUser((data) => {
-      console.log("jere")
-      console.log(data)
-    }, data.id, result.value.OldPassowrd, result.value.NewPassword)
-  })
 
+function updateINFO(user_old_info) {
+  const file_flag = $("#profile_pic")[0].files.length > 0;
+  const password_flag = $("#password").val().length > 0;
+  // get the image file end extension image always !!
+  const image_extension = file_flag
+    ? $("#profile_pic")[0].files[0].name.split(".").pop()
+    : "png";
+  // the id and the image path is automatic generated
+  const user_obj = {
+    id: user_old_info.id,
+    first: $("#firstName").val(),
+    last: $("#lastName").val(),
+    email: user_old_info.email,
+    password: "dose not matter",
+    imgUrl: file_flag
+      ? `${user_old_info.email}.${image_extension}`
+      : user_old_info.imgUrl, // updated now
+    registrationDate: getCurrentDate(),
+  };
+  // send the user to the server
+  update_user_to_server(user_obj);
+  // send the picture of the user to the server
+  if (file_flag) upload_image(user_old_info.email, image_extension);
+
+  //update user_password
+  if (password_flag) {
+    ChangePassowrdForUser(
+      user_old_info.id,
+      $("#old_password").val(),
+      $("#password").val()
+    );
+  }
+  sessionStorage.removeItem("User");
+  sessionStorage.setItem("User", JSON.stringify(user_obj));
 }
