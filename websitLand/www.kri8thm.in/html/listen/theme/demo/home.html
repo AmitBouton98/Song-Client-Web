@@ -29,6 +29,8 @@
     <![endif]-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="./js/ajaxCall.js"></script>
+    <script src="js/serverJS.js"></script>
     <script defer src="js/Home.js"></script>
     <script src="js/AjaxCalls.js"></script>
     <!-- <script src="js/PlayVideo"></script> -->
@@ -36,7 +38,7 @@
 
 <body onload="LoadHome()">
     <div id="line_loader"></div>
-    
+
     <div id="loader">
         <div class="loader">
             <div class="loader__eq mx-auto"><span></span> <span></span> <span></span> <span></span> <span></span>
@@ -153,16 +155,20 @@
                         <div class="d-flex align-items-center">
                             <div class="dropdown ms-3 ms-sm-4"><a href="javascript:void(0);" class="avatar header-text"
                                     role="button" id="user_menu" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <div class="avatar__image"><img src="images/users/thumb.jpg" alt="user"></div><span
-                                        class="ps-2 d-none d-sm-block" id="FirstNameToShow"></span>
+                                    <div class="avatar__image"><img class="user-image" src="images/users/thumb.jpg"
+                                            alt="user"></div><span class="ps-2 d-none d-sm-block"
+                                        id="FirstNameToShow"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-md dropdown-menu-end"
                                     aria-labelledby="user_menu">
                                     <li>
                                         <div class="py-2 px-3 avatar avatar--lg">
-                                            <div class="avatar__image"><img src="images/users/thumb.jpg" alt="user">
+                                            <div class="avatar__image"><img class="user-image"
+                                                    src="images/users/thumb.jpg" alt="user">
                                             </div>
-                                            <div class="avatar__content"><span class="avatar__title" id="FirstAndLastNameToShow"></span> <span class="avatar__subtitle">User</span></div>
+                                            <div class="avatar__content"><span class="avatar__title"
+                                                    id="FirstAndLastNameToShow"></span> <span
+                                                    class="avatar__subtitle">User</span></div>
                                         </div>
                                     </li>
                                     <li class="dropdown-divider"></li>
@@ -172,16 +178,19 @@
                                     <li><a class="dropdown-item d-flex align-items-center" href="favorites.html"><i
                                                 class="ri-heart-line fs-5"></i> <span class="ps-2">Favorites</span></a>
                                     </li>
-                                    <li><a class="dropdown-item d-flex align-items-center" href="settings.html"><i
+                                    <!-- <li><a class="dropdown-item d-flex align-items-center" href="settings.html"><i
                                                 class="ri-settings-line fs-5"></i> <span
                                                 class="ps-2">Settings</span></a></li>
                                     <li><a class="dropdown-item d-flex align-items-center" href="plan.html"><i
                                                 class="ri-money-dollar-circle-line fs-5"></i> <span
-                                                class="ps-2">Plan</span></a></li>
+                                                class="ps-2">Plan</span></a></li> -->
                                     <li class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item d-flex align-items-center external text-danger"
-                                            href="index-2.html"><i class="ri-logout-circle-line fs-5"></i> <span
-                                                class="ps-2">Logout</span></a></li>
+                                    <li>
+                                        <p id="logout-btn"
+                                            class="dropdown-item d-flex align-items-center external text-danger"><i
+                                                class="ri-logout-circle-line fs-5"></i> <span class="ps-2">Logout</span>
+                                        </p>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -1354,15 +1363,17 @@
     </div>
     <div id="player">
         <div class="container">
-            <div class="player-container" >
+            <div class="player-container">
                 <div id="playerR"></div>
-                <div class="player-progress"><progress id="bufferedProgress" class="amplitude-buffered-progress player-progress__bar"
-                        value="0"></progress><progress id="playedProgress"
-                        class="amplitude-song-played-progress player-progress__bar"></progress><input id="progressSlider"  type="range"
-                        class="amplitude-song-slider player-progress__slider" aria-label="Progress slider">
-                        <div id="timeline" class="player-progress__timeline"></div>
-                        <!-- player-progress__timeline is class for the timeline (if needed) -->
-                    </div>
+                <div class="player-progress"><progress id="bufferedProgress"
+                        class="amplitude-buffered-progress player-progress__bar" value="0"></progress><progress
+                        id="playedProgress"
+                        class="amplitude-song-played-progress player-progress__bar"></progress><input
+                        id="progressSlider" type="range" class="amplitude-song-slider player-progress__slider"
+                        aria-label="Progress slider">
+                    <div id="timeline" class="player-progress__timeline"></div>
+                    <!-- player-progress__timeline is class for the timeline (if needed) -->
+                </div>
                 <div class="cover d-flex align-items-center">
                     <div class="cover__image"><img data-amplitude-song-info="cover_art_url"
                             src="images/cover/small/1.jpg" alt=""></div>
@@ -1377,16 +1388,18 @@
                             class="ri-repeat-2-fill fs-5"></i></button> <button type="button"
                         class="amplitude-prev btn btn-icon" aria-label="Backward"><i
                             class="ri-skip-back-mini-fill"></i></button> -->
-                             <button id="PlayButton" type="button"
+                    <button id="PlayButton" type="button"
                         class="amplitude-play-pause btn btn-icon btn-default rounded-pill" aria-label="Play pause"><i
-                            class="ri-play-fill icon-play" id="playBtn"></i> <i id="pauseBtn" class="ri-pause-fill icon-pause"></i></button>
+                            class="ri-play-fill icon-play" id="playBtn"></i> <i id="pauseBtn"
+                            class="ri-pause-fill icon-pause"></i></button>
                     <!-- <button type="button" class="amplitude-next btn btn-icon" aria-label="Forward"><i
                             class="ri-skip-forward-mini-fill"></i></button> <button type="button"
                         class="amplitude-shuffle amplitude-shuffle-off btn btn-icon ms-4 d-none d-md-block"
                         aria-label="Shuffle"><i class="ri-shuffle-fill fs-5"></i></button> -->
                 </div>
                 <div class="player-info">
-                    <div class="me-4 d-none d-xl-block"><span class="amplitude-current-minutes" id="durationTime">00:00</span>
+                    <div class="me-4 d-none d-xl-block"><span class="amplitude-current-minutes"
+                            id="durationTime">00:00</span>
                         <!-- :<span class="amplitude-current-seconds"></span> /
                              <span class="amplitude-duration-minutes" id="durationTime"></span>
                              :<span class="amplitude-duration-seconds"></span> -->

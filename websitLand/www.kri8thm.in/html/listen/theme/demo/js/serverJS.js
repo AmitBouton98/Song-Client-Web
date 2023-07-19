@@ -138,3 +138,8 @@ function loginUser(email, password) {
     }
   );
 }
+function getProfileImage(user_email, image_elms) {
+  image_elms.each(function () {
+    $(this).attr("src", `${api}/Upload?fileName=${user_email}`);
+  });
+}
