@@ -156,7 +156,7 @@
 
             const apiUrl = `https://api.spotify.com/v1/search?type=artist&q=${encodeURIComponent(artistName)}&decorate_restrictions=false&best_match=true&include_external=audio&limit=1`;
             // the access token i got from here (amit) ->  https://open.spotify.com/get_access_token?reason=transport&productType=web_player&_authfailed=1
-            const accessToken = 'BQDLEaQk8X6dkOWhYOOIG-QV87ADN_sasXT-s5DiHSD8HnvepNu0sfF05D2eOFZGScajTwvBBMDHyEOfrudsZM_K-hikAgUkBPoNXuo67TINt3N_7VnmD71X14iDbFM0QalwEeFfRFsB96DGt1xTwMxC-nWASOuqN3wAuQrHa1-Efb0pAuG5NuJFiWkSunpRiYFM2seVpavewS3fuvUTYIkgRP2vxH-HEXnB9Eval7_Za6tz0breGApWB8ERCNuQEP8DX2aYZkFsWhBY3E6JAVxJ7bngRoohUfi_MOkefW2fjrr84sOSl0bW5XTGscDK8BDH3-bDNZdP2vqw8t77jG867lww';// access token
+            const accessToken = 'BQDLc8hVVzAjcXy3EYtgeF1CJseigLO19NOm7fIowxz0NvWyOi8QME3mx3dpeEMD23064y8pxNOAuMPgL3kbqXEgle9xd5Tvlo_MktK0yxjG4n7yDyE1p-51e-oWZ6dpfhq5a5WCWj3BsYDJrohSbVE61YTMQufe66N0rZtY5plLOtYWc_7HwVzAdfCHnXXY3YzwF6TwHyQ5-FZyIIV4-oixJ84yaIwd98kcisyyZyIc-xPLDVHVx4stl4hpWS9_jNICUiSmrqy3OChUcHZRGL6t6gi9lsaVG-VVqL1fzscWr9Mq3G6pG2jmR6AVNy7Jgme3E9uwC2oNL4cKmKcLW_QKsyhY';// access token
 
             fetch(apiUrl, {
                 headers: {
@@ -165,7 +165,7 @@
             })
                 .then(response => response.json())
                 .then(data => {
-                    ChangeArtistUrl(artistName, data.best_match.items[0].images[1].url)
+                    // ChangeArtistUrl(artistName, data.best_match.items[0].images[1].url)
                     console.log("done")
                 })
                 .catch(error => {
