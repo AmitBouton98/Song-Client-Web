@@ -1,3 +1,4 @@
+const api = "https://localhost:7281/api";
 function ajaxCall(method, api, data, successCB, errorCB) {
   $.ajax({
     type: method, // Get/Post/Put/Delete/Patch
