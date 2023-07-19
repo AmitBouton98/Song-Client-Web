@@ -17,11 +17,32 @@ $(document).ready(function () {
 });
 
 function LoadHome() {
-  GetTop10GlobalSongs((data) => {
-    for (item of data) {
-      CreateLargeMusic(item);
-    }
-  });
+    GetTop10GlobalSongs((data) => {
+        for (item of data) {
+            CreateLargeMusic(item, 'LargeMusicTop10')
+        }
+    })
+    // getting 6 songs he might like
+    GetSongsUserMightLike((data) => {
+        console.log(data)
+        if (data.length == 0) {
+            $('#SongsUserMightLike').hide()
+        }
+        for (item of data) {
+            CreateLargeMusic(item, '6SongsUserMightLike')
+        }
+    }, User.id)
+    GetTop10ListenedArtists((data) => {
+        console.log(data)
+        if (data.length == 0) {
+            $('#Top10Artists').hide()
+        }
+        for (item of data) {
+            console.log(item)
+            CreateArtistDiv(item)
+        }
+    })
+
 }
 function getVideoUrl(query) {
   const apiUrl = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(
@@ -179,9 +200,9 @@ function CreateElemFromReasrch(data, WhereToInster, song) {
   div.appendChild(colDiv);
 }
 
-function CreateLargeMusic(data) {
-  var swiperSlide = document.createElement("div");
-  swiperSlide.className = "swiper-slide";
+function CreateLargeMusic(data, WhereToInster) {
+    var swiperSlide = document.createElement('div');
+    swiperSlide.className = 'swiper-slide';
 
   var coverDiv = document.createElement("div");
   coverDiv.className = "cover cover--round";
@@ -297,6 +318,51 @@ function CreateLargeMusic(data) {
   coverDiv.appendChild(coverFootDiv);
   swiperSlide.appendChild(coverDiv);
   document.getElementById("LargeMusicTop10").appendChild(swiperSlide);
+    coverDiv.appendChild(coverFootDiv);
+    swiperSlide.appendChild(coverDiv);
+    document.getElementById(WhereToInster).appendChild(swiperSlide)
+
+
+}
+
+function CreateArtistDiv(data) {
+    const swiperSlide = document.createElement("div");
+    swiperSlide.classList.add("swiper-slide");
+
+    const avatarDiv = document.createElement("div");
+    avatarDiv.classList.add("avatar", "avatar--xxl", "d-block", "text-center");
+
+    const avatarImageDiv = document.createElement("div");
+    avatarImageDiv.classList.add("avatar__image");
+    const artistLink = document.createElement("a");
+    artistLink.href = "artist-details.html";
+    // token
+    const artistImage = document.createElement("img");
+    artistImage.src = data.artistUrl; // cchange the img
+    // artistImage.src = 'images/cover/large/12.jpg'; // cchange the img
+    console.log(data)
+    artistImage.alt = data.artistName;
+    artistLink.appendChild(artistImage);
+    artistLink.onclick = () => {
+        getArtistByName((item) => {
+            navigateToPageArtistDetails(item)
+        }, data.artistName)
+        console.log('Title link clicked');
+        // Add your code here to handle the click event for the title link
+    };
+
+    avatarImageDiv.appendChild(artistLink);
+
+    const artistTitleLink = document.createElement("a");
+    artistTitleLink.href = "artist-details.html";
+    artistTitleLink.classList.add("avatar__title", "mt-3");
+    artistTitleLink.textContent = data.artistName;
+
+    avatarDiv.appendChild(avatarImageDiv);
+    avatarDiv.appendChild(artistTitleLink);
+
+    swiperSlide.appendChild(avatarDiv);
+    document.getElementById('Top10Artists').appendChild(swiperSlide)
 }
 
 var playButton = document.getElementById("PlayButton");
@@ -451,9 +517,9 @@ function PlayButtonOnClick(data) {
 }
 
 function navigateToPageArtistDetails(data) {
-  console.log(data);
-  // var ArtistDetails = { artistName: data.artistName, content: data.content, published: data.published, listeners: data.listeners, playcount: data.playcount, likes: data.likes };
-  var ArtistDetails = { artistName: data.artistName, likes: data.likes };
+    console.log(data)
+    // var ArtistDetails = { artistName: data.artistName, content: data.content, published: data.published, listeners: data.listeners, playcount: data.playcount, likes: data.likes };
+    var ArtistDetails = { artistName: data.artistName, likes: data.likes, artistUrl:data.artistUrl };
 
   sessionStorage.setItem("ArtistDetails", JSON.stringify(ArtistDetails));
 }

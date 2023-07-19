@@ -10,26 +10,30 @@ $(document).ready(function () {
   $("#logout-btn").on("click", logOut);
 });
 function LoadArtistPage() {
-  var Artist = JSON.parse(sessionStorage.getItem("ArtistDetails"));
-  document.getElementById("clear_playlist").click();
-  //}, data.artist.name, data.artist.bio.summary, data.artist.bio.published, data.artist.stats.listeners, data.artist.stats.playcount)
-  GetArtistInfo((d) => {
-    let data = {
-      artistName: d.artist.name,
-      content: d.artist.bio.summary,
-      likes: 0,
-      listeners: d.artist.stats.listeners,
-      playcount: d.artist.stats.playcount,
-      published: d.artist.bio.published, // need to check how to chenge it
-    };
-    console.log(data);
-    AddInfoArtist(data);
-    GetSongsForArtis((songs) => {
-      for (item of songs) {
-        AddSongToPage(item, "SongForArtist");
-      }
-    }, data.artistName);
-  }, Artist.artistName);
+    var Artist = JSON.parse(sessionStorage.getItem('ArtistDetails'));
+    document.getElementById('clear_playlist').click();
+    //}, data.artist.name, data.artist.bio.summary, data.artist.bio.published, data.artist.stats.listeners, data.artist.stats.playcount)
+    GetArtistInfo((d)=>{
+        let data = {
+            artistName: d.artist.name,
+            content: d.artist.bio.summary,
+            likes: 0,
+            listeners: d.artist.stats.listeners,
+            playcount: d.artist.stats.playcount,
+            published: d.artist.bio.published, // need to check how to chenge it
+        }
+        console.log(data)
+        AddInfoArtist(data)
+        GetSongsForArtis((songs) => {
+            for (item of songs) {
+                AddSongToPage(item,"SongForArtist") 
+            }
+        }, data.artistName)
+    },Artist.artistName)
+    let ImgForArtistDetails = document.getElementById('ImgForArtistDetails')
+    ImgForArtistDetails.src = Artist.artistUrl
+    ImgForArtistDetails.classList.add('ArtistImg')
+    console.log(ImgForArtistDetails)
 }
 function AddInfoArtist(data) {
   console.log(data);

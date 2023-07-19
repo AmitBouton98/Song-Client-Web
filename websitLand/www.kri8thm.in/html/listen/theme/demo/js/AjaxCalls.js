@@ -27,6 +27,47 @@ function GetArtistInfo(callback, artist) {
   );
   return false;
 }
+function GetArtistUrl(callback, artistName) {
+
+    const apiUrl = `https://api.spotify.com/v1/search?type=artist&q=${encodeURIComponent(artistName)}&decorate_restrictions=false&best_match=true&include_external=audio&limit=1`;
+    // the access token i got from here (amit) ->  https://open.spotify.com/get_access_token?reason=transport&productType=web_player&_authfailed=1
+    const accessToken = 'BQD4HABgheiN96QfdGmkHJnXklmbUGQqH4HuuaUoyqZB-wcaTwkAv6Vh62d4JTqqWOJ_W4jJZlqEM1EIZXMVQCKHgl1v0LRXCSu0-ZohG_Wdrw7gywyeYYD4DmRVXCYx7YNehpMtN-sA-pZs6j4ySlEYXzFev-EasY6labgB24wWqrPo9jtS2uFJqPbCVcWB-HJ3SR2hDTlPN9uuA67JzUE_28wDKEnfH3icVypjIqVV3VPg9LfVaxDknKTTO2-vO380VgDSvrAixmn53ya0cr6BE6vjY8btTorxWtINJcvEc1VRW_h-x05izgCY49JJ-1nVPRBSICXpPtBZMntWUMAaoVJ5","accessTokenExpirationTimestampMs';// access token
+
+    fetch(apiUrl, {
+        headers: {
+            'Authorization': `Bearer ${accessToken}`
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            callback(data)
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+
+    return false;
+}
+function httpGet(theUrl)
+{
+    let xmlhttp;
+    
+    if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+    } else { // code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    
+    xmlhttp.onreadystatechange=function() {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+            return xmlhttp.responseText;
+        }
+    }
+    xmlhttp.open("GET", theUrl, false);
+    xmlhttp.send();
+    
+    return xmlhttp.response;
+}
 function getSongByName(callback, name) {
   ajaxCall(
     "GET",
@@ -98,6 +139,13 @@ function GetTop10GlobalSongs(callback) {
     NotFound
   );
   return false;
+}
+'https://localhost:7281/api/SongMusics/GetSongsUserMightLike/UserId/2'
+function GetSongsUserMightLike(callback, UserId) {
+    ajaxCall("GET", `${api}/SongMusics/GetSongsUserMightLike/UserId/${UserId}`, "", function (data) {
+        callback(data)
+    }, NotFound);
+    return false;
 }
 function GetNumberOfListenersToMusic(callback, SongId) {
   ajaxCall(
@@ -246,17 +294,17 @@ function GetAllArtists(callback) {
   );
   return false;
 }
-function AddPlayedForSongByGivenUserId(callback, SongId, UserId) {
-  ajaxCall(
-    "PUT",
-    `${api}/SongMusics/CreateOrUpdateNumberOfPlayed?SongId=${SongId}&UserId=${UserId}`,
-    "",
-    function (data) {
-      callback(data);
-    },
-    NotFound
-  );
-  return false;
+function GetTop10ListenedArtists(callback) {
+    ajaxCall("GET", `${api}/ArtistMusics/GetTop10Artists`, "", function (data) {
+        callback(data)
+    }, NotFound);
+    return false;
+}
+function AddPlayedForSongByGivenUserId(callback, SongId,UserId) {
+    ajaxCall("PUT", `${api}/SongMusics/CreateOrUpdateNumberOfPlayed?SongId=${SongId}&UserId=${UserId}`, "", function (data) {
+        callback(data)
+    }, NotFound);
+    return false;
 }
 function GetAllFavoriteSongForGivenUserId(callback, UserId) {
   ajaxCall(

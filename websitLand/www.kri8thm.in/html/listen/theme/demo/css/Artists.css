@@ -1,0 +1,14 @@
+.ArtistImg {
+
+    max-width: 100%;
+    width: 100%;
+    height: 200px;
+}
+
+.cover__image {
+    max-width: 100%;
+    width: 100%;
+
+    object-fit: contain;
+    text-align: center;
+}
