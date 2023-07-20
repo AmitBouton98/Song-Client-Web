@@ -1,12 +1,39 @@
-$(document).ready(function () {
-  // AddInfoSong(data)
-  $("#logout-btn").on("click", logOut);
-});
 function LoadSongDetailsPage() {
   var data = JSON.parse(sessionStorage.getItem("SongDetails"));
-  // console.log(data)
+  get_comment_for_song(data.id, loopINComments);
+  // console.log(data);
   AddInfoSong(data);
 }
+
+function loopINComments(comments) {
+  async function processComment(comment) {
+    return new Promise((resolve) => {
+      get_user_by_id_comments(comment.userId, function (user) {
+        console.log(comment);
+        create_comment(
+          "#comments-area",
+          user.imgUrl,
+          user.name,
+          comment.createDate,
+          comment.stars,
+          comment.text,
+          comment.userId,
+          comment.id
+        );
+        resolve();
+      });
+    });
+  }
+
+  async function loop() {
+    for (let comment of comments) {
+      await processComment(comment);
+    }
+  }
+
+  loop();
+}
+
 function AddInfoSong(data) {
   // number of play
   // let PlayNumberForSong = document.getElementById("PlayNumberForSong")
