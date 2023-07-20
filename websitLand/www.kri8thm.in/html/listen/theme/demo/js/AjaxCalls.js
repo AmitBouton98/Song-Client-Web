@@ -290,6 +290,30 @@ function GetFavoriteArtistByUserId(callback, UserId) {
   );
   return false;
 }
+function GetAvgNumberForGivenArtist(callback, artistName) {
+  ajaxCall(
+    "GET",
+    `${api}/Comments/GetAvgNumberForGivenArtist/artistName/${artistName}`,
+    "",
+    function (data) {
+      callback(data);
+    },
+    NotFound
+  );
+  return false;
+}
+function GetAvgNumberForGivenSong(callback, SongId) {
+  ajaxCall(
+    "GET",
+    `${api}/Comments/GetAvgNumberForGivenSong/SongId/${SongId}`,
+    "",
+    function (data) {
+      callback(data);
+    },
+    NotFound
+  );
+  return false;
+}
 function GetAllArtists(callback) {
   ajaxCall(
     "GET",
@@ -390,6 +414,7 @@ function GetNumberOfSongs(callback) {
   );
   return false;
 }
+
 function PutFavoriteArtistToUser(callback, UserId, Artist) {
   ajaxCall(
     "PUT",

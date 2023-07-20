@@ -25,7 +25,6 @@ function LoadHome() {
   });
   // getting 6 songs he might like
   GetSongsUserMightLike((data) => {
-    console.log(data);
     if (data.length == 0) {
       $("#SongsUserMightLike").hide();
     }
@@ -34,12 +33,10 @@ function LoadHome() {
     }
   }, User.id);
   GetTop10ListenedArtists((data) => {
-    console.log(data);
     if (data.length == 0) {
       $("#Top10Artists").hide();
     }
     for (item of data) {
-      console.log(item);
       CreateArtistDiv(item);
     }
   });
@@ -338,7 +335,6 @@ function CreateArtistDiv(data) {
   const artistImage = document.createElement("img");
   artistImage.src = data.artistUrl; // cchange the img
   // artistImage.src = 'images/cover/large/12.jpg'; // cchange the img
-  console.log(data);
   artistImage.alt = data.artistName;
   artistLink.appendChild(artistImage);
   artistLink.onclick = () => {

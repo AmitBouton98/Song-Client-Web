@@ -173,13 +173,13 @@ function getProfileImage(image_url, image_elms) {
     $(this).attr("src", `${api}/Upload?fileName=${image_url}`);
   });
 }
-function add_comment_to_song(comment_song_obj) {
+function add_comment_to_song(comment_song_obj,callback) {
   ajaxCall(
     "POST",
     `${api}/Comments/PostSongComment`,
     JSON.stringify(comment_song_obj),
     (response) => {
-      console.log("yes1");
+      callback()
       Swal.fire({
         icon: "success",
         title: `Correct info`,
@@ -201,13 +201,13 @@ function add_comment_to_song(comment_song_obj) {
     }
   );
 }
-function add_comment_to_artist(comment_artist_obj) {
+function add_comment_to_artist(comment_artist_obj,callback) {
   ajaxCall(
     "POST",
     `${api}/Comments/PostArtistComment`,
     JSON.stringify(comment_artist_obj),
     (response) => {
-      console.log("yes1");
+      callback()
       Swal.fire({
         icon: "success",
         title: `Correct info`,
@@ -326,13 +326,13 @@ function delete_song_comment_from_server(comment_id) {
     }
   );
 }
-function delete_artist_comment_from_server(comment_id) {
+function delete_artist_comment_from_server(comment_id,callback) {
   ajaxCall(
     "DELETE",
     `${api}/Comments/DeleteArtistComment/commentId/${comment_id}`,
     null,
     (response) => {
-      console.log("yes yes");
+      callback()
       Swal.fire({
         icon: "success",
         title: `Deleted successfully`,

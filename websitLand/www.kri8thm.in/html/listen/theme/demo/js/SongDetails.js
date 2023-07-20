@@ -1,14 +1,19 @@
+var data = JSON.parse(sessionStorage.getItem("SongDetails"));
 function LoadSongDetailsPage() {
   $("#commentForm").submit(function () {
     create_comment_song("#comments-area");
+    UpdateSongAvgLikes()
     return false;
   });
-  var data = JSON.parse(sessionStorage.getItem("SongDetails"));
   get_comment_for_song(data.id, loopINComments);
   // console.log(data);
   AddInfoSong(data);
 }
-
+function UpdateSongAvgLikes(){
+  GetAvgNumberForGivenSong((num)=>{
+    document.getElementById('NumOfAvgFavoritesForSong').textContent = Number(num.toFixed(2));
+  },data.id)
+}
 function loopINComments(comments) {
   async function processComment(comment) {
     return new Promise((resolve) => {
@@ -61,6 +66,8 @@ function AddInfoSong(data) {
     );
     NumberofFavoritesForSong.innerHTML = num;
   }, data.id);
+
+  UpdateSongAvgLikes()
 
   let Url = document.createElement("li");
   Url.innerHTML = `<a href="https://www.youtube.com/watch?v=${data.youtubeId}"><b>Youtube link</b> </a>`;

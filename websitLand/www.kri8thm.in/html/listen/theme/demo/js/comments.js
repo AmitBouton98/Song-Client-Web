@@ -17,7 +17,7 @@ function create_comment_song(comment_area) {
     Stars: comment_stars_number,
   };
   console.log(obj_song_comment);
-  add_comment_to_song(obj_song_comment);
+  add_comment_to_song(obj_song_comment,UpdateSongAvgLikes);
   create_comment(comment_area);
 }
 
@@ -35,7 +35,7 @@ function create_comment_artist(comment_area) {
     Stars: comment_stars_number,
   };
   console.log(obj_artist_comment);
-  add_comment_to_artist(obj_artist_comment);
+  add_comment_to_artist(obj_artist_comment,UpdateArtistAvgLikes);
   create_comment(comment_area);
 }
 function create_comment(
@@ -58,24 +58,21 @@ function create_comment(
   const comment_format = `
         <div class="avatar avatar--lg align-items-start mt-4" >
           <div class="avatar__image"><img src="${get_image_from_server(
-            user_img ?? user_info.imgUrl
-          )}" alt="user"></div>
-          <div class="avatar__content" data-comment-id="${comment_id}" data-comment-rating="${number_stars}"><span class="avatar__title mb-1">${
-    user_name ?? user_info.first + " " + user_info.last
-  }
-          ${
-            user_id == user_info.id
-              ? `<i class="fa-solid fa-pen-to-square green-color cursor-pointer ps-sm-3" onclick= "edit_comment(this,'${forhwo}')"></i>`
-              : ""
-          }
-          ${
-            user_id == user_info.id
-              ? `<i class="fa-solid fa-trash-can red-color cursor-pointer " onclick= "deleteComment(this,'${forhwo}')"></i>`
-              : ""
-          }
+    user_img ?? user_info.imgUrl
+  )}" alt="user"></div>
+          <div class="avatar__content" data-comment-id="${comment_id}" data-comment-rating="${number_stars}"><span class="avatar__title mb-1">${user_name ?? user_info.first + " " + user_info.last
+    }
+          ${user_id == user_info.id
+      ? `<i class="fa-solid fa-pen-to-square green-color cursor-pointer ps-sm-3" onclick= "edit_comment(this,'${forhwo}')"></i>`
+      : ""
+    }
+          ${user_id == user_info.id
+      ? `<i class="fa-solid fa-trash-can red-color cursor-pointer " onclick= "deleteComment(this,'${forhwo}')"></i>`
+      : ""
+    }
           </span>
 
-          <span class="avatar__subtitle mb-2">${date ?? getCurrentDate()}</span>
+          <span class="avatar__subtitle mb-2">${date ?? new Date()}</span>
               <div class="text-warning d-flex mb-1">
                   ${create_stars(number_stars ?? comment_stars_number)}
               </div>
@@ -131,8 +128,12 @@ function edit_comment_in_server(elem, forwho) {
       ArtisName: artist_info.artistName,
       Stars: $(parent_elm).attr("data-comment-rating"),
     };
-    if (forwho == "artist") add_comment_to_artist(obj_artist_comment);
-    else add_comment_to_song(obj_song_comment);
+    if (forwho == "artist") {
+      add_comment_to_artist(obj_artist_comment);
+    }
+    else {
+      add_comment_to_song(obj_song_comment);
+    }
   }
   parent_elm.children(".temp-form").remove();
   parent_elm.append(
@@ -149,11 +150,13 @@ function deleteComment(clicked_elm, forwho) {
   if (forwho == "artist") {
     delete_artist_comment_from_server(
       $(second_fromTheTop_parent_elm).attr("data-comment-id")
-    );
+    ,UpdateArtistAvgLikes);
   } else {
     delete_song_comment_from_server(
       $(second_fromTheTop_parent_elm).attr("data-comment-id")
-    );
+      ,UpdateSongAvgLikes);
+
   }
   $(third_fromTheTop_parent_elm).remove();
+
 }
