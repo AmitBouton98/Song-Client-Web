@@ -16,7 +16,7 @@
         const apiKey = 'AIzaSyB2VcxkLp-3FQye8OFr5xwTvZjPqzUZ0Mo';
         // web for api : https://console.cloud.google.com/apis/credentials?cloudshell=true&orgonly=true&project=tru-392715&supportedpurview=project
 
-         function load() {
+        function load() {
 
             // for (item of Arr) { // add artist details
             //     Get((data) => {
@@ -152,7 +152,7 @@
             }, (err) => { console.log(err) });
             return false;
         }
-        async function GetArtistUrl( artistName) {
+        async function GetArtistUrl(artistName) {
 
             const apiUrl = `https://api.spotify.com/v1/search?type=artist&q=${encodeURIComponent(artistName)}&decorate_restrictions=false&best_match=true&include_external=audio&limit=1`;
             // the access token i got from here (amit) ->  https://open.spotify.com/get_access_token?reason=transport&productType=web_player&_authfailed=1
@@ -241,10 +241,25 @@
             background-color: #f00;
         }
     </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- <script src="https://public.radio.co/playerapi/jquery.radiocoplayer.min.js"></script> -->
+    <!-- <script>$('.radioplayer').radiocoPlayer();</script> -->
+    <script>
+        let tag = "pop"; // tag to search for 
+        let url = `http://www.radio-browser.info/webservice/json/stations/bytag/${tag}`;
 
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => console.error(error));
+    </script>
 </head>
 
 <body onload="load()">
+    <!-- <div class="radioplayer" data-src="<em><strong>https://streaming.radio.co/your_station/listen</strong></em>" data-autoplay="false" data-playbutton="true" data-volumeslider="true" data-elapsedtime="true" data-nowplaying="true" data-showplayer="true" data-volume="50" data-showartwork="false"></div> -->
+
     <!-- <div id="player"></div>
     <button id="playBtn">Play</button>
     <button id="pauseBtn">Pause</button>

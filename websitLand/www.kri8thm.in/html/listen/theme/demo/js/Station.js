@@ -1,0 +1,3 @@
+function LoadStation(){
+    $('.radioplayer').radiocoPlayer()
+}
