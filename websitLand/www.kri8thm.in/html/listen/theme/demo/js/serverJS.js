@@ -173,3 +173,4 @@ function getProfileImage(image_url, image_elms) {
     $(this).attr("src", `${api}/Upload?fileName=${image_url}`);
   });
 }
+function add_comment_to_song() {}

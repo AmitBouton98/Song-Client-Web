@@ -75,3 +75,7 @@ function logOut() {
   sessionStorage.removeItem("User");
   window.location.replace("./login.html");
 }
+
+function get_image_from_server(image_url) {
+  return `${api}/Upload?fileName=${image_url}`;
+}
