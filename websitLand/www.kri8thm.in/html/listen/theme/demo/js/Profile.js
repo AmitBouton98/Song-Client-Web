@@ -35,6 +35,7 @@ function LoadProfileDetails(data) {
     updateINFO(data);
     return false;
   });
+  document.getElementById('RegistrationDate').innerHTML = `Registration date : ${data.registrationDate.slice(0,10)}`
 }
 
 function updateINFO(user_old_info) {
