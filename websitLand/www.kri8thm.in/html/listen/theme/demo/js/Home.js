@@ -380,7 +380,7 @@ function onPlayerReady(event) {
   console.log(duration);
   progressSlider.max = duration;
   playedProgress.max = duration;
-  bufferedProgress.max = duration;
+  bufferedProgress.value = 1; // buffer for whole the song
 
   playButton.onclick = togglePlay;
   progressSlider.addEventListener("input", onSliderChange);
@@ -466,7 +466,11 @@ function updateTimeDisplay() {
   var remainingTime = duration - currentTime; // Calculates the remaining time
 
   document.getElementById("durationTime").innerHTML = formatTime(remainingTime);
-  progressSlider.value = currentTime; // changing the progress slider for current time (every 1 sec)
+  // progressSlider.value = currentTime; // changing the progress slider for current time (every 1 sec)
+
+  progressSlider.value = currentTime; // הנקודה
+  playedProgress.value = currentTime; // החלק שהושמע כבר
+  // bufferedProgress.value = currentTime;
 }
 function onPlayerError() {
   // here is if there is error with the song
