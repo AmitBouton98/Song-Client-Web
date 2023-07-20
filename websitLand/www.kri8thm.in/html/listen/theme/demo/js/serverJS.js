@@ -201,10 +201,59 @@ function add_comment_to_song(comment_song_obj) {
     }
   );
 }
+function add_comment_to_artist(comment_artist_obj) {
+  ajaxCall(
+    "POST",
+    `${api}/Comments/PostArtistComment`,
+    JSON.stringify(comment_artist_obj),
+    (response) => {
+      console.log("yes1");
+      Swal.fire({
+        icon: "success",
+        title: `Correct info`,
+        text: `have fun and enjoy your time in our website `,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    },
+    (resolve) => {
+      // console.log(resolve);
+      // in time it retyrn 0 then goes here because of that we need to do theis
+      Swal.fire({
+        icon: "info",
+        title: `Status code: ${resolve.status}`,
+        text: `Server message: ${resolve.responseText}`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+  );
+}
 function get_comment_for_song(song_id, callback) {
   ajaxCall(
     "GET",
     `${api}/Comments/GetSongComments/songId/${song_id}`,
+    null,
+    (response) => {
+      callback(response);
+    },
+    (resolve) => {
+      console.log(resolve);
+      // in time it retyrn 0 then goes here because of that we need to do theis
+      Swal.fire({
+        icon: "info",
+        title: `Status code: ${resolve.status}`,
+        text: `Server message: ${resolve.responseText}`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+  );
+}
+function get_comment_for_artist(artist_name, callback) {
+  ajaxCall(
+    "GET",
+    `${api}/Comments/GetArtistComments/artistName/${artist_name}`,
     null,
     (response) => {
       callback(response);
@@ -250,10 +299,37 @@ function get_user_by_id_comments(user_id, callback) {
   );
 }
 
-function delete_comment_from_server(comment_id) {
+function delete_song_comment_from_server(comment_id) {
   ajaxCall(
     "DELETE",
     `${api}/Comments/DeleteSongComment/commentId/${comment_id}`,
+    null,
+    (response) => {
+      console.log("yes yes");
+      Swal.fire({
+        icon: "success",
+        title: `Deleted successfully`,
+        text: `Server message: The message has been deleted`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    },
+    (resolve) => {
+      // in time it retyrn 0 then goes here because of that we need to do theis
+      Swal.fire({
+        icon: "info",
+        title: `Status code: ${resolve.status}`,
+        text: `Server message: ${resolve.responseText}`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+  );
+}
+function delete_artist_comment_from_server(comment_id) {
+  ajaxCall(
+    "DELETE",
+    `${api}/Comments/DeleteArtistComment/commentId/${comment_id}`,
     null,
     (response) => {
       console.log("yes yes");

@@ -1,4 +1,8 @@
 function LoadSongDetailsPage() {
+  $("#commentForm").submit(function () {
+    create_comment_song("#comments-area");
+    return false;
+  });
   var data = JSON.parse(sessionStorage.getItem("SongDetails"));
   get_comment_for_song(data.id, loopINComments);
   // console.log(data);
@@ -18,7 +22,8 @@ function loopINComments(comments) {
           comment.stars,
           comment.text,
           comment.userId,
-          comment.id
+          comment.id,
+          "song"
         );
         resolve();
       });
