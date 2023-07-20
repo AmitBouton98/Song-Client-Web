@@ -143,7 +143,6 @@ function GetTop10GlobalSongs(callback) {
   );
   return false;
 }
-("https://localhost:7281/api/SongMusics/GetSongsUserMightLike/UserId/2");
 function GetSongsUserMightLike(callback, UserId) {
   ajaxCall(
     "GET",
