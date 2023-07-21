@@ -242,23 +242,10 @@
         }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- <script src="https://public.radio.co/playerapi/jquery.radiocoplayer.min.js"></script> -->
-    <!-- <script>$('.radioplayer').radiocoPlayer();</script> -->
-    <script>
-        let tag = "pop"; // tag to search for 
-        let url = `http://www.radio-browser.info/webservice/json/stations/bytag/${tag}`;
-
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-            })
-            .catch(error => console.error(error));
-    </script>
+    
 </head>
 
 <body onload="load()">
-    <!-- <div class="radioplayer" data-src="<em><strong>https://streaming.radio.co/your_station/listen</strong></em>" data-autoplay="false" data-playbutton="true" data-volumeslider="true" data-elapsedtime="true" data-nowplaying="true" data-showplayer="true" data-volume="50" data-showartwork="false"></div> -->
 
     <!-- <div id="player"></div>
     <button id="playBtn">Play</button>
