@@ -242,10 +242,32 @@
         }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
+
 </head>
 
 <body onload="load()">
+    <h1>Listen to 100FM</h1>
+    <audio id="radioPlayer" controls>
+        <source src="http://cdn.cybercdn.live/Radios_100FM/Audio/icecast.audio" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <button id="playButton">Play</button>
+    <button id="pauseButton">Pause</button>
+
+    <script>
+        const radioPlayer = document.getElementById('radioPlayer');
+        const playButton = document.getElementById('playButton');
+        const pauseButton = document.getElementById('pauseButton');
+
+        playButton.addEventListener('click', function () {
+            radioPlayer.play();
+        });
+
+        pauseButton.addEventListener('click', function () {
+            radioPlayer.pause();
+        });
+    </script>
+
 
     <!-- <div id="player"></div>
     <button id="playBtn">Play</button>
