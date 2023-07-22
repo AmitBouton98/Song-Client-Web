@@ -30,6 +30,10 @@ input:focus:invalid {
     animation: shake 0.2s ease-in-out;
 }
 
+.right-text {
+    text-align: right;
+}
+
 .hide-card {
     display: none;
     visibility: hidden;
