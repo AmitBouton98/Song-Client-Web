@@ -37,8 +37,8 @@
     <script src="js/serverJS.js"></script>
     <script defer src="js/Home.js"></script>
     <script src="js/AjaxCalls.js"></script>
-    <script defer src="js/Home.js"></script>
     <!-- Websit for taking radio audio :    http://digital.100fm.co.il/ChannelList_Kodi.xml -->
+    <script src="js/Station.js"></script>
 </head>
 
 <body>
@@ -114,7 +114,7 @@
                                     class="ri-search-2-line"></i></label> <input type="text"
                                 placeholder="Type anything to get result..." id="search_input"
                                 class="form-control form-control-sm"></form>
-                        <div id="search_results" class="search pb-3"> // is the search bar (history and more)
+                        <div id="search_results" class="search pb-3">
                             <div class="search__head">
                                 <div class="search__head__filter">
                                     <button type="button" class="btn btn-sm btn-light-primary"
@@ -206,6 +206,7 @@
         </header>
         <main id="page_content">
             <div class="hero" style="background-image: url(images/banner/radio.jpg);"></div>
+            <canvas id="visualizer" width="800" height="200"></canvas>
             <div class="under-hero container">
                 <div class="section">
                     <div class="section__head">
@@ -250,12 +251,12 @@
                                 data-song-album=""
                                 data-song-url="http://kodi.streamgates.net/radios-audio/100Hits/icecast.audio"
                                 data-song-cover="https://d203uamca1bsc4.cloudfront.net/app/thumbnails/t-hits.png">
-
+                                <!-- stopped here  -->
                                 <div class="cover__image"><img
                                         src="https://d203uamca1bsc4.cloudfront.net/app/thumbnails/t-hits.png"
-                                        alt="Hits"> <button type="button"
+                                        alt="Hits"> <button type="button" onclick="CanvasCtxAudio(this)"  
                                         class="btn btn-play btn-default btn-icon rounded-pill" data-play-id="3"><i
-                                            class="ri-play-fill icon-play"></i> <i
+                                            class="ri-play-fill icon-play" ></i> <i
                                             class="ri-pause-fill icon-pause"></i></button></div>
                                 <div class="cover__foot"><a href="javascript:void(0);" role="button"
                                         class="cover__title text-truncate">Hits</a></div>
