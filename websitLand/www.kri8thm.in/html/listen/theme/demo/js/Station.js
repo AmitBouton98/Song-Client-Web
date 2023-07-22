@@ -1,7 +1,7 @@
 const audioElements = [];
 const playButtons = [];
 
-function StopAllAudios(){
+async function StopAllAudios(){
     for (const d of audioElements) {
         d.pause();
         d.currentTime = 0;
@@ -9,21 +9,21 @@ function StopAllAudios(){
         // const source = audioContext.createMediaElementSource(d);
         // source.disconnect();
 
-        // // Remove the audio element from the DOM
+        // Remove the audio element from the DOM
         // d.remove();
     }
     audioElements.length = 0; // Clear the array
 }
-function AddButtons(){
+async function AddButtons(){
     for(item of playButtons){
         $(item).show()
         console.log()
     }
     playButtons.length = 0; // Clear the array
 }
-function CanvasCtxAudio(elem) { 
-    StopAllAudios()
-    AddButtons()
+async function CanvasCtxAudio(elem) { 
+    await StopAllAudios()
+    await AddButtons()
     const flag = false
     
     // path is this
@@ -91,7 +91,7 @@ function CanvasCtxAudio(elem) {
     function animateVisualizer() {
         analyser.getByteFrequencyData(dataArray);
 
-        canvasCtx.fillStyle = 'rgba(0, 0, 0, 0.1)'; // Background color
+        canvasCtx.fillStyle = 'white'; // Background color
         canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
 
         const barStep = Math.floor(bufferLength / barCount);
