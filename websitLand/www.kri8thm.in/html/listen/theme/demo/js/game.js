@@ -123,11 +123,11 @@ function goToHome(elm) {
   $("#home-card-game").css("display", "flex");
 }
 function create_score_row(data) {
-  const scoreHTML = `<h4>${data.score}</h4>`;
+  const scoreHTML = `<h4 class="ps-3 mb-0">${data.score}</h4>`;
   $(".scores-score-col").append(scoreHTML);
 }
 function showNames(data) {
-  const nameHTML = `<h4>${data.name}</h4>`;
+  const nameHTML = `<h4 class="ps-3 mb-0">${data.name}</h4>`;
   $(".scores-names-col").append(nameHTML);
 }
 
@@ -135,8 +135,8 @@ async function showScores(data) {
   $("#scores-table").css("display", "block");
   $(".scores-names-col").empty();
   $(".scores-score-col").empty();
-  $(".scores-names-col").append(' <h4 class="score-col-header">Name</h4>');
-  $(".scores-score-col").append('<h4 class="score-col-header">Score</h4>');
+  $(".scores-names-col").append(' <h4 class="score-col-header ps-3">Name</h4>');
+  $(".scores-score-col").append('<h4 class="score-col-header ps-3">Score</h4>');
   // $("#home-card-game").css("display", "none");
   for (let item of data) {
     get_user_by_id_comments(item.userId, (user_info) => {
