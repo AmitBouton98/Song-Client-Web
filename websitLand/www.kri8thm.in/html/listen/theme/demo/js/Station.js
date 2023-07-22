@@ -1,5 +1,31 @@
+const audioElements = [];
+const playButtons = [];
 
+function StopAllAudios(){
+    for (const d of audioElements) {
+        d.pause();
+        d.currentTime = 0;
+        // Disconnect the audio nodes from the audio context
+        // const source = audioContext.createMediaElementSource(d);
+        // source.disconnect();
+
+        // // Remove the audio element from the DOM
+        // d.remove();
+    }
+    audioElements.length = 0; // Clear the array
+}
+function AddButtons(){
+    for(item of playButtons){
+        $(item).show()
+        console.log()
+    }
+    playButtons.length = 0; // Clear the array
+}
 function CanvasCtxAudio(elem) { 
+    StopAllAudios()
+    AddButtons()
+    const flag = false
+    
     // path is this
     // $(this).parent().parent().attr('data-song-url')
     // button -> div -> div (with the url)
@@ -7,7 +33,7 @@ function CanvasCtxAudio(elem) {
     let audio, analyser, dataArray, bufferLength;
     const canvas = document.getElementById('visualizer');
     const canvasCtx = canvas.getContext('2d');
-    // const playButton = document.getElementById('playButton');
+    const playButton = document.getElementById('playButton');
     const centerX = canvas.width / 2;
     const barWidth = 5;
     const barSpacing = 2;
@@ -28,15 +54,24 @@ function CanvasCtxAudio(elem) {
         const source = audioContext.createMediaElementSource(audio);
         source.connect(analyser).connect(audioContext.destination);
 
-        elem.addEventListener('click', () => {
+        if(!flag){
+            StopAllAudios()
+            audioElements.push(audio)
+            playButtons.push(elem)
+            audio.play();
+            $(elem).hide()
+        }
+        playButton.onclick  = function() {
             if (audio.paused) {
                 audioContext.resume().then(() => {
+                    StopAllAudios()
                     audio.play();
                 });
             } else {
+                StopAllAudios()
                 audio.pause();
             }
-        });
+        };
 
         initializeBars();
         animateVisualizer();
@@ -88,6 +123,7 @@ function CanvasCtxAudio(elem) {
     if (audioContext) {
         // Start the audio visualization
         initializeAudio();
+        
     } else {
         alert('Web Audio API is not supported in this browser.');
     }
