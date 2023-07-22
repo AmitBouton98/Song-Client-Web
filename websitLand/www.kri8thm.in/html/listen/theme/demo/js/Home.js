@@ -10,6 +10,7 @@ $(document).ready(function () {
   // cleare the cache dont delete this
   //need to check on geners
   document.getElementById("clear_playlist").click();
+  $('#player').hide()
   $("#logout-btn").on("click", logOut);
   document.getElementById("FirstNameToShow").innerHTML = User.first;
   document.getElementById("FirstAndLastNameToShow").innerHTML =
@@ -473,6 +474,7 @@ function onPlayerError() {
   player.destroy();
 }
 function PlayButtonOnClick(data) {
+  $('#player').show() // display none the player section (because when move from page to page he still apear)
   AddPlayedForSongByGivenUserId(
     (status) => {
       if (window.location.href.includes("song-details.html")) {

@@ -30,15 +30,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="js/gloabal.js"></script>
+    <!-- <script src="js/gloabal.js"></script> -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://www.youtube.com/iframe_api"></script>
-    <script src="./js/ajaxCall.js"></script>
-    <script src="js/serverJS.js"></script>
-    <script defer src="js/Home.js"></script>
-    <script src="js/AjaxCalls.js"></script>
-    <script defer src="js/Home.js"></script>
+    <!-- <script src="https://www.youtube.com/iframe_api"></script> -->
+    <!-- <script src="./js/ajaxCall.js"></script> -->
+    <!-- <script src="js/serverJS.js"></script> -->
+    <!-- <script defer src="js/Home.js"></script> -->
+    <!-- <script src="js/AjaxCalls.js"></script> -->
     <!-- Websit for taking radio audio :    http://digital.100fm.co.il/ChannelList_Kodi.xml -->
+    <script src="js/Station.js"></script>
 </head>
 
 <body>
@@ -114,7 +114,7 @@
                                     class="ri-search-2-line"></i></label> <input type="text"
                                 placeholder="Type anything to get result..." id="search_input"
                                 class="form-control form-control-sm"></form>
-                        <div id="search_results" class="search pb-3"> // is the search bar (history and more)
+                        <div id="search_results" class="search pb-3">
                             <div class="search__head">
                                 <div class="search__head__filter">
                                     <button type="button" class="btn btn-sm btn-light-primary"
@@ -206,6 +206,7 @@
         </header>
         <main id="page_content">
             <div class="hero" style="background-image: url(images/banner/radio.jpg);"></div>
+            <canvas id="visualizer" width="800" height="200"></canvas>
             <div class="under-hero container">
                 <div class="section">
                     <div class="section__head">
@@ -221,7 +222,7 @@
                                 <div class="cover__image"><img
                                         src="https://d203uamca1bsc4.cloudfront.net/app/thumbnails/t-100fm.png"
                                         alt="100fm">
-                                    <button type="button" class="btn btn-play btn-default btn-icon rounded-pill"
+                                    <button type="button" class="btn btn-play btn-default btn-icon rounded-pill" onclick="CanvasCtxAudio(this)"
                                         data-play-id="1"><i class="ri-play-fill icon-play"></i> <i
                                             class="ri-pause-fill icon-pause"></i></button>
                                 </div>
@@ -237,7 +238,7 @@
 
                                 <div class="cover__image"><img
                                         src="https://d203uamca1bsc4.cloudfront.net/app/thumbnails/t-hot.png"
-                                        alt="ים תיכוני לוהט"><button type="button"
+                                        alt="ים תיכוני לוהט"><button type="button" onclick="CanvasCtxAudio(this)"
                                         class="btn btn-play btn-default btn-icon rounded-pill" data-play-id="2"><i
                                             class="ri-play-fill icon-play"></i> <i
                                             class="ri-pause-fill icon-pause"></i></button></div>
@@ -250,12 +251,13 @@
                                 data-song-album=""
                                 data-song-url="http://kodi.streamgates.net/radios-audio/100Hits/icecast.audio"
                                 data-song-cover="https://d203uamca1bsc4.cloudfront.net/app/thumbnails/t-hits.png">
-
+                                <!-- stopped here  -->
                                 <div class="cover__image"><img
                                         src="https://d203uamca1bsc4.cloudfront.net/app/thumbnails/t-hits.png"
-                                        alt="Hits"> <button type="button"
+                                        alt="Hits"> <button type="button" onclick="CanvasCtxAudio(this)"
+
                                         class="btn btn-play btn-default btn-icon rounded-pill" data-play-id="3"><i
-                                            class="ri-play-fill icon-play"></i> <i
+                                            class="ri-play-fill icon-play" ></i> <i
                                             class="ri-pause-fill icon-pause"></i></button></div>
                                 <div class="cover__foot"><a href="javascript:void(0);" role="button"
                                         class="cover__title text-truncate">Hits</a></div>
@@ -270,7 +272,7 @@
                                 <div class="cover__image"><img
                                         src="https://d203uamca1bsc4.cloudfront.net/app/thumbnails/t-tiktok.png"
                                         alt="TikTok">
-                                    <button type="button" class="btn btn-play btn-default btn-icon rounded-pill"
+                                    <button type="button" class="btn btn-play btn-default btn-icon rounded-pill" onclick="CanvasCtxAudio(this)"
                                         data-play-id="4"><i class="ri-play-fill icon-play"></i> <i
                                             class="ri-pause-fill icon-pause"></i></button>
                                 </div>
@@ -286,7 +288,7 @@
 
                                 <div class="cover__image"><img
                                         src="https://d203uamca1bsc4.cloudfront.net/app/thumbnails/t-relax.png"
-                                        alt="Relax"> <button type="button"
+                                        alt="Relax"> <button type="button" onclick="CanvasCtxAudio(this)"
                                         class="btn btn-play btn-default btn-icon rounded-pill" data-play-id="5"><i
                                             class="ri-play-fill icon-play"></i> <i
                                             class="ri-pause-fill icon-pause"></i></button></div>
@@ -302,7 +304,7 @@
 
                                 <div class="cover__image"><img
                                         src="https://d203uamca1bsc4.cloudfront.net/app/thumbnails/t-mizrachit.png"
-                                        alt="מזרחית"> <button type="button"
+                                        alt="מזרחית"> <button type="button" onclick="CanvasCtxAudio(this)"
                                         class="btn btn-play btn-default btn-icon rounded-pill" data-play-id="6"><i
                                             class="ri-play-fill icon-play"></i> <i
                                             class="ri-pause-fill icon-pause"></i></button></div>
@@ -325,7 +327,7 @@
 
                             <div class="cover__image"><img
                                     src="https://d203uamca1bsc4.cloudfront.net/app/thumbnails/t-deep.png" alt="Deep">
-                                <button type="button" class="btn btn-play btn-default btn-icon rounded-pill"
+                                <button type="button" class="btn btn-play btn-default btn-icon rounded-pill" onclick="CanvasCtxAudio(this)"
                                     data-play-id="7"><i class="ri-play-fill icon-play"></i> <i
                                         class="ri-pause-fill icon-pause"></i></button>
                             </div>
@@ -341,7 +343,7 @@
 
                             <div class="cover__image"><img
                                     src="https://d203uamca1bsc4.cloudfront.net/app/thumbnails/t-israeli.png"
-                                    alt="ישראלי"> <button type="button"
+                                    alt="ישראלי"> <button type="button" onclick="CanvasCtxAudio(this)"
                                     class="btn btn-play btn-default btn-icon rounded-pill" data-play-id="8"><i
                                         class="ri-play-fill icon-play"></i> <i
                                         class="ri-pause-fill icon-pause"></i></button></div>
@@ -357,7 +359,7 @@
 
                             <div class="cover__image"><img
                                     src="https://d203uamca1bsc4.cloudfront.net/app/thumbnails/t-80s.png" alt="80'S">
-                                <button type="button" class="btn btn-play btn-default btn-icon rounded-pill"
+                                <button type="button" class="btn btn-play btn-default btn-icon rounded-pill" onclick="CanvasCtxAudio(this)"
                                     data-play-id="9"><i class="ri-play-fill icon-play"></i> <i
                                         class="ri-pause-fill icon-pause"></i></button>
                             </div>
@@ -373,7 +375,7 @@
 
                             <div class="cover__image"><img
                                     src="https://d203uamca1bsc4.cloudfront.net/app/thumbnails/t-top40.png" alt="Top 40">
-                                <button type="button" class="btn btn-play btn-default btn-icon rounded-pill"
+                                <button type="button" class="btn btn-play btn-default btn-icon rounded-pill" onclick="CanvasCtxAudio(this)"
                                     data-play-id="9"><i class="ri-play-fill icon-play"></i> <i
                                         class="ri-pause-fill icon-pause"></i></button>
                             </div>
@@ -389,7 +391,7 @@
 
                             <div class="cover__image"><img
                                     src="https://d203uamca1bsc4.cloudfront.net/app/thumbnails/t-hiphop.png"
-                                    alt="HipHop"> <button type="button"
+                                    alt="HipHop"> <button type="button" onclick="CanvasCtxAudio(this)"
                                     class="btn btn-play btn-default btn-icon rounded-pill" data-play-id="10"><i
                                         class="ri-play-fill icon-play"></i> <i
                                         class="ri-pause-fill icon-pause"></i></button></div>
@@ -405,7 +407,7 @@
 
                             <div class="cover__image"><img
                                     src="https://d203uamca1bsc4.cloudfront.net/app/thumbnails/t-hafla.png" alt="חפלה">
-                                <button type="button" class="btn btn-play btn-default btn-icon rounded-pill"
+                                <button type="button" class="btn btn-play btn-default btn-icon rounded-pill" onclick="CanvasCtxAudio(this)"
                                     data-play-id="11"><i class="ri-play-fill icon-play"></i> <i
                                         class="ri-pause-fill icon-pause"></i></button>
                             </div>
@@ -444,7 +446,7 @@
                         class="amplitude-repeat btn btn-icon me-4 d-none d-md-block" aria-label="Repeat"><i
                             class="ri-repeat-2-fill fs-5"></i></button> <button type="button"
                         class="amplitude-prev btn btn-icon" aria-label="Backward"><i
-                            class="ri-skip-back-mini-fill"></i></button> <button type="button"
+                            class="ri-skip-back-mini-fill"></i></button> <button type="button" id="playButton" 
                         class="amplitude-play-pause btn btn-icon btn-default rounded-pill" aria-label="Play pause"><i
                             class="ri-play-fill icon-play"></i> <i class="ri-pause-fill icon-pause"></i></button>
                     <button type="button" class="amplitude-next btn btn-icon" aria-label="Forward"><i
