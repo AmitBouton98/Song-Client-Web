@@ -26,7 +26,7 @@ function LoadProfile() {
 function LoadProfileDetails(data) {
   $("#firstName").val(data.first);
   $("#lastName").val(data.last);
-
+  document.getElementById('user-name-header').textContent = data.first + ' ' +data.last
   let SaveProfileDetails = document.getElementById("SaveProfileDetails");
   SaveProfileDetails.onclick = () => {
     updateINFO;
