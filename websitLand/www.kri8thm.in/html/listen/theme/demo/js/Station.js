@@ -35,13 +35,14 @@ async function CanvasCtxAudio(elem) {
     const path = $(elem).parent().parent().attr("data-song-url")
     let audio, analyser, dataArray, bufferLength;
     const canvas = document.getElementById('visualizer');
+    canvas.style.width = '100%'
     const canvasCtx = canvas.getContext('2d');
     const playButton = document.getElementById('playButton');
     const centerX = canvas.width / 2;
     const barWidth = 5;
-    const barSpacing = 2;
+    const barSpacing = 4;//3
     const barCount = Math.floor(canvas.width / (barWidth + barSpacing));
-    const maxAmplitude = 400;
+    const maxAmplitude = 350;//250
     const bars = [];
 
     const audioFile = path;
