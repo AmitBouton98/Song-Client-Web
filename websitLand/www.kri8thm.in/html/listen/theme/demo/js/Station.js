@@ -91,9 +91,8 @@ async function CanvasCtxAudio(elem) {
     function animateVisualizer() {
         analyser.getByteFrequencyData(dataArray);
 
-        canvasCtx.fillStyle = 'white'; // Background color
-        canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
-
+        canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
+        
         const barStep = Math.floor(bufferLength / barCount);
 
         for (let i = 0; i < barCount; i++) {
