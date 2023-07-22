@@ -38,6 +38,7 @@
     <script defer src="js/Home.js"></script>
     <script src="js/AjaxCalls.js"></script>
     <script src="js/AnalyticsAdmin.js"></script>
+    <link rel="stylesheet" href="css/analytics.css">
 </head>
 
 <body onload="LoadAdminPage()">
@@ -208,7 +209,8 @@
             <div class="under-hero container">
                 <div class="section">
                     <div class="mb-5 fs-6">
-                        <h3>Hi <span class="text-primary" id="UserFirstAndLastName"></span>, Welcome to the Listen App</h3>
+                        <h3>Hi <span class="text-primary" id="UserFirstAndLastName"></span>, Welcome to the Listen App
+                        </h3>
                         <p>Here is the analytics of your account.</p>
                     </div>
                     <div class="row g-4">
@@ -220,7 +222,8 @@
                                             class="btn btn-icon text-white ms-auto"><i
                                                 class="ri-settings-fill"></i></button>
                                     </div>
-                                    <p>Your total num of played songs is :</p><span class="display-4 d-block mb-3" id="TotalTimeForHearingSong"></span>
+                                    <p>Your total num of played songs is :</p><span class="display-4 d-block mb-3"
+                                        id="TotalTimeForHearingSong"></span>
                                     <a class="btn btn-warning rounded-pill" href="genres.html">For more songs</a>
                                 </div>
                             </div>
@@ -264,83 +267,31 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                             <div class="card h-100">
                                 <div class="card-header">
-                                    <h5 class="mb-0">User Statistics</h5>
+                                    <h5 class="mb-0">Your most played</h5>
                                 </div>
                                 <div class="card-body">
-                                    <div style="height: 300px"><canvas id="user_statistics"></canvas></div>
-                                    <div class="text-center"><span class="fw-bold fs-6 d-block mt-3 mb-2 text-dark">Top
-                                            Countries</span>
-                                        <div class="row">
-                                            <div class="col-4 border-right">
-                                                <div class="py-2 px-sm-3"><span class="d-block">USA</span>
-                                                    <p class="fw-bold">1,243</p>
-                                                </div>
-                                            </div>
-                                            <div class="col-4 border-right">
-                                                <div class="py-2 px-sm-3"><span class="d-block">UK</span>
-                                                    <p class="fw-bold">643</p>
-                                                </div>
-                                            </div>
-                                            <div class="col-4">
-                                                <div class="py-2 px-sm-3"><span class="d-block">Canada</span>
-                                                    <p class="fw-bold">351</p>
-                                                </div>
-                                            </div>
+                                    <div class="flex grid-row">
+                                        <img id="most-artist-img" src="https://picsum.photos/200" alt="">
+                                        <div>
+                                            <p class=" title-card-ms">Artist : <span id="artist-name"></span> </p>
+                                            <p><span id="info-most-artist">artist info substing 50 chars</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="flex grid-row">
+                                        <img id="most-song-img" src="https://picsum.photos/200" alt="">
+                                        <div>
+                                            <p class=" title-card-ms">Song : <span id="song-name"></span> </p>
+                                            <p><span id="info-most-song">artist info substing 50 chars</span></p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="card h-100">
-                                <div class="card-header">
-                                    <h5 class="mb-0">Referrals</h5>
-                                </div>
-                                <div class="card-body">
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item border-0 px-0 py-3">
-                                            <p class="fs-4 mb-1 fw-semi-bold">3421</p>
-                                            <p class="mb-2 fw-medium">Visits from Facebook</p>
-                                            <div class="progress" style="height: .25rem">
-                                                <div class="progress-bar bg-primary" role="progressbar"
-                                                    style="width: 80%;" aria-valuenow="25" aria-valuemin="0"
-                                                    aria-valuemax="100"></div>
-                                            </div>
-                                        </li>
-                                        <li class="list-group-item border-0 px-0 py-3">
-                                            <p class="fs-4 mb-1 fw-semi-bold">2401</p>
-                                            <p class="mb-2 fw-medium">Visits from Instagram</p>
-                                            <div class="progress" style="height: .25rem">
-                                                <div class="progress-bar bg-danger" role="progressbar"
-                                                    style="width: 67%;" aria-valuenow="25" aria-valuemin="0"
-                                                    aria-valuemax="100"></div>
-                                            </div>
-                                        </li>
-                                        <li class="list-group-item border-0 px-0 py-3">
-                                            <p class="fs-4 mb-1 fw-semi-bold">975</p>
-                                            <p class="mb-2 fw-medium">Visits from Twitter</p>
-                                            <div class="progress" style="height: .25rem">
-                                                <div class="progress-bar bg-info" role="progressbar" style="width: 31%;"
-                                                    aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </li>
-                                        <li class="list-group-item border-0 px-0 py-3">
-                                            <p class="fs-4 mb-1 fw-semi-bold">1672</p>
-                                            <p class="mb-2 fw-medium">Visits from Affiliates</p>
-                                            <div class="progress" style="height: .25rem">
-                                                <div class="progress-bar bg-success" role="progressbar"
-                                                    style="width: 52%;" aria-valuenow="25" aria-valuemin="0"
-                                                    aria-valuemax="100"></div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
                     </div>
+
                 </div>
             </div>
             <footer id="footer">
