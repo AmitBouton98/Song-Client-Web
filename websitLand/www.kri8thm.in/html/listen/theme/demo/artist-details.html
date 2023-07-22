@@ -43,6 +43,7 @@
     <script defer src="js/Home.js"></script>
     <script src="js/comments.js"></script>
     <link rel="stylesheet" href="css/comments.css">
+    <script src="js/textSpeech.js"></script>
 </head>
 
 <body onload="LoadArtistPage()">
@@ -77,7 +78,8 @@
                                     class="fa-solid fa-gamepad"></i>
                                 <span class="ps-3 ">Game</span></a></li>
                         <li class="nav-item nav-item--head"><span class="nav-item--head__text">Analytic data</span>
-                            <span class="nav-item--head__dots">...</span></li>
+                            <span class="nav-item--head__dots">...</span>
+                        </li>
                         <li class="nav-item"><a href="analytics.html" class="nav-link d-flex align-items-center"><i
                                     class="ri-pie-chart-line fs-5"></i> <span class="ps-3">Analytics</span></a></li>
                         <li class="nav-item nav-item--head"><span class="nav-item--head__text">Private</span> <span
@@ -228,10 +230,12 @@
                                 <li>245 Songs</li>
                                 <li>Apr 1, 1990</li> -->
                             </ul>
-                            <p class="mb-5 fw-semi-bold" id="InfoArtistContent">Lorem ipsum dolor sit amet consectetur
+                            <p class="mb-5 fw-semi-bold textToSpeak" id="InfoArtistContent">Lorem ipsum dolor sit amet
+                                consectetur
                                 adipisicing elit. Voluptatibus iste
                                 fugit voluptatum dolorem assumenda deleniti, mollitia culpa facere. Velit nisi quidem
                                 nesciunt quae veritatis possimus cupiditate placeat officiis ab modi!</p>
+
                             <ul class="info-list">
                                 <li>
                                     <div class="d-flex align-items-center"><button type="button" id="play_all"
@@ -249,6 +253,10 @@
                                 <li><span class="text-dark d-flex align-items-center"><i
                                             class="ri-star-fill text-warning"></i> <span class="ps-2 fw-medium"
                                             id="ArtistLikes">0</span></span></li>
+                                <li onclick="toggleSpeech()" class="form-check-label"><span
+                                        class="text-dark d-flex align-items-center"><i
+                                            class="fa-solid fa-ear-listen"></i></i> <span class="ps-2 fw-medium"
+                                            id="ArtistLikes">Read artist info</span></span></li>
 
                             </ul>
                         </div>
