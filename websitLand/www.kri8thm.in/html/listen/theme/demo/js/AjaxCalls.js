@@ -439,6 +439,56 @@ function DeleteFavoriteArtistToUser(callback, UserId, Artist) {
   );
   return false;
 }
+'https://localhost:7281/api/ArtistMusics/GetTop1ArtistForUser?UserId=14'
+function GetTop1ArtistForUser(callback, UserId) {
+  ajaxCall(
+    "GET",
+    `${api}/ArtistMusics/GetTop1ArtistForUser?UserId=${UserId}`,
+    "",
+    function (data) {
+      callback(data);
+    },
+    NotFound
+  );
+  return false;
+}
+'https://localhost:7281/api/SongMusics/GetTop1SongForUser?UserId=14'
+function GetTop1SongForUser(callback, UserId) {
+  ajaxCall(
+    "GET",
+    `${api}/SongMusics/GetTop1SongForUser?UserId=${UserId}`,
+    "",
+    function (data) {
+      callback(data);
+    },
+    NotFound
+  );
+  return false;
+}
+function GetNumberOfPlayedForUser(callback, UserId) {
+  ajaxCall(
+    "GET",
+    `${api}/UserMusics/GetNumberOfPlayedForUser?UserId=${UserId}`,
+    "",
+    function (data) {
+      callback(data);
+    },
+    NotFound
+  );
+  return false;
+}
+function GetScoreForUser(callback, UserId) {
+  ajaxCall(
+    "GET",
+    `${api}/UserPoints/GetScoreForUser?UserId=${UserId}`,
+    "",
+    function (data) {
+      callback(data);
+    },
+    NotFound
+  );
+  return false;
+}
 function NotFound(error) {
   console.log("Not found");
   console.log(error.responseText);

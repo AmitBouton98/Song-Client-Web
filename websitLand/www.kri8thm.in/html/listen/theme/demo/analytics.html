@@ -208,21 +208,20 @@
             <div class="under-hero container">
                 <div class="section">
                     <div class="mb-5 fs-6">
-                        <h3>Hi <span class="text-primary">Admin</span>, Welcome to the Listen App</h3>
-                        <p>Select your music to listen & download free and premium music.</p>
+                        <h3>Hi <span class="text-primary" id="UserFirstAndLastName"></span>, Welcome to the Listen App</h3>
+                        <p>Here is the analytics of your account.</p>
                     </div>
                     <div class="row g-4">
                         <div class="col-xl-5">
                             <div class="card bg-primary text-white">
                                 <div class="card-body fs-6">
                                     <div class="d-flex align-items-center mb-2">
-                                        <h4 class="text-white mb-0">Total Earnings</h4><button type="button"
+                                        <h4 class="text-white mb-0">Total time of hearing song</h4><button type="button"
                                             class="btn btn-icon text-white ms-auto"><i
                                                 class="ri-settings-fill"></i></button>
                                     </div>
-                                    <p>Voluptatem ut, facilis ipsum, nostrum quia officia dolor mollitia temporibus hic
-                                        aspernatur laborum.</p><span class="display-4 d-block mb-3">$126,457</span>
-                                    <button type="button" class="btn btn-warning rounded-pill">Get Details</button>
+                                    <p>Your total num of played songs is :</p><span class="display-4 d-block mb-3" id="TotalTimeForHearingSong"></span>
+                                    <a class="btn btn-warning rounded-pill" href="genres.html">For more songs</a>
                                 </div>
                             </div>
                         </div>
@@ -255,13 +254,12 @@
                                 <div class="col-sm-4 mt-4 mt-sm-0">
                                     <div class="card h-100 bg-warning">
                                         <div class="card-body">
-                                            <h5 class="text-black">Purchases</h5>
+                                            <h5 class="text-black">Game Score</h5>
                                             <div class="d-flex align-items-center text-black"><i
                                                     class="ri-currency-fill fs-5"></i>
-                                                <p class="fw-medium ps-2">11,012,547</p>
+                                                <p class="fw-medium ps-2" id="GetScoreForUser"></p>
                                             </div>
                                         </div>
-                                        <div style="height: 160px"><canvas id="purchases"></canvas></div>
                                     </div>
                                 </div>
                             </div>
