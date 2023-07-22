@@ -173,13 +173,13 @@ function getProfileImage(image_url, image_elms) {
     $(this).attr("src", `${api}/Upload?fileName=${image_url}`);
   });
 }
-function add_comment_to_song(comment_song_obj,callback) {
+function add_comment_to_song(comment_song_obj, callback) {
   ajaxCall(
     "POST",
     `${api}/Comments/PostSongComment`,
     JSON.stringify(comment_song_obj),
     (response) => {
-      callback()
+      callback();
       Swal.fire({
         icon: "success",
         title: `Correct info`,
@@ -201,13 +201,13 @@ function add_comment_to_song(comment_song_obj,callback) {
     }
   );
 }
-function add_comment_to_artist(comment_artist_obj,callback) {
+function add_comment_to_artist(comment_artist_obj, callback) {
   ajaxCall(
     "POST",
     `${api}/Comments/PostArtistComment`,
     JSON.stringify(comment_artist_obj),
     (response) => {
-      callback()
+      callback();
       Swal.fire({
         icon: "success",
         title: `Correct info`,
@@ -326,13 +326,13 @@ function delete_song_comment_from_server(comment_id) {
     }
   );
 }
-function delete_artist_comment_from_server(comment_id,callback) {
+function delete_artist_comment_from_server(comment_id, callback) {
   ajaxCall(
     "DELETE",
     `${api}/Comments/DeleteArtistComment/commentId/${comment_id}`,
     null,
     (response) => {
-      callback()
+      callback();
       Swal.fire({
         icon: "success",
         title: `Deleted successfully`,
@@ -350,6 +350,62 @@ function delete_artist_comment_from_server(comment_id,callback) {
         showConfirmButton: false,
         timer: 1500,
       });
+    }
+  );
+}
+function get_top_ten_scores(callback) {
+  ajaxCall(
+    "GET",
+    `${api}/UserPoints/GetTop10Scores`,
+    null,
+    (response) => {
+      console.log(response);
+      callback(response);
+    },
+    (resolve) => {
+      // in time it retyrn 0 then goes here because of that we need to do theis
+      Swal.fire({
+        icon: "info",
+        title: `Status code: ${resolve.status}`,
+        text: `Server message: ${resolve.responseText}`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+  );
+}
+
+function get_question(questionName, callback) {
+  ajaxCall(
+    "GET",
+    `${api}/QuestionMusics/${questionName}`,
+    null,
+    (response) => {
+      callback(response);
+    },
+    (resolve) => {
+      // in time it retyrn 0 then goes here because of that we need to do theis
+      Swal.fire({
+        icon: "info",
+        title: `Status code: ${resolve.status}`,
+        text: `Server message: ${resolve.responseText}`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+  );
+}
+function set_Score(score_obj, callback) {
+  ajaxCall(
+    "POST",
+    `${api}/UserPoints`,
+    JSON.stringify(score_obj),
+    (response) => {
+      callback();
+    },
+    (resolve) => {
+      console.log(resolve);
+      callback();
     }
   );
 }
