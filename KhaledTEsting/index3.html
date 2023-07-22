@@ -1,22 +1,58 @@
-<div class="avatar avatar--lg align-items-start">
-    <div class="avatar__image"><img src="images/users/thumb.jpg" alt="user"></div>
-    <div class="avatar__content"><span class="avatar__title mb-1">Androws Kinny</span> <span
-            class="avatar__subtitle mb-2">Apr 22, 2019</span>
-        <div class="text-warning d-flex mb-1"><i class="ri-star-s-fill"></i> <i class="ri-star-s-fill"></i> <i
-                class="ri-star-s-fill"></i> <i class="ri-star-s-fill"></i></div>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laboriosam vel
-            necessitatibus suscipit dicta quasi velit ratione nemo, voluptatum debitis cum
-            sit quod dolor pariatur laudantium cumque.</p><a href="javascript:void(0);" class="btn btn-link">
-            <div class="btn__wrap"><i class="ri-reply-line fs-6"></i> <span>Reply</span>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .flex {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .grid-row {
+            padding: 10px;
+            background-color: transparent;
+        }
+
+        .grid-row img {
+            padding: 10px;
+            height: 200px;
+            object-fit: contain;
+        }
+
+        .title-card-ms {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        @media only screen and (max-width: 588px) {
+
+            .flex {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card-body">
+        <div class="flex grid-row">
+            <img src="https://picsum.photos/200" alt="">
+            <div>
+                <p class="ms-5 title-card-ms">artist name</p>
+                <p><span>artist info substing 50 chars</span><a href="">more info.. </a></p>
             </div>
-        </a>
-        <!-- <div class="avatar avatar--lg align-items-start mt-4">
-            <div class="avatar__image"><img src="images/users/thumb.jpg" alt="user"></div>
-            <div class="avatar__content"><span class="avatar__title">Androws Kinny</span>
-                <span class="avatar__subtitle mb-2">Apr 23, 2019</span>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laboriosam vel
-                    necessitatibus suscipit dicta quasi velit ratione nemo.</p>
+        </div>
+        <div class="flex grid-row">
+            <img src="https://picsum.photos/200" alt="">
+            <div>
+                <p class="ms-5 title-card-ms">song name</p>
+                <p><span>artist info substing 50 chars</span><a href="">more info.. </a></p>
             </div>
-        </div> -->
+        </div>
     </div>
-</div>
+</body>
+
+</html>
