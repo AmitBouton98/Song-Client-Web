@@ -1,164 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        .rating {
-            display: flex;
-            flex-direction: row-reverse;
-            gap: 0.3rem;
-            --stroke: #666;
-            --fill: #ffc73a;
-        }
-
-        .rating input {
-            appearance: unset;
-        }
-
-        .rating label {
-            cursor: pointer;
-        }
-
-        .rating svg {
-            width: 3rem;
-            height: 3rem;
-            overflow: visible;
-            fill: transparent;
-            stroke: var(--stroke);
-            stroke-linejoin: bevel;
-            stroke-dasharray: 12;
-            animation: idle 4s linear infinite;
-            transition: stroke 0.2s, fill 0.5s;
-        }
-
-        @keyframes idle {
-            from {
-                stroke-dashoffset: 24;
-            }
-        }
-
-        .rating label:hover svg {
-            stroke: var(--fill);
-        }
-
-        .rating input:checked~label svg {
-            transition: 0s;
-            animation: idle 4s linear infinite, yippee 0.75s backwards;
-            fill: var(--fill);
-            stroke: var(--fill);
-            stroke-opacity: 0;
-            stroke-dasharray: 0;
-            stroke-linejoin: miter;
-            stroke-width: 8px;
-        }
-
-        @keyframes yippee {
-            0% {
-                transform: scale(1);
-                fill: var(--fill);
-                fill-opacity: 0;
-                stroke-opacity: 1;
-                stroke: var(--stroke);
-                stroke-dasharray: 10;
-                stroke-width: 1px;
-                stroke-linejoin: bevel;
-            }
-
-            30% {
-                transform: scale(0);
-                fill: var(--fill);
-                fill-opacity: 0;
-                stroke-opacity: 1;
-                stroke: var(--stroke);
-                stroke-dasharray: 10;
-                stroke-width: 1px;
-                stroke-linejoin: bevel;
-            }
-
-            30.1% {
-                stroke: var(--fill);
-                stroke-dasharray: 0;
-                stroke-linejoin: miter;
-                stroke-width: 8px;
-            }
-
-            60% {
-                transform: scale(1.2);
-                fill: var(--fill);
-            }
-        }
-    </style>
-
-    <script src="https://www.youtube.com/iframe_api"></script>
-
+    <title>Text to Speech</title>
 </head>
 
 <body>
-    <!-- <script>
-        let audio = new Audio('https://www.youtube.com/embed/OBEOPnAO1hc')
-        audio.play()
-    </script> -->
+    <div>
+        <label for="textToSpeak">Enter text to convert to speech:</label><br>
+        <textarea id="textToSpeak" rows="5" cols="50"></textarea><br>
+        <button onclick="toggleSpeech()">Read</button>
+    </div>
 
-
-    <!-- <form action="#" class="star-rating-form">
-        <div class="rating">
-            <input value="1" name="star-radio" id="star-1" type="radio">
-            <label for="star-1" data-value="5">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"
-                        pathLength="360"></path>
-                </svg>
-            </label>
-            <input value="2" name="star-radio" id="star-2" type="radio">
-            <label for="star-2" data-value="4">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"
-                        pathLength="360"></path>
-                </svg>
-            </label>
-            <input value="3" name="star-radio" id="star-3" type="radio">
-            <label for="star-3" data-value="3">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"
-                        pathLength="360"></path>
-                </svg>
-            </label>
-            <input value="4" name="star-radio" id="star-4" type="radio">
-            <label for="star-4" data-value="2">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"
-                        pathLength="360"></path>
-                </svg>
-            </label>
-            <input value="5" name="star-radio" id="star-5" type="radio">
-            <label for="star-1" data-value="5">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"
-                        pathLength="360"></path>
-                </svg>
-            </label>
-        </div>
-    </form>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
-        integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-        $(".star-rating-form").submit(function () {
-            console.log(this);
-        });
-        console.log($('label[for^="star"]'))
-        $('label[for^="star"]').on("click", function () {
-            console.log($(this).attr("data-value"))
-        })
-    </script> -->
+        let speaking = false;
+        let utterance;
+
+        function toggleSpeech() {
+            const text = document.getElementById('textToSpeak').value;
+            if (!speaking) {
+                utterance = new SpeechSynthesisUtterance(text);
+
+                // Uncomment the following line to change the language (optional).
+                // utterance.lang = 'en-US';
+
+                speechSynthesis.speak(utterance);
+                speaking = true;
+                document.querySelector('button').textContent = 'Stop';
+            } else {
+                speechSynthesis.cancel();
+                speaking = false;
+                document.querySelector('button').textContent = 'Read';
+            }
+        }
+    </script>
 </body>
 
 </html>
