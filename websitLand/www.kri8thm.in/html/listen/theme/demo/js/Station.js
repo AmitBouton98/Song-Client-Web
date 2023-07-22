@@ -1,7 +1,9 @@
+
+
 const audioElements = [];
 const playButtons = [];
 
-async function StopAllAudios(){
+async function StopAllAudios() {
     for (const d of audioElements) {
         d.pause();
         d.currentTime = 0;
@@ -14,18 +16,19 @@ async function StopAllAudios(){
     }
     audioElements.length = 0; // Clear the array
 }
-async function AddButtons(){
-    for(item of playButtons){
+async function AddButtons() {
+    for (item of playButtons) {
         $(item).show()
         console.log()
     }
     playButtons.length = 0; // Clear the array
 }
-async function CanvasCtxAudio(elem) { 
+async function CanvasCtxAudio(elem) {
+    $('#player').show()
     await StopAllAudios()
     await AddButtons()
     const flag = false
-    
+
     // path is this
     // $(this).parent().parent().attr('data-song-url')
     // button -> div -> div (with the url)
@@ -54,14 +57,14 @@ async function CanvasCtxAudio(elem) {
         const source = audioContext.createMediaElementSource(audio);
         source.connect(analyser).connect(audioContext.destination);
 
-        if(!flag){
+        if (!flag) {
             StopAllAudios()
             audioElements.push(audio)
             playButtons.push(elem)
             audio.play();
             $(elem).hide()
         }
-        playButton.onclick  = function() {
+        playButton.onclick = function () {
             if (audio.paused) {
                 audioContext.resume().then(() => {
                     StopAllAudios()
@@ -92,7 +95,7 @@ async function CanvasCtxAudio(elem) {
         analyser.getByteFrequencyData(dataArray);
 
         canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
-        
+
         const barStep = Math.floor(bufferLength / barCount);
 
         for (let i = 0; i < barCount; i++) {
@@ -122,7 +125,7 @@ async function CanvasCtxAudio(elem) {
     if (audioContext) {
         // Start the audio visualization
         initializeAudio();
-        
+
     } else {
         alert('Web Audio API is not supported in this browser.');
     }
