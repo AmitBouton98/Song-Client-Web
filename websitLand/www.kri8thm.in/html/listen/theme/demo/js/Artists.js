@@ -31,7 +31,9 @@ function CreateFavoriteArtists(data) {
 
   // Create the anchor tag with href "artist-details.html"
   var anchorTag = document.createElement("a");
-  anchorTag.href = "artist-details.html";
+  // anchorTag.href = "artist-details.html";
+  $(anchorTag).css('cursor','pointer')
+
   // add the artist to local storage !
   anchorTag.onclick = () => {
     // event.preventDefault();
@@ -53,7 +55,9 @@ function CreateFavoriteArtists(data) {
 
   // Create the anchor tag with href "artist-details.html" and class "avatar__title mt-3"
   var titleAnchorTag = document.createElement("a");
-  titleAnchorTag.href = "artist-details.html";
+  // titleAnchorTag.href = "artist-details.html";
+  $(titleAnchorTag).css('cursor','pointer')
+
   titleAnchorTag.className = "avatar__title mt-3";
   titleAnchorTag.textContent = data.artistName;
 
@@ -72,7 +76,9 @@ function CreateArtist(data) {
 
   // Create the anchor tag with href "artist-details.html" and class "cover cover--round"
   var anchorTag = document.createElement("a");
-  anchorTag.href = "artist-details.html";
+  // anchorTag.href = "artist-details.html";
+  $(anchorTag).css('cursor','pointer')
+
   anchorTag.className = "cover cover--round";
 
   anchorTag.onclick = () => {

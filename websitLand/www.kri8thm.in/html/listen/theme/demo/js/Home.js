@@ -123,7 +123,9 @@ function CreateElemFromReasrch(data, WhereToInster, song) {
 
   // Create the anchor element for the cover image
   var coverLink = document.createElement("a");
-  coverLink.href = "song-details.html";
+  // coverLink.href = "song-details.html";
+  $(coverLink).css('cursor','pointer')
+
   coverLink.className = "list__cover";
 
   // Create the cover image element
@@ -142,7 +144,9 @@ function CreateElemFromReasrch(data, WhereToInster, song) {
 
   // Create the title anchor element
   var titleLink = document.createElement("a");
-  titleLink.href = "song-details.html";
+  // titleLink.href = "song-details.html";
+  $(titleLink).css('cursor','pointer')
+
   titleLink.className = "list__title text-truncate";
   titleLink.textContent = data.name; // name of the song
 
@@ -152,7 +156,8 @@ function CreateElemFromReasrch(data, WhereToInster, song) {
 
   // Create the artist anchor element
   var artistLink = document.createElement("a");
-  artistLink.href = "artist-details.html";
+  // artistLink.href = "artist-details.html";
+  $(artistLink).css('cursor','pointer')
   artistLink.textContent = data.artistName; // name of the artist
   if (song) {
     // add the artist to local storage !
@@ -286,12 +291,15 @@ function CreateLargeMusic(data, WhereToInster) {
   var coverFootDiv = document.createElement("div");
   coverFootDiv.className = "cover__foot";
   var coverTitleLink = document.createElement("a");
-  coverTitleLink.href = "song-details.html";
+  // coverTitleLink.href = "song-details.html";
+  $(coverTitleLink).css('cursor','pointer')
+
   coverTitleLink.className = "cover__title text-truncate";
   coverTitleLink.textContent = data.name;
   coverTitleLink.onclick = () => {
     getSongByName((item) => {
       navigateToPageSongDetails(item);
+
     }, data.name);
     // coverTitleLink.href = 'song-details.html';
     console.log("Title link clicked");
@@ -300,7 +308,8 @@ function CreateLargeMusic(data, WhereToInster) {
   var coverSubtitleP = document.createElement("p");
   coverSubtitleP.className = "cover__subtitle text-truncate";
   var artistDetailsLink = document.createElement("a");
-  artistDetailsLink.href = "artist-details.html";
+  // artistDetailsLink.href = "artist-details.html";
+  $(artistDetailsLink).css('cursor','pointer')
   artistDetailsLink.textContent = data.artistName;
   artistDetailsLink.onclick = () => {
     getArtistByName((item) => {
@@ -331,7 +340,9 @@ function CreateArtistDiv(data) {
   const avatarImageDiv = document.createElement("div");
   avatarImageDiv.classList.add("avatar__image");
   const artistLink = document.createElement("a");
-  artistLink.href = "artist-details.html";
+  // artistLink.href = "artist-details.html";
+  $(artistLink).css('cursor','pointer')
+
   // token
   const artistImage = document.createElement("img");
   artistImage.src = data.artistUrl; // cchange the img
@@ -349,7 +360,9 @@ function CreateArtistDiv(data) {
   avatarImageDiv.appendChild(artistLink);
 
   const artistTitleLink = document.createElement("a");
-  artistTitleLink.href = "artist-details.html";
+  // artistTitleLink.href = "artist-details.html";
+  $(artistTitleLink).css('cursor','pointer')
+
   artistTitleLink.classList.add("avatar__title", "mt-3");
   artistTitleLink.textContent = data.artistName;
 
@@ -526,6 +539,8 @@ function navigateToPageArtistDetails(data) {
   };
 
   sessionStorage.setItem("ArtistDetails", JSON.stringify(ArtistDetails));
+  window.location.replace('./artist-details.html')
+
 }
 function navigateToPageSongDetails(data) {
   console.log(data.lyriclink);
@@ -539,4 +554,5 @@ function navigateToPageSongDetails(data) {
     youtubeId: data.youtubeId,
   };
   sessionStorage.setItem("SongDetails", JSON.stringify(SongDetails));
+  window.location.replace('./song-details.html')
 }
