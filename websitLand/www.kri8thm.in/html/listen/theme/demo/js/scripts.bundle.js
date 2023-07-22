@@ -159,7 +159,7 @@ var Base = (function () {
                 "undefined" !== $(this).attr("href")
                   ? $(this).attr("href")
                   : null;
-            i && (window.history.pushState("", "", i), a(i, t));
+            i //&& (window.history.pushState("", "", i), a(i, t));
           }
         );
     },
