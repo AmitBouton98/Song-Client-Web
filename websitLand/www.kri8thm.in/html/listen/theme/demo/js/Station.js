@@ -55,14 +55,14 @@ async function CanvasCtxAudio(elem) {
 
     const source = audioContext.createMediaElementSource(audio);
     source.connect(analyser).connect(audioContext.destination);
-    var volumeSlider = document.getElementById("VolumeSlider");
-    audio.volume = volumeSlider.value / 100;
-    function onVolumeChange() {
-      // Change the volume when slider value changes
-      var volume = volumeSlider.value;
-      audio.volume = volume / 100;
-    }
-    volumeSlider.addEventListener("input", onVolumeChange);
+    // var volumeSlider = document.getElementById("VolumeSlider");
+    // audio.volume = volumeSlider.value / 100;
+    // function onVolumeChange() {
+    //   // Change the volume when slider value changes
+    //   var volume = volumeSlider.value;
+    //   audio.volume = volume / 100;
+    // }
+    // volumeSlider.addEventListener("input", onVolumeChange);
 
     if (!flag) {
       StopAllAudios();
