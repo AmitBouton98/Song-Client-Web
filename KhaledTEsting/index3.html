@@ -1,58 +1,247 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="utf-8" />
+    <title></title>
+
+
+
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+
+    <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-analytics.js"></script>
+
+    <!--**** Remember to add the database script ***-->
+    <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-database.js"></script>
+
+    <!--Your web app's Firebase configuration-->
+    <script>
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAa-9BANPJjPUHHxlZ0bGOrL6hT2HUhEtk",
+            authDomain: "hardy-agility-392807.firebaseapp.com",
+            projectId: "hardy-agility-392807",
+            storageBucket: "hardy-agility-392807.appspot.com",
+            messagingSenderId: "619684261834",
+            appId: "1:619684261834:web:d85ce65fcd53cb34c8e933",
+            measurementId: "G-V4MLB082YQ",
+            databaseURL: "https://hardy-agility-392807-default-rtdb.europe-west1.firebasedatabase.app/" // Add your Firebase Database URL here
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+
+    </script>
+
+    <script>
+        let user = JSON.parse(sessionStorage.getItem("User"))
+        function init() {
+            msgArr = [];
+            ref = firebase.database().ref("messages");
+            // listen to incoming messages
+            listenToNewMessages();
+            // listen to removing messages
+            listenToRemove();
+            ph = document.getElementById("ph");
+        }
+        function renderMessage(message) {
+            const htmlContent =
+                `
+                <div class="message-row ${user.Id == msg.userId ? "revers-flex" : ""}">
+                    <div>
+                        <img class="users-images" src="${msg.imgURL}" alt="">
+                    </div>
+                    <div class="message-contatiner">
+                        <h2 class="users-names">Name: ${msg.name}</h2>
+                        <p class="users-messages-contents">Message: ${msg.msg}</p>
+                    </div>
+                </div>
+            `
+            return htmlContent
+        }
+
+        function listenToNewMessages() {
+            // child_added will be evoked for every child that was added
+            // on the first entry, it will bring all the childs
+            ref.on("child_added", snapshot => {
+                msg = {
+                    name: snapshot.val().name,
+                    content: snapshot.val().msg,
+                    imgURL: snapshot.val().imgURL,
+                    userId: snapshot.val().userId
+                }
+                msgArr.push(msg)
+                printMessage(msg);
+            })
+        }
+
+
+        function listenToRemove() {
+            ref.on("child_removed", snapshot => {
+                msgArr = msgArr.filter(m => m.content != snapshot.val().msg);
+                // re-render the messages
+                printMessages(msgArr);
+            })
+        }
+        /*
+                function getMSGfromDB() {
+                    msgArr = [];
+                    // once listens to an event and then deletes the listner
+                    // it is usually used to initially bring data
+                    ref.once("value", snapshot => {
+                        snapshot.forEach(element => {
+                            msg = {
+                            name:element.val().name,
+                            content:element.val().msg,
+                        }
+                         msgArr.push(msg)
+                        });
+                        printMessages(msgArr);
+                    })
+        
+                }
+        */
+        function deleteMsgsBySubString() {
+            let subString = document.getElementById("delTB").value;
+            if (subString == "") {
+                alert("substing can not be empty");
+                return;
+            }
+            ref.once("value", snapshot => {
+                snapshot.forEach(element => {
+                    // check if contains the substring
+                    if (element.val().msg.indexOf(subString) > -1) {
+                        ref.child(element.key).remove();
+                    }
+                });
+            })
+        }
+        // img url // name // text // imgURL
+        function printMessage(msg) {
+            let str = renderMessage(msg);
+            ph.innerHTML += str;
+        }
+
+        function printMessages(msgArr) {
+            var str = "";
+            for (let index = 0; index < msgArr.length; index++) {
+                const msg = msgArr[index];
+                str += renderMessage(msg);
+            }
+            ph.innerHTML = str;
+        }
+
+        function AddMSG() {
+            let msg = document.getElementById("msgTB").value;
+            let name = document.getElementById("nameTB").value;
+            if (name == "") {
+                alert("must enter a name");
+                return;
+            }
+            ref.push().set({
+                "msg": msg,
+                "name": name,
+                "imgURL": user.imgUrl,
+                "userId": user.Id
+            });
+        }
+
+    </script>
+
+
+
     <style>
-        .flex {
+        .users-images {
+            border-radius: 50%;
+            object-fit: contain;
+            height: 50px;
+            width: 50px;
+            background-color: pink;
+        }
+
+        .message-row {
             display: flex;
             flex-direction: row;
+
         }
 
-        .grid-row {
+        .message-contatiner {
+            background-color: lightblue;
+            border-radius: 15px;
             padding: 10px;
-            background-color: transparent;
+            margin: 10px;
         }
 
-        .grid-row img {
-            padding: 10px;
-            height: 200px;
-            object-fit: contain;
+        .message-contatiner p {
+            margin: 0;
         }
 
-        .title-card-ms {
-            font-size: 2rem;
-            font-weight: bold;
+        .revers-flex .message-contatiner {
+            background-color: lightgreen;
+
         }
 
-        @media only screen and (max-width: 588px) {
-
-            .flex {
-                flex-direction: column;
-            }
+        .revers-flex {
+            flex-direction: row-reverse;
         }
     </style>
+
 </head>
 
-<body>
-    <div class="card-body">
-        <div class="flex grid-row">
-            <img src="https://picsum.photos/200" alt="">
+<body onload="init()">
+    <div class="message-area">
+        <div class="message-row revers-flex">
             <div>
-                <p class="ms-5 title-card-ms">artist name</p>
-                <p><span>artist info substing 50 chars</span><a href="">more info.. </a></p>
+                <img class="users-images" src="https://picsum.photos/id/237/200/300" alt="">
+            </div>
+            <div class="message-contatiner">
+                <p class="users-names">Name</p>
+                <p class="users-messages-contents">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur
+                    iure
+                    nostrum explicabo autem blanditiis
+                    a qui harum eos? Ipsum unde explicabo nobis porro natus, nam labore reprehenderit ea voluptatum
+                    provident.</p>
             </div>
         </div>
-        <div class="flex grid-row">
-            <img src="https://picsum.photos/200" alt="">
+        <div class="message-row ">
             <div>
-                <p class="ms-5 title-card-ms">song name</p>
-                <p><span>artist info substing 50 chars</span><a href="">more info.. </a></p>
+                <img class="users-images" src="https://picsum.photos/id/237/200/300" alt="">
+            </div>
+            <div class="message-contatiner">
+                <h2 class="users-names">Name</h2>
+                <p class="users-messages-contents">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur
+                    iure
+                    nostrum explicabo autem blanditiis
+                    a qui harum eos? Ipsum unde explicabo nobis porro natus, nam labore reprehenderit ea voluptatum
+                    provident.</p>
             </div>
         </div>
     </div>
+
+    <input type="text" id="nameTB" placeholder="Enter your name" />
+    <input type="text" id="nameTB" placeholder="Enter your id" />
+    <!--<button onclick="AddName()">Add Name</button>-->
+    <br />
+    <br />
+
+    <input type="text" id="msgTB" />
+    <button onclick="AddMSG()">Add Message</button>
+
+    <br />
+    <br />
+
+    <input type="text" id="delTB" placeholder="enter substring to delete" />
+    <button onclick="deleteMsgsBySubString()">Delete Message</button>
+
+
+    <div id="ph"></div>
+
 </body>
 
 </html>

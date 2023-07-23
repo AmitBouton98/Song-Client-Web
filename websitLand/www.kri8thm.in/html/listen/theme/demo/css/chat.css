@@ -1,0 +1,98 @@
+.users-images {
+    border-radius: 50%;
+    object-fit: contain;
+    height: 50px;
+    width: 50px;
+    background-color: pink;
+}
+
+.message-row {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.message-contatiner {
+    background-color: lightblue;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.message-contatiner p {
+    margin: 0;
+}
+
+.revers-flex .message-contatiner {
+    background-color: lightgreen;
+
+}
+
+.revers-flex {
+    flex-direction: row-reverse;
+}
+
+.users-names {
+    font-weight: bold;
+}
+
+.hero {
+    height: 150px !important;
+    display: flex;
+    flex-direction: row;
+}
+
+#footer .container {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.delete-message {
+    cursor: pointer;
+}
+
+
+
+.under-hero.container {
+    padding: 0 !important;
+}
+
+.message-area {
+    height: 60vh;
+    overflow-y: scroll;
+}
+
+body {
+    overflow: hidden;
+}
+
+.message-content-text {
+    display: inline-block;
+    height: 100%;
+    width: 80%;
+    background-color: aliceblue;
+    border-radius: 5px;
+    border: 1px solid black;
+    padding: 10px;
+    margin: 10px;
+}
+
+.message-content-send-btn {
+    margin: 10px;
+    border: none;
+    background-color: lightgreen;
+    color: black;
+    border-radius: 25px;
+    padding: 10px;
+    display: inline;
+    height: 100%;
+    width: 20%;
+}
+
+.message-content-send-btn:hover {
+    color: lightgreen;
+    background-color: black;
+}
