@@ -67,7 +67,6 @@ function finishGame() {
   set_Score(score_obj, forceBack);
 }
 function forceBack() {
-  console.log("yesss");
   goToHome("#game-form");
   get_top_ten_scores(showScores);
 }
