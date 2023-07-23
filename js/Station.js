@@ -44,7 +44,6 @@ async function CanvasCtxAudio(elem) {
   const bars = [];
 
   const audioFile = path;
-  console.log(audioFile);
   // Function to initialize the audio element
   function initializeAudio() {
     audio = new Audio(audioFile);
