@@ -124,6 +124,9 @@ function change_user_password(uniquekey, email, password) {
         showConfirmButton: false,
         timer: 1500,
       });
+      setTimeout(() => {
+        window.location.replace("./login.html");
+      }, 1500);
     },
     (resolve) => {
       // in time it retyrn 0 then goes here because of that we need to do theis

@@ -39,9 +39,7 @@ function resetPassword() {
   const user_info = JSON.parse(sessionStorage.getItem("User"));
   // call the change_user_password function from the server
   change_user_password(key_letters, user_info["email"], $("#password").val());
-  //changed
-  sessionStorage.removeItem("User");
-  setTimeout(() => {
-    window.location.replace("./login.html");
-  }, 1500);
+  // delete the user from the session storage 
+  // sessionStorage.removeItem("User");
+
 }
