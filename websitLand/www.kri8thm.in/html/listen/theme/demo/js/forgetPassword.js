@@ -40,7 +40,7 @@ function resetPassword() {
   // call the change_user_password function from the server
   change_user_password(key_letters, user_info["email"], $("#password").val());
   //changed
-  // sessionStorage.removeItem("User");
+  sessionStorage.removeItem("User");
   setTimeout(() => {
     window.location.replace("./login.html");
   }, 1500);
