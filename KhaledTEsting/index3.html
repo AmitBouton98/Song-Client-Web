@@ -7,7 +7,25 @@
 
 
 
+    <style>
+        .active-user {
+            display: inline-block;
+            background-color: green;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin: 0 5px;
+        }
 
+        .not-active-user {
+            display: inline-block;
+            background-color: red;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin: 0 5px;
+        }
+    </style>
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js"></script>
 
@@ -21,10 +39,8 @@
 
     <!--Your web app's Firebase configuration-->
     <script>
-        sessionStorage.setItem("user", JSON.stringify({
-            userId: "1",
-            imgUrl: "https://picsum.photos/id/237/200/300"
-        }))
+        let ref_private_chats = []
+        // sessionStorage.setItem("User", JSON.stringify())
         const firebaseConfig = {
             apiKey: "AIzaSyANdlvJ3vPkk_yn00EPFnOJ69ezOm_X0lA",
             authDomain: "peak-emitter-392420.firebaseapp.com",
@@ -43,22 +59,37 @@
         firebase.analytics();
 
     </script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+        integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-        let user = JSON.parse(sessionStorage.getItem("User"))
-        function init() {
-            msgArr = [];
-            ref = firebase.database().ref("messages");
-            // listen to incoming messages
-            listenToNewMessages();
-            // listen to removing messages
-            listenToRemove();
-            ph = document.getElementById("ph");
+        let user = {
+            "Id": "1",
+            "imgUrl": "https://picsum.photos/id/237/200/300"
         }
-        function renderMessage(message) {
+        function addMessage(otherUserId) {
+            ref_private_chat = firebase.database().ref("messages/" + user.Id + "-chat-with-" + otherUserId);
+            console.log("messaged")
+            ref_private_chat.push().set({
+                "from": user.Id,
+                'to': `${otherUserId}`,
+                "content": "yess"
+            })
+        }
+        function goToChat(otherUserId) {
+            // ref_private_chat = firebase.database().ref("messages/" + user.Id + "-chat-with-" + otherUserId);
+            // console.log(ref_private_chat.key)
+            // console.log(ref_private_chats)
+
+            // renderPrivateChat(user.Id, otherUserId)
+            // console.log("chat with" + otherUserId + " my id: " + user.Id)
+        }
+
+        function renderMessage(msg) {
+            let ph2 = document.getElementById("ph2");
             const htmlContent =
                 `
-                <div class="message-row ${user.Id == msg.userId ? "revers-flex" : ""}">
+                <div class="message-row ${user.Id == msg.from ? "revers-flex" : ""}">
                     <div>
                         <img class="users-images" src="${msg.imgURL}" alt="">
                     </div>
@@ -68,24 +99,174 @@
                     </div>
                 </div>
             `
-            return htmlContent
+            ph2.innerHTML += htmlContent
         }
+        function renderPrivateChat(myId, otherId) {
+            ref = firebase.database().ref("messages/" + myId + "-chat-with-" + otherId);
+            ref.once("value", snapshot => {
+                snapshot.forEach(element => {
+                    console.log(element.val())
+                    //renderMessage
+                    getUserObj(otherId, (data) => {
+                        console.log(data)
+                        const msg = {
+                            from: element.val().from,
+                            imgURL: data.image,
+                            msg: element.val().content,
+                        }
+                        renderMessage(msg)
+                    })
+                });
+            })
+        }
+        function getUserObj(userId, callback) {
+
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                contentType: "application/json",
+                username: "user",
+                password: "admin",
+                url: "https://proj.ruppin.ac.il/cgroup17/test2/tar1/api/UserMusics/GetUserById/Id/" + userId,
+                success: function (data) {
+                    let obj = {
+                        "name": data.first + " " + data.last,
+                        "image": data.imgUrl,
+                        "userId": data.id
+                    }
+                    callback(obj)
+                }
+            });
+        }
+        function init() {
+            getUsersStatusRender();
+            ref2 = firebase.database().ref("online/");
+            ref2.on("child_changed", snapshot => {
+                snapshot.forEach(element => {
+                    const userId = element.ref_.path.pieces_[1];
+                    const userStatus = element.node_.value_
+                    getUserObj(userId, (data) => {
+                        console.log(data)
+                        render(data, userStatus)
+                    })
+                });
+            })
+            msgArr = [];
+            function getUsers(val) {
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    contentType: "application/json",
+                    username: "user",
+                    password: "admin",
+                    url: "https://proj.ruppin.ac.il/cgroup17/test2/tar1/api/UserMusics",
+                    success: function (data) {
+                        for (let item in data) {
+                            ref_private_chats[`${data[item].id}`] = ""
+                            val(data[item].id)
+                        }
+                    }
+                });
+            }
+            getUsers(setUserOnline);
+
+
+            getUsers(setUserOffline)
+            function getUsersStatusRender() {
+                ref2 = firebase.database().ref("online/");
+                ref2.once("value", snapshot => {
+                    snapshot.forEach(element => {
+                        getUserObj(element.key, (data) => {
+                            render(data, element.val().userOnline)
+                        })
+                    });
+                })
+            }
+            let api = "https://proj.ruppin.ac.il/cgroup17/test2/tar1/api"
+            function get_image_from_server(image_url) {
+                return `${api}/Upload?fileName=${image_url}`;
+            }
+
+            // ref = firebase.database().ref("messages");
+            function render(user2, userStatus) {
+                // console.log(user, userStatus)
+                const userNameSpan = document.getElementById(`span-${user2.userId}`)
+                const userStatusDiv = document.getElementById(`div-${user2.userId}`)
+                ref_private_chats[user2.userId] = firebase.database().ref("messages/" + user2.userId + "-chat-with-" + user.userId);
+                ref_private_chats[user2.userId].on("child_added", (snapshot) => {
+                    console.log(snapshot)
+                })
+                if (userNameSpan != null && userStatusDiv != null) {
+                    userNameSpan.innerText = (user2.name)
+                    userStatusDiv.className = `${userStatus}`
+                    return
+                }
+                else {
+                    const htmlContent =
+                        `
+                    <div onclick="goToChat(${user2.userId})">
+                        <img class="users-images" src="${get_image_from_server(user2.image)}" alt="">
+                        <span id="span-${user2.userId}">${user2.name}</span><div id="div-${user2.userId}" class="${userStatus}"></div>
+                        </div>
+                        <button onclick="addMessage(1)"></button>
+                    `
+                    ph.innerHTML += htmlContent
+                }
+            }
+
+            function setUserOffline(userId) {
+                ref2 = firebase.database().ref("online/" + userId);
+                ref2.update({
+                    userOnline: "not-active-user"
+                });
+            }
+            function setUserOnline(userId) {
+                ref2 = firebase.database().ref("online/" + userId);
+                ref2.update({
+                    userOnline: "active-user"
+                });
+            }
+            //
+            // deleteAll(firebase.database().ref("online/"), () => {
+
+            // });
+
+            // iam_online()
+            // listen to incoming messages
+            // listenToNewMessages();
+            // // listen to removing messages
+            // listenToRemove();
+            // ph = document.getElementById("ph");
+        }
+        // function renderMessage(message) {
+        //     const htmlContent =
+        //         `
+        //         <div class="message-row ${user.Id == msg.userId ? "revers-flex" : ""}">
+        //             <div>
+        //                 <img class="users-images" src="${msg.imgURL}" alt="">
+        //             </div>
+        //             <div class="message-contatiner">
+        //                 <h2 class="users-names">Name: ${msg.name}</h2>
+        //                 <p class="users-messages-contents">Message: ${msg.msg}</p>
+        //             </div>
+        //         </div>
+        //     `
+        //     return htmlContent
+        // }
 
         function listenToNewMessages() {
             // child_added will be evoked for every child that was added
             // on the first entry, it will bring all the childs
-            ref.on("child_added", snapshot => {
-                msg = {
-                    name: snapshot.val().name,
-                    content: snapshot.val().msg,
-                    imgURL: snapshot.val().imgURL,
-                    userId: snapshot.val().userId
-                }
-                msgArr.push(msg)
-                printMessage(msg);
+
+        }
+        function deleteAll(refs, fun) {
+            refs.once("value", snapshot => {
+                snapshot.forEach(element => {
+                    refs.child(element.key).remove();
+                });
+                fun();
             })
         }
-
 
         function listenToRemove() {
             ref.on("child_removed", snapshot => {
@@ -94,24 +275,6 @@
                 printMessages(msgArr);
             })
         }
-        /*
-                function getMSGfromDB() {
-                    msgArr = [];
-                    // once listens to an event and then deletes the listner
-                    // it is usually used to initially bring data
-                    ref.once("value", snapshot => {
-                        snapshot.forEach(element => {
-                            msg = {
-                            name:element.val().name,
-                            content:element.val().msg,
-                        }
-                         msgArr.push(msg)
-                        });
-                        printMessages(msgArr);
-                    })
-        
-                }
-        */
         function deleteMsgsBySubString() {
             let subString = document.getElementById("delTB").value;
             if (subString == "") {
@@ -130,7 +293,7 @@
         // img url // name // text // imgURL
         function printMessage(msg) {
             let str = renderMessage(msg);
-            ph.innerHTML += str;
+            ph2.innerHTML += str;
         }
 
         function printMessages(msgArr) {
@@ -139,7 +302,7 @@
                 const msg = msgArr[index];
                 str += renderMessage(msg);
             }
-            ph.innerHTML = str;
+            ph2.innerHTML = str;
         }
 
         function AddMSG() {
@@ -149,11 +312,14 @@
                 alert("must enter a name");
                 return;
             }
-            ref.push().set({
+            otherUserId = "2"
+            ref_user = firebase.database().ref(`messages/${user.Id}`);
+            ref_user.push().set({
                 "msg": msg,
                 "name": name,
                 "imgURL": user.imgUrl,
-                "userId": user.Id
+                "userForm": user.Id,
+                "UserTo": otherUserId
             });
         }
 
@@ -246,6 +412,7 @@
 
 
     <div id="ph"></div>
+    <div id="ph2"></div>
 
 </body>
 
