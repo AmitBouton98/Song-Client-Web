@@ -220,8 +220,7 @@
         <main id="page_content">
             <div class="hero" style="background-image: url(images/banner/event.jpg)"></div>
             <div class="under-hero container">
-                <input type="text" id="msgTB" />
-                <button onclick="AddMSG()">Add Message</button>
+
 
                 <input type="text" id="delTB" placeholder="enter substring to delete" />
                 <button onclick="deleteMsgsBySubString()">Delete Message</button>
@@ -231,9 +230,9 @@
             </div>
             <footer id="footer">
                 <div class="container">
-                    <div class="text-center mb-4"><a href="mailto:amit.khaled.airbnb@gmail.com"
-                            class="display-5 email">amit.khaled.airbnb@gmail.com</a></div>
-
+                    <input class="message-content-text" type="text" id="msgTB" />
+                    <button class="message-content-send-btn" onclick="AddMSG()"><i
+                            class="fa-solid fa-paper-plane fs-4"></i></button>
                 </div>
             </footer>
         </main>

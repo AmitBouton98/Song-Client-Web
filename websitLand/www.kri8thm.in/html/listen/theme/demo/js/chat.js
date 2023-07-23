@@ -25,10 +25,8 @@ function renderMessage(msg) {
                         )}" alt="">
                     </div>
                     <div class="message-contatiner">
-                        <h2 class="users-names">Name: ${msg.name}</h2>
-                        <p class="users-messages-contents">Message: ${
-                          msg.content
-                        }</p>
+                        <p class="users-names">${msg.name}</p>
+                        <p class="users-messages-contents">${msg.content}</p>
                     </div>
                 </div>
             `;
