@@ -50,6 +50,12 @@
     align-items: center;
 }
 
+.delete-message {
+    cursor: pointer;
+}
+
+
+
 .under-hero.container {
     padding: 0 !important;
 }
