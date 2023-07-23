@@ -35,7 +35,7 @@ function LoadHome() {
   }, User.id);
   GetTop10ListenedArtists((data) => {
     if (data.length == 0) {
-      $("#Top10Artists").hide();
+      $("#TopArtistGlobal").hide();
     }
     for (item of data) {
       CreateArtistDiv(item);
@@ -79,9 +79,9 @@ function buttonClickHandler(btn) {
   }
   // add active to the clicked button
   btn.classList.add("active");
-  document.getElementById("SongListSearch").innerHTML = ""; // need to check why it doesnt clear the data
+  document.getElementById("SongListSearch").innerHTML = ""; 
   $("#search_form").submit(() => {
-    console.log(btn.innerHTML);
+    document.getElementById("SongListSearch").innerHTML = ""; 
     var searchInput = document.getElementById("search_input");
     var searchValue = searchInput.value;
     // Perform actions based on the clicked button
@@ -111,7 +111,6 @@ function buttonClickHandler(btn) {
 }
 
 function CreateElemFromReasrch(data, WhereToInster, song) {
-  console.log(data);
   var div = document.getElementById(WhereToInster);
   // Create the outer div with the appropriate classes
   var colDiv = document.createElement("div");
@@ -132,7 +131,7 @@ function CreateElemFromReasrch(data, WhereToInster, song) {
   var coverImg = document.createElement("img");
   song == false
     ? (coverImg.src = data.urlLink)
-    : (coverImg.src = "images/cover/large/12.jpg"); // img of the song in the search
+    : (coverImg.src = data.artistUrl); // img of the song in the search
   // coverImg.alt = data.name;
 
   // Append the cover image to the cover link
@@ -164,7 +163,6 @@ function CreateElemFromReasrch(data, WhereToInster, song) {
     artistLink.onclick = function (event) {
       // event.preventDefault();
       navigateToPageArtistDetails(data);
-      console.log("Title link clicked");
       // Add your code here to handle the click event for the title link
     };
   } else {
@@ -172,7 +170,6 @@ function CreateElemFromReasrch(data, WhereToInster, song) {
     titleLink.onclick = function (event) {
       // event.preventDefault();
       navigateToPageSongDetails(data); // need to add ************
-      console.log("Title link clicked");
       // Add your code here to handle the click event for the title link
     };
     getArtistByName((d) => {
@@ -180,7 +177,6 @@ function CreateElemFromReasrch(data, WhereToInster, song) {
       artistLink.onclick = function (event) {
         // event.preventDefault();
         navigateToPageArtistDetails(d);
-        console.log("Title link clicked");
         // Add your code here to handle the click event for the title link
       };
     }, data.artistName);
@@ -299,10 +295,8 @@ function CreateLargeMusic(data, WhereToInster) {
   coverTitleLink.onclick = () => {
     getSongByName((item) => {
       navigateToPageSongDetails(item);
-
     }, data.name);
     // coverTitleLink.href = 'song-details.html';
-    console.log("Title link clicked");
     // Add your code here to handle the click event for the title link
   };
   var coverSubtitleP = document.createElement("p");
@@ -315,16 +309,15 @@ function CreateLargeMusic(data, WhereToInster) {
     getArtistByName((item) => {
       navigateToPageArtistDetails(item);
     }, data.artistName);
-    console.log("Title link clicked");
     // Add your code here to handle the click event for the title link
   };
   coverSubtitleP.appendChild(artistDetailsLink);
   coverFootDiv.appendChild(coverTitleLink);
   coverFootDiv.appendChild(coverSubtitleP);
 
-  coverDiv.appendChild(coverFootDiv);
-  swiperSlide.appendChild(coverDiv);
-  document.getElementById("LargeMusicTop10").appendChild(swiperSlide);
+  // coverDiv.appendChild(coverFootDiv);
+  // swiperSlide.appendChild(coverDiv);
+  // document.getElementById("LargeMusicTop10").appendChild(swiperSlide);
   coverDiv.appendChild(coverFootDiv);
   swiperSlide.appendChild(coverDiv);
   document.getElementById(WhereToInster).appendChild(swiperSlide);
@@ -387,7 +380,6 @@ function onVolumeChange() {
 function onPlayerReady(event) {
   // Player is ready
   var duration = player.getDuration();
-  console.log(duration);
   progressSlider.max = duration;
   playedProgress.max = duration;
   bufferedProgress.value = 1; // buffer for whole the song
@@ -408,6 +400,7 @@ function onPlayerStateChange(event) {
   } else {
     // Video is paused or ended
     playButton.innerHTML = "Play"; // Update button text
+  
     // playButton.className = 'ri-play-fill icon-play';
   }
 }
@@ -440,7 +433,7 @@ function onSliderChange() {
   player.seekTo(currentTime);
   document.getElementById("durationTime").innerHTML = formatTime(
     player.getDuration() - currentTime
-  ); // no need
+  );
 }
 
 function togglePlay() {
@@ -494,7 +487,6 @@ function PlayButtonOnClick(data) {
         document.getElementById("ListenMusic").innerHTML =
           Number(document.getElementById("ListenMusic").innerHTML) + 1;
       }
-      // console.log(status)
     },
     data.id,
     User.id
@@ -507,11 +499,6 @@ function PlayButtonOnClick(data) {
     player.destroy(); // destroy the old vidio
   }
 
-  console.log(document.getElementById("playerR"));
-
-  // AddPlayedForSongByGivenUserId((status) => {
-  //     // console.log(status)
-  // }, data.id, User.id);
   player = new YT.Player("playerR", {
     height: "0",
     width: "0",
@@ -530,7 +517,6 @@ function PlayButtonOnClick(data) {
 }
 
 function navigateToPageArtistDetails(data) {
-  console.log(data);
   // var ArtistDetails = { artistName: data.artistName, content: data.content, published: data.published, listeners: data.listeners, playcount: data.playcount, likes: data.likes };
   var ArtistDetails = {
     artistName: data.artistName,
@@ -543,7 +529,6 @@ function navigateToPageArtistDetails(data) {
 
 }
 function navigateToPageSongDetails(data) {
-  console.log(data.lyriclink);
   var SongDetails = {
     id: data.id,
     artistName: data.artistName,

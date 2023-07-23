@@ -90,7 +90,7 @@ async function CanvasCtxAudio(elem) {
             bars.push({ x, y, barHeight });
         }
     }
-
+    
     // Function to animate the canvas and the bars based on the audio data
     function animateVisualizer() {
         analyser.getByteFrequencyData(dataArray);

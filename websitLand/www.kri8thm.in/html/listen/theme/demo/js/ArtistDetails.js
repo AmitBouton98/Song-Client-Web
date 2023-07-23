@@ -64,7 +64,6 @@ function LoadArtistPage() {
       playcount: d.artist.stats.playcount,
       published: d.artist.bio.published, // need to check how to chenge it
     };
-    console.log(data);
     AddInfoArtist(data);
     GetSongsForArtis((songs) => {
       for (item of songs) {
@@ -75,10 +74,8 @@ function LoadArtistPage() {
   let ImgForArtistDetails = document.getElementById("ImgForArtistDetails");
   ImgForArtistDetails.src = Artist.artistUrl;
   ImgForArtistDetails.classList.add("ArtistImg");
-  console.log(ImgForArtistDetails);
 }
 function AddInfoArtist(data) {
-  console.log(data);
   // ul is to add the info down to the name
   let ul = document.getElementById("InfoArtistLi");
 
@@ -105,7 +102,6 @@ function AddInfoArtist(data) {
   UpdateArtistAvgLikes()
 
   GetNumberOfPlayedForGivenArtist((num) => {
-    console.log(num);
     document.getElementById("PlayNumberForArtist").innerHTML = num;
   }, data.artistName);
   GetTheNumberOfAppearanceInUserByGivenArtist((num) => {
