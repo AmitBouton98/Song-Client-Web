@@ -1,0 +1,33 @@
+.users-images {
+    border-radius: 50%;
+    object-fit: contain;
+    height: 50px;
+    width: 50px;
+    background-color: pink;
+}
+
+.message-row {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.message-contatiner {
+    background-color: lightblue;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.message-contatiner h2 {
+    margin: 0;
+}
+
+.revers-flex .message-contatiner {
+    background-color: lightgreen;
+
+}
+
+.revers-flex {
+    flex-direction: row-reverse;
+}
