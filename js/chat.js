@@ -47,7 +47,7 @@ function listenToNewMessages() {
 
 function listenToRemove() {
     ref.on("child_removed", (snapshot) => {
-        msgArr = msgArr.filter((m) => m.content != snapshot.val().msg);
+        msgArr = msgArr.filter((m) => m.key != snapshot.key);
         // re-render the messages
         printMessages(msgArr);
     });
