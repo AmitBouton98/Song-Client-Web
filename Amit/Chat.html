@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+
+
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+
+    <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-analytics.js"></script>
+
+    <!--**** Remember to add the database script ***-->
+    <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-database.js"></script>
+
+    <!--Your web app's Firebase configuration-->
+    <script>
+  
+        const firebaseConfig = {
+            apiKey: "AIzaSyAa-9BANPJjPUHHxlZ0bGOrL6hT2HUhEtk",
+            authDomain: "hardy-agility-392807.firebaseapp.com",
+            projectId: "hardy-agility-392807",
+            storageBucket: "hardy-agility-392807.appspot.com",
+            messagingSenderId: "619684261834",
+            appId: "1:619684261834:web:d85ce65fcd53cb34c8e933",
+            measurementId: "G-V4MLB082YQ",
+            databaseURL: "https://hardy-agility-392807-default-rtdb.europe-west1.firebasedatabase.app/" // Add your Firebase Database URL here
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+
+    </script>
+
+    <script>
+
+        function init() {
+            msgArr = [];
+            ref = firebase.database().ref("messages");
+            // listen to incoming messages
+            listenToNewMessages();
+            // listen to removing messages
+            listenToRemove();
+            ph = document.getElementById("ph");
+        }
+
+        function listenToNewMessages() {
+            // child_added will be evoked for every child that was added
+            // on the first entry, it will bring all the childs
+            ref.on("child_added", snapshot => {
+                msg = {
+                    name: snapshot.val().name,
+                    content: snapshot.val().msg,
+                }
+                msgArr.push(msg)
+                printMessage(msg);
+            })
+        }
+
+
+        function listenToRemove() {
+            ref.on("child_removed", snapshot => {
+                msgArr = msgArr.filter(m => m.content != snapshot.val().msg);
+                // re-render the messages
+                printMessages(msgArr);
+            })
+        }
+        /*
+                function getMSGfromDB() {
+                    msgArr = [];
+                    // once listens to an event and then deletes the listner
+                    // it is usually used to initially bring data
+                    ref.once("value", snapshot => {
+                        snapshot.forEach(element => {
+                            msg = {
+                            name:element.val().name,
+                            content:element.val().msg,
+                        }
+                         msgArr.push(msg)
+                        });
+                        printMessages(msgArr);
+                    })
+        
+                }
+        */
+        function deleteMsgsBySubString() {
+            let subString = document.getElementById("delTB").value;
+            if (subString == "") {
+                alert("substing can not be empty");
+                return;
+            }
+            ref.once("value", snapshot => {
+                snapshot.forEach(element => {
+                    // check if contains the substring
+                    if (element.val().msg.indexOf(subString) > -1) {
+                        ref.child(element.key).remove();
+                    }
+                });
+            })
+        }
+
+        function printMessage(msg) {
+            let str = "name: " + msg.name + ", content: " + msg.content + "<br/>";
+            ph.innerHTML += str;
+        }
+
+        function printMessages(msgArr) {
+            var str = "";
+            for (let index = 0; index < msgArr.length; index++) {
+                const msg = msgArr[index];
+                str += "name: " + msg.name + ", content: " + msg.content + "<br/>";
+            }
+            ph.innerHTML = str;
+        }
+
+        function AddMSG() {
+            let msg = document.getElementById("msgTB").value;
+            let name = document.getElementById("nameTB").value;
+            if (name == "") {
+                alert("must enter a name");
+                return;
+            }
+            ref.push().set({ "msg": msg, "name": name });
+        }
+
+    </script>
+
+
+
+
+
+</head>
+
+<body onload="init()">
+
+    <input type="text" id="nameTB" placeholder="Enter your name" />
+    <!--<button onclick="AddName()">Add Name</button>-->
+
+    <br />
+    <br />
+
+    <input type="text" id="msgTB" />
+    <button onclick="AddMSG()">Add Message</button>
+
+    <br />
+    <br />
+
+    <input type="text" id="delTB" placeholder="enter substring to delete" />
+    <button onclick="deleteMsgsBySubString()">Delete Message</button>
+
+
+    <div id="ph"></div>
+
+</body>
+
+</html>
