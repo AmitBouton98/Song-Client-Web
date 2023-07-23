@@ -51,7 +51,7 @@ function upload_image(userEmail, image_extension) {
   // Add the uploaded file to the form data collection
   if (file != undefined) {
     // it always will be one file for every user
-    // the form data funciton give us the appilty to assign new name to the fiel
+    // the form data function give us the ability to assign new name to the file
     data.append("file", file, `${userEmail}.${image_extension}`);
   }
   upload_user_profile_pic(data);

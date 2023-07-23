@@ -117,7 +117,6 @@ function change_user_password(uniquekey, email, password) {
     null,
     (response) => {
       sessionStorage.setItem("User", JSON.stringify(response));
-      console.log(response);
       Swal.fire({
         icon: "success",
         title: `The password have been channged`,

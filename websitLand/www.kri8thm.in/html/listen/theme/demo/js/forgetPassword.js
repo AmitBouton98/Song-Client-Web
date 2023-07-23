@@ -1,7 +1,5 @@
 $(document).ready(function () {
   const user_info = JSON.parse(sessionStorage.getItem("User"));
-  console.log(user_info);
-  console.log("yes");
   $("#user-email").text(user_info["email"]);
   $("#reset-password-form").submit(function () {
     resetPassword();
@@ -41,7 +39,8 @@ function resetPassword() {
   const user_info = JSON.parse(sessionStorage.getItem("User"));
   // call the change_user_password function from the server
   change_user_password(key_letters, user_info["email"], $("#password").val());
-  sessionStorage.removeItem("User");
+  //changed
+  // sessionStorage.removeItem("User");
   setTimeout(() => {
     window.location.replace("./login.html");
   }, 1500);
