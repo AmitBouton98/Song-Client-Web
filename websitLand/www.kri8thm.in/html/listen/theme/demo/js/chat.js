@@ -14,7 +14,7 @@ function init() {
   ph = document.getElementById("ph");
 }
 function renderMessage(msg) {
-  console.log(msg);
+  console.log(msg.key);
   const htmlContent = `
                 <div class="message-row ${
                   user.id == msg.userId ? "revers-flex" : ""
@@ -42,6 +42,7 @@ function listenToNewMessages() {
       content: snapshot.val().msg,
       imgURL: snapshot.val().imgURL,
       userId: snapshot.val().Id,
+      key : snapshot.key
     };
     msgArr.push(msg);
     printMessage(msg);
