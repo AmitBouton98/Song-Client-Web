@@ -57,8 +57,11 @@
                             aria-label="Toggle navigation"><i class="ri-menu-3-fill"></i></button></div>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mt-4 mt-lg-0 mx-auto fw-semi-bold">
+                            <li class="nav-item"><a class="nav-link external" href="index.html">Home</a></li>
                             <li class="nav-item"><a class="nav-link external" href="about.html">About us</a></li>
                             <li class="nav-item"><a class="nav-link external" href="contact.html">Contact us</a></li>
+                            <li class="nav-item"><a class="nav-link external" href="additions.html">Additions</a></li>
+
                         </ul>
                     </div>
                 </nav>
@@ -92,8 +95,9 @@
                                     <div class="feature__icon" style="color: var(--bs-blue);"><i
                                             class="fa-brands fa-rocketchat fs-4"></i></div>
                                     <h5 class="mt-4 mb-3">Chat</h5>
-                                    <p>On the website, you have <b>Chat</b> that you can speak with the other accounts in the web. <br>
-                                    We use firebase to store the chat</p>
+                                    <p>On the website, you have <b>Chat</b> that you can speak with the other accounts
+                                        in the web. <br>
+                                        We use firebase to store the chat</p>
                                 </div>
                             </div>
                         </div>
@@ -103,7 +107,8 @@
                                     <div class="feature__icon" style="color: var(--bs-red);"><i
                                             class="fa-solid fa-shield-halved fs-4"></i></div>
                                     <h5 class="mt-4 mb-3">Secutiry - encryption passwords</h5>
-                                    <p>All the passwords on the website are encrypted with the <b>SHA-256 algorithm</b>, which
+                                    <p>All the passwords on the website are encrypted with the <b>SHA-256 algorithm</b>,
+                                        which
                                         ensures the safety of the users.</p>
                                 </div>
                             </div>
@@ -115,7 +120,8 @@
                                             class="fa-solid fa-radio fs-4"></i></div>
                                     <h5 class="mt-4 mb-3">Radio station</h5>
                                     <p>On the website, you can listen to selected Radio stations.</p>
-                                    <p>we use channel- digital.100fm  (http://digital.100fm.co.il/ChannelList_Kodi.xml).</p>
+                                    <p>we use channel- digital.100fm (http://digital.100fm.co.il/ChannelList_Kodi.xml).
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -147,7 +153,8 @@
                                     <div class="feature__icon" style="color: var(--bs-pink);"><i
                                             class="ri-question-answer-fill fs-4"></i></div>
                                     <h5 class="mt-4 mb-3">Played for songs</h5>
-                                    <p>We created table for played and we gather each play for song for each player, and it provide us the abillity to know they preferences.</p>
+                                    <p>We created table for played and we gather each play for song for each player, and
+                                        it provide us the abillity to know they preferences.</p>
                                 </div>
                             </div>
                         </div>
@@ -193,7 +200,7 @@
                                 </div>
                             </div>
                         </div>
-                       
+
                         <div class="col-xl-3 col-lg-4 col-sm-6">
                             <div class="card h-100 py-2">
                                 <div class="card-body">
@@ -202,8 +209,9 @@
                                     <h5 class="mt-4 mb-3">fotget password</h5>
                                     <p>On the website, you can reset you password and get unique key to your email (you
                                         have 30 min to reset).</p>
-                                    <p>There is 1000 email limit for this, we use smtp.elasticemail.com for the host.</p>
-    
+                                    <p>There is 1000 email limit for this, we use smtp.elasticemail.com for the host.
+                                    </p>
+
                                 </div>
                             </div>
                         </div>
@@ -213,7 +221,8 @@
                                     <div class="feature__icon" style="color: var(--bs-blue);"><i
                                             class="ri-music-2-fill fs-4"></i></div>
                                     <h5 class="mt-4 mb-3">Listen to music</h5>
-                                    <p>On the website, you can listen to music (youtube data api v3 )."https://www.youtube.com/iframe_api"</p>
+                                    <p>On the website, you can listen to music (youtube data api v3
+                                        )."https://www.youtube.com/iframe_api"</p>
                                     <p>we did it by adding only valid songs (with working url to youtube with python
                                         code) and than use YT.Player</p>
                                 </div>
@@ -226,20 +235,26 @@
                                     <div class="feature__icon" style="color: var(--bs-red);"><i
                                             class="fa-brands fa-youtube fs-4"></i></div>
                                     <h5 class="mt-4 mb-3">navigate to youtube</h5>
-                                    <p>On the website, for each song you can navigate to youtube. based on the youtube id we got from api call</p>
+                                    <p>On the website, for each song you can navigate to youtube. based on the youtube
+                                        id we got from api call</p>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="col-xl-3 col-lg-4 col-sm-6">
                             <div class="card h-100 py-2">
                                 <div class="card-body">
                                     <div class="feature__icon" style="color: var(--bs-red);"><i
                                             class="fa-brands fa-youtube fs-4"></i></div>
                                     <h5 class="mt-4 mb-3">YoutubeId and YoutubeUrl</h5>
-                                    <p>We took the youtubeId and the youtubeUrl(img of the song) by using youtube data api v3 call. we search in yourube query and get the result from there</p>
-                                    <p>we use this path : https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(SongData.artistName + " " + SongData.name)}&key=${apiKey}.</p>
-                                    <p>the key we got from this web : https://console.cloud.google.com/apis/credentials?cloudshell=true&orgonly=true&project=tru-392715&supportedpurview=project.</p>
+                                    <p>We took the youtubeId and the youtubeUrl(img of the song) by using youtube data
+                                        api v3 call. we search in yourube query and get the result from there</p>
+                                    <p>we use this path :
+                                        https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(SongData.artistName
+                                        + " " + SongData.name)}&key=${apiKey}.</p>
+                                    <p>the key we got from this web :
+                                        https://console.cloud.google.com/apis/credentials?cloudshell=true&orgonly=true&project=tru-392715&supportedpurview=project.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -249,8 +264,11 @@
                                     <div class="feature__icon" style="color: var(--bs-red);"><i
                                             class="fa-brands fa-youtube fs-4"></i></div>
                                     <h5 class="mt-4 mb-3">YoutubeId and YoutubeUrl- Addition python</h5>
-                                    <p>Because not all the song is valid to play in the web, we wrore python code and extract 500song only if they playable.</p>
-                                    <p>the link for this code : https://colab.research.google.com/drive/1UeMzaF29bDeaD7e8OV83E1kqZw-1XVDq?usp=sharing</p>
+                                    <p>Because not all the song is valid to play in the web, we wrore python code and
+                                        extract 500song only if they playable.</p>
+                                    <p>the link for this code :
+                                        https://colab.research.google.com/drive/1UeMzaF29bDeaD7e8OV83E1kqZw-1XVDq?usp=sharing
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -260,9 +278,14 @@
                                     <div class="feature__icon" style="color: var(--bs-red);"><i
                                             class="fa-brands fa-youtube fs-4"></i></div>
                                     <h5 class="mt-4 mb-3">Artist url</h5>
-                                    <p>We use api call for sporift to get the artist image because there is bug in last.fm to get the img. we search in protify and got the info from there</p>
-                                    <p>we use this api https://api.spotify.com/v1/search?type=artist&q=${encodeURIComponent(artistName)}&decorate_restrictions=false&best_match=true&include_external=audio&limit=1.</p>
-                                    <p>we got the token access from this link : https://open.spotify.com/get_access_token?reason=transport&productType=web_player&_authfailed=1.</p>
+                                    <p>We use api call for sporift to get the artist image because there is bug in
+                                        last.fm to get the img. we search in protify and got the info from there</p>
+                                    <p>we use this api
+                                        https://api.spotify.com/v1/search?type=artist&q=${encodeURIComponent(artistName)}&decorate_restrictions=false&best_match=true&include_external=audio&limit=1.
+                                    </p>
+                                    <p>we got the token access from this link :
+                                        https://open.spotify.com/get_access_token?reason=transport&productType=web_player&_authfailed=1.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -273,7 +296,8 @@
                                             class="fa-solid fa-database fs-4"></i></div>
                                     <h5 class="mt-4 mb-3">Analyse data</h5>
                                     <p>On the website, you can view your personal analytics info about your account.</p>
-                                    <p>for example you can view your most played song and most favorite artist(based on his song played0), your score and more.</p>
+                                    <p>for example you can view your most played song and most favorite artist(based on
+                                        his song played0), your score and more.</p>
                                 </div>
                             </div>
                         </div>
@@ -283,7 +307,8 @@
                                     <div class="feature__icon" style="color: var(--bs-green);"><i
                                             class="fa-solid fa-database fs-4"></i></div>
                                     <h5 class="mt-4 mb-3">Speech api js </h5>
-                                    <p>On the website, you the website you can listen to artist info by speech api js (like hugging face ai).</p>
+                                    <p>On the website, you the website you can listen to artist info by speech api js
+                                        (like hugging face ai).</p>
                                     <p>It build in browser api (SpeechSynthesisUtterance).</p>
                                 </div>
                             </div>
@@ -309,25 +334,27 @@
                                             class="ri-music-2-fill fs-4"></i></div>
                                     <h5 class="mt-4 mb-3">500 songs</h5>
                                     <p>On the website, you can <b>listen</b> to 500 selected songs from 265 different
-                                        artists.</br> we create python code to get the 500song + duration + youtubeId + youtubeUrl
+                                        artists.</br> we create python code to get the 500song + duration + youtubeId +
+                                        youtubeUrl
                                     </p>
                                 </div>
                             </div>
                         </div>
-                        
-                        
+
+
                         <div class="col-xl-3 col-lg-4 col-sm-6">
                             <div class="card h-100 py-2">
                                 <div class="card-body">
                                     <div class="feature__icon" style="color: var(--bs-green);"><i
                                             class="fa-solid fa-gamepad fs-4"></i></div>
                                     <h5 class="mt-4 mb-3">Game</h5>
-                                    <p>On the website, you can play and enjoy a competitive game. you can watch the other player score as well</p>
+                                    <p>On the website, you can play and enjoy a competitive game. you can watch the
+                                        other player score as well</p>
                                 </div>
                             </div>
                         </div>
-                        
-                        
+
+
                         <div class="col-xl-3 col-lg-4 col-sm-6">
                             <div class="card h-100 py-2">
                                 <div class="card-body">
@@ -359,14 +386,15 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="col-xl-3 col-lg-4 col-sm-6">
                             <div class="card h-100 py-2">
                                 <div class="card-body">
                                     <div class="feature__icon" style="color: var(--bs-green);"><i
                                             class="fa-solid fa-mobile fs-4"></i></div>
                                     <h5 class="mt-4 mb-3">Responsive website </h5>
-                                    <p>The site is responsive, which increases the convenience of using the site on different devices.</p>
+                                    <p>The site is responsive, which increases the convenience of using the site on
+                                        different devices.</p>
                                 </div>
                             </div>
                         </div>
