@@ -2,23 +2,24 @@ var data = JSON.parse(sessionStorage.getItem("SongDetails"));
 function LoadSongDetailsPage() {
   $("#commentForm").submit(function () {
     create_comment_song("#comments-area");
-    UpdateSongAvgLikes()
+    UpdateSongAvgLikes();
     return false;
   });
   get_comment_for_song(data.id, loopINComments);
   // console.log(data);
   AddInfoSong(data);
 }
-function UpdateSongAvgLikes(){
-  GetAvgNumberForGivenSong((num)=>{
-    document.getElementById('NumOfAvgFavoritesForSong').textContent = Number(num.toFixed(2));
-  },data.id)
+function UpdateSongAvgLikes() {
+  GetAvgNumberForGivenSong((num) => {
+    document.getElementById("NumOfAvgFavoritesForSong").textContent = Number(
+      num.toFixed(2)
+    );
+  }, data.id);
 }
 function loopINComments(comments) {
   async function processComment(comment) {
     return new Promise((resolve) => {
       get_user_by_id_comments(comment.userId, function (user) {
-        console.log(comment);
         create_comment(
           "#comments-area",
           user.imgUrl,
@@ -67,7 +68,7 @@ function AddInfoSong(data) {
     NumberofFavoritesForSong.innerHTML = num;
   }, data.id);
 
-  UpdateSongAvgLikes()
+  UpdateSongAvgLikes();
 
   let Url = document.createElement("li");
   Url.innerHTML = `<a href="https://www.youtube.com/watch?v=${data.youtubeId}"><b>Youtube link</b> </a>`;

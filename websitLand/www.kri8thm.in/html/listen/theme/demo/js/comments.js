@@ -16,8 +16,7 @@ function create_comment_song(comment_area) {
     SongId: song_info.id,
     Stars: comment_stars_number,
   };
-  console.log(obj_song_comment);
-  add_comment_to_song(obj_song_comment,UpdateSongAvgLikes);
+  add_comment_to_song(obj_song_comment, UpdateSongAvgLikes);
   create_comment(comment_area);
 }
 
@@ -34,10 +33,10 @@ function create_comment_artist(comment_area) {
     ArtisName: artist_info.artistName,
     Stars: comment_stars_number,
   };
-  console.log(obj_artist_comment);
-  add_comment_to_artist(obj_artist_comment,UpdateArtistAvgLikes);
+  add_comment_to_artist(obj_artist_comment, UpdateArtistAvgLikes);
   create_comment(comment_area);
 }
+
 function create_comment(
   comment_area,
   user_img,
@@ -58,18 +57,21 @@ function create_comment(
   const comment_format = `
         <div class="avatar avatar--lg align-items-start mt-4" >
           <div class="avatar__image"><img src="${get_image_from_server(
-    user_img ?? user_info.imgUrl
-  )}" alt="user"></div>
-          <div class="avatar__content" data-comment-id="${comment_id}" data-comment-rating="${number_stars}"><span class="avatar__title mb-1">${user_name ?? user_info.first + " " + user_info.last
-    }
-          ${user_id == user_info.id
-      ? `<i class="fa-solid fa-pen-to-square green-color cursor-pointer ps-sm-3" onclick= "edit_comment(this,'${forhwo}')"></i>`
-      : ""
-    }
-          ${user_id == user_info.id
-      ? `<i class="fa-solid fa-trash-can red-color cursor-pointer " onclick= "deleteComment(this,'${forhwo}')"></i>`
-      : ""
-    }
+            user_img ?? user_info.imgUrl
+          )}" alt="user"></div>
+          <div class="avatar__content" data-comment-id="${comment_id}" data-comment-rating="${number_stars}"><span class="avatar__title mb-1">${
+    user_name ?? user_info.first + " " + user_info.last
+  }
+          ${
+            user_id == user_info.id
+              ? `<i class="fa-solid fa-pen-to-square green-color cursor-pointer ps-sm-3" onclick= "edit_comment(this,'${forhwo}')"></i>`
+              : ""
+          }
+          ${
+            user_id == user_info.id
+              ? `<i class="fa-solid fa-trash-can red-color cursor-pointer " onclick= "deleteComment(this,'${forhwo}')"></i>`
+              : ""
+          }
           </span>
 
           <span class="avatar__subtitle mb-2">${date ?? new Date()}</span>
@@ -130,8 +132,7 @@ function edit_comment_in_server(elem, forwho) {
     };
     if (forwho == "artist") {
       add_comment_to_artist(obj_artist_comment);
-    }
-    else {
+    } else {
       add_comment_to_song(obj_song_comment);
     }
   }
@@ -146,17 +147,16 @@ function edit_comment_in_server(elem, forwho) {
 function deleteComment(clicked_elm, forwho) {
   const second_fromTheTop_parent_elm = $(clicked_elm).parent().parent();
   const third_fromTheTop_parent_elm = $(second_fromTheTop_parent_elm).parent();
-  console.log($(second_fromTheTop_parent_elm).attr("data-comment-id"));
   if (forwho == "artist") {
     delete_artist_comment_from_server(
-      $(second_fromTheTop_parent_elm).attr("data-comment-id")
-    ,UpdateArtistAvgLikes);
+      $(second_fromTheTop_parent_elm).attr("data-comment-id"),
+      UpdateArtistAvgLikes
+    );
   } else {
     delete_song_comment_from_server(
-      $(second_fromTheTop_parent_elm).attr("data-comment-id")
-      ,UpdateSongAvgLikes);
-
+      $(second_fromTheTop_parent_elm).attr("data-comment-id"),
+      UpdateSongAvgLikes
+    );
   }
   $(third_fromTheTop_parent_elm).remove();
-
 }
