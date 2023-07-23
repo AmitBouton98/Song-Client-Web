@@ -1,6 +1,15 @@
 var User = JSON.parse(sessionStorage.getItem("User"));
-
+let itemsArray;
+let i = 0;
 $(document).ready(function () {
+  $("#load-more").on("click", function () {
+    if (i == 500) return
+    for (item of itemsArray) {
+      i++;
+      AddSongToPage(item, "SongS");
+      if (i % 50 == 0) break;
+    }
+  })
   //     GetAllSongs((data) => {
   //         for (item of data) {
   //             AddSongForArtist(item)
@@ -8,10 +17,14 @@ $(document).ready(function () {
   //     })
   $("#logout-btn").on("click", logOut);
 });
+
 function LoadGenerePage() {
   GetAllSongs((data) => {
-    for (item of data) {
+    itemsArray = data;
+    for (item of itemsArray) {
+      i++;
       AddSongToPage(item, "SongS");
+      if (i % 50 == 0) break;
     }
   });
 }
@@ -78,7 +91,7 @@ function AddSongToPage(data, ToWhereAppand) {
   // Create the title anchor element
   var titleLink = document.createElement("a");
   // titleLink.href = "song-details.html";
-  $(titleLink).css('cursor','pointer')
+  $(titleLink).css('cursor', 'pointer')
   titleLink.className = "list__title text-truncate";
   titleLink.textContent = data.name;
   titleLink.onclick = () => {
@@ -95,7 +108,7 @@ function AddSongToPage(data, ToWhereAppand) {
   // Create the artist anchor element
   var artistLink = document.createElement("a");
   // artistLink.href = "artist-details.html";
-  $(artistLink).css('cursor','pointer')
+  $(artistLink).css('cursor', 'pointer')
 
   artistLink.textContent = data.artistName;
   artistLink.onclick = () => {
@@ -281,47 +294,47 @@ function AddSongToPage(data, ToWhereAppand) {
   var dropdownWrapper = document.createElement("li");
   dropdownWrapper.className = "dropstart d-inline-flex";
 
-    // Create the duration
-    var durationListItem = document.createElement('li');
-    durationListItem.textContent = data.duration; // time of the video
-    
+  // Create the duration
+  var durationListItem = document.createElement('li');
+  durationListItem.textContent = data.duration; // time of the video
 
-    // Create the dropdown toggle
-    var dropdownToggle = document.createElement('a');
-    dropdownToggle.className = 'dropdown-link';
-    dropdownToggle.href = 'javascript:void(0);';
-    dropdownToggle.setAttribute('role', 'button');
-    dropdownToggle.setAttribute('data-bs-toggle', 'dropdown');
-    dropdownToggle.setAttribute('aria-label', 'Cover options');
-    dropdownToggle.setAttribute('aria-expanded', 'false');
 
-    var dropdownToggleIcon = document.createElement('i');
-    dropdownToggleIcon.className = 'ri-more-fill';
+  // Create the dropdown toggle
+  var dropdownToggle = document.createElement('a');
+  dropdownToggle.className = 'dropdown-link';
+  dropdownToggle.href = 'javascript:void(0);';
+  dropdownToggle.setAttribute('role', 'button');
+  dropdownToggle.setAttribute('data-bs-toggle', 'dropdown');
+  dropdownToggle.setAttribute('aria-label', 'Cover options');
+  dropdownToggle.setAttribute('aria-expanded', 'false');
 
-    // Append the dropdown toggle icon to the dropdown toggle
-    dropdownToggle.appendChild(dropdownToggleIcon);
+  var dropdownToggleIcon = document.createElement('i');
+  dropdownToggleIcon.className = 'ri-more-fill';
 
-    // Create the dropdown wrapper
-    var dropdownWrapper = document.createElement('li');
-    dropdownWrapper.className = 'dropstart d-inline-flex';
+  // Append the dropdown toggle icon to the dropdown toggle
+  dropdownToggle.appendChild(dropdownToggleIcon);
 
-    // Append the dropdown toggle to the dropdown wrapper
-    dropdownWrapper.appendChild(dropdownToggle);
+  // Create the dropdown wrapper
+  var dropdownWrapper = document.createElement('li');
+  dropdownWrapper.className = 'dropstart d-inline-flex';
 
-    // Append the dropdown menu to the dropdown wrapper
-    // dropdownWrapper.appendChild(dropdownMenu);
+  // Append the dropdown toggle to the dropdown wrapper
+  dropdownWrapper.appendChild(dropdownToggle);
 
-    // Append the option list items and the dropdown wrapper to the options list
-    optionsList.appendChild(optionListItem1);
-    optionsList.appendChild(optionListItem2);
-    optionsList.appendChild(durationListItem);
-    // optionsList.appendChild(dropdownWrapper);
+  // Append the dropdown menu to the dropdown wrapper
+  // dropdownWrapper.appendChild(dropdownMenu);
 
-    // Append the cover div, content div, and options list to the list div
-    listDiv.appendChild(coverDiv);
-    listDiv.appendChild(contentDiv);
-    listDiv.appendChild(optionsList);
+  // Append the option list items and the dropdown wrapper to the options list
+  optionsList.appendChild(optionListItem1);
+  optionsList.appendChild(optionListItem2);
+  optionsList.appendChild(durationListItem);
+  // optionsList.appendChild(dropdownWrapper);
 
-    document.getElementById(ToWhereAppand).appendChild(listDiv)
-    // document.getElementById("SongS").appendChild(listDiv)
+  // Append the cover div, content div, and options list to the list div
+  listDiv.appendChild(coverDiv);
+  listDiv.appendChild(contentDiv);
+  listDiv.appendChild(optionsList);
+
+  document.getElementById(ToWhereAppand).appendChild(listDiv)
+  // document.getElementById("SongS").appendChild(listDiv)
 }
