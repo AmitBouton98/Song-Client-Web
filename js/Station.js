@@ -22,6 +22,7 @@ async function AddButtons() {
   playButtons.length = 0; // Clear the array
 }
 async function CanvasCtxAudio(elem) {
+
   $("#player").show();
   await StopAllAudios();
   await AddButtons();
@@ -30,7 +31,7 @@ async function CanvasCtxAudio(elem) {
   // path is this
   // $(this).parent().parent().attr('data-song-url')
   // button -> div -> div (with the url)
-  const path = $(elem).parent().parent().attr("data-song-url");
+  const path = $(elem).parent().parent().attr("data-song-urll");
   let audio, analyser, dataArray, bufferLength;
   const canvas = document.getElementById("visualizer");
   canvas.style.width = "100%";
@@ -55,14 +56,14 @@ async function CanvasCtxAudio(elem) {
 
     const source = audioContext.createMediaElementSource(audio);
     source.connect(analyser).connect(audioContext.destination);
-    // var volumeSlider = document.getElementById("VolumeSlider");
-    // audio.volume = volumeSlider.value / 100;
-    // function onVolumeChange() {
-    //   // Change the volume when slider value changes
-    //   var volume = volumeSlider.value;
-    //   audio.volume = volume / 100;
-    // }
-    // volumeSlider.addEventListener("input", onVolumeChange);
+    var volumeSlider = document.getElementById("VolumeSlider");
+    audio.volume = volumeSlider.value / 100;
+    function onVolumeChange() {
+      // Change the volume when slider value changes
+      var volume = volumeSlider.value;
+      audio.volume = volume / 100;
+    }
+    volumeSlider.addEventListener("input", onVolumeChange);
 
     if (!flag) {
       StopAllAudios();
@@ -76,10 +77,12 @@ async function CanvasCtxAudio(elem) {
         audioContext.resume().then(() => {
           StopAllAudios();
           audio.play();
+          playButton.innerText ='played'
         });
       } else {
         StopAllAudios();
         audio.pause();
+        playButton.innerText ='pause'
       }
     };
 
@@ -136,7 +139,7 @@ async function CanvasCtxAudio(elem) {
   const audioContext = new (window.AudioContext || window.webkitAudioContext)();
   if (audioContext) {
     // Start the audio visualization
-    initializeAudio();
+      initializeAudio();
   } else {
     alert("Web Audio API is not supported in this browser.");
   }
