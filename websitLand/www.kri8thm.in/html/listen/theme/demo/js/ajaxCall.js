@@ -1,4 +1,6 @@
-const api = "https://localhost:7281/api";
+// const api = "https://localhost:7281/api";
+const api = "https://proj.ruppin.ac.il/cgroup17/test2/tar1/api"
+
 function ajaxCall(method, api, data, successCB, errorCB) {
   $.ajax({
     type: method, // Get/Post/Put/Delete/Patch
