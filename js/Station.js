@@ -10,7 +10,7 @@ async function StopAllAudios() {
     // source.disconnect();
 
     // Remove the audio element from the DOM
-    // d.remove();
+    d.remove();
   }
   audioElements.length = 0; // Clear the array
 }
@@ -22,7 +22,6 @@ async function AddButtons() {
   playButtons.length = 0; // Clear the array
 }
 async function CanvasCtxAudio(elem) {
-
   $("#player").show();
   await StopAllAudios();
   await AddButtons();
@@ -64,7 +63,6 @@ async function CanvasCtxAudio(elem) {
       audio.volume = volume / 100;
     }
     volumeSlider.addEventListener("input", onVolumeChange);
-
     if (!flag) {
       StopAllAudios();
       audioElements.push(audio);
@@ -72,17 +70,24 @@ async function CanvasCtxAudio(elem) {
       audio.play();
       $(elem).hide();
     }
+
     playButton.onclick = function () {
+      console.log('cliked')
+
       if (audio.paused) {
         audioContext.resume().then(() => {
           StopAllAudios();
           audio.play();
           playButton.innerText ='played'
+          console.log('played')
+
         });
       } else {
         StopAllAudios();
         audio.pause();
         playButton.innerText ='pause'
+        console.log('pause')
+
       }
     };
 
