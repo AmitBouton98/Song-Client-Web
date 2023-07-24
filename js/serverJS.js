@@ -411,3 +411,18 @@ function set_Score(score_obj, callback) {
     }
   );
 }
+
+
+function getAllUsers(callbackFunction_renderUserTable_D) {
+  ajaxCall(
+    "GET",
+    `${api}/UserMusics`,
+    null,
+    (response) => {
+      callbackFunction_renderUserTable_D(response)
+    },
+    (resolve) => {
+      console.log(resolve)
+    }
+  )
+}

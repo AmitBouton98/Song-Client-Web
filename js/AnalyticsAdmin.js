@@ -16,7 +16,49 @@ function LoadAdminPage() {
   LoadNumberOfUsersAndSongs();
   LoadPlayedNumberForUserAndTopSongAndArtist();
 }
+function renderUserTable() {
+  getAllUsers((data) => {
+    console.log(data);
+    let table = new DataTable('#myTable', {
+      searching: false,
+      pageLength: 10,
+      data: data,
+      responsive: window.innerWidth < 1000 ? true : false,
+      responsive: true,
+      columnDefs: [
+        { responsivePriority: 1, targets: 0 },
+        { responsivePriority: 2, targets: 5 }
+      ],
+      columns: [
+        { data: "id" },
+        {
+          data: "imgUrl",
+          render: function (data, type, row, meta) {
+            return `<img src="${get_image_from_server(data)}" alt="" class="user-table-image">`;
+          }
+        },
+        { data: "first" },
+        { data: "last" },
+        {
+          data: "email",
+          render: function (data, type, row, meta) {
+            return `<a href="mailto:${data}">${data}</a>`;
+          }
+        },
+        { data: "registrationDate" },
+      ],
+    });
+    table.draw();
+  });
+}
+
 function LoadNumberOfUsersAndSongs() {
+  if (user_info.email == "admin@gmail.com") {
+    $("#my-table-area").removeClass("hide-table")
+    renderUserTable();
+  } else {
+    $("#my-table-area").addClass("hide-table")
+  }
   GetNumberOfUsers((data) => {
     console.log(data);
     document.getElementById("TotalNumberOfUsers").innerHTML = data;
@@ -25,6 +67,9 @@ function LoadNumberOfUsersAndSongs() {
     console.log(data);
     document.getElementById("TotalNumberOfSongs").innerHTML = data;
   });
+  // $('#example').dataTable({
+  //   "ajaxSource": "sources/objects.txt",
+  // });
 }
 function LoadPlayedNumberForUserAndTopSongAndArtist() {
   const Played = document.getElementById("TotalTimeForHearingSong");

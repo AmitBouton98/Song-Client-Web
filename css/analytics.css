@@ -3,6 +3,15 @@
       flex-direction: row;
   }
 
+  .user-table-image {
+      height: 50px;
+      width: 50px;
+      object-fit: contain;
+      display: inline;
+      border-radius: 50%;
+      background-color: white;
+  }
+
   .grid-row {
       padding: 10px;
       background-color: transparent;
@@ -32,4 +41,9 @@
       }
 
 
+  }
+
+  .hide-table {
+      display: none;
+      visibility: 0;
   }
