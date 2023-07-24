@@ -84,16 +84,23 @@ function AddMSG() {
     });
     document.getElementById("msgTB").value = ""
 }
+// this funtion is for speach to text
 function SpeachToText() {
     let recognization = new webkitSpeechRecognition();
     let output = $('#msgTB')
     recognization.onstart = () => {
         output.val('')
-     }
+    }
 
     recognization.onresult = (e) => {
         var transcript = e.results[0][0].transcript;
         output.val(transcript)
+    }
+    recognization.onend = () => {
+        // Start a new recognition session with a 1-second delay
+        setTimeout(() => {
+            recognization.start();
+        }, 1000);
     }
     recognization.start();
 }
