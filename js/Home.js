@@ -82,6 +82,7 @@ function buttonClickHandler(btn) {
   document.getElementById("SongListSearch").innerHTML = ""; 
   $("#search_form").submit(() => {
     document.getElementById("SongListSearch").innerHTML = ""; 
+    document.getElementById("ArtistListSearch").innerHTML = ""; 
     var searchInput = document.getElementById("search_input");
     var searchValue = searchInput.value;
     // Perform actions based on the clicked button
