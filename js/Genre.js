@@ -1,12 +1,12 @@
 var User = JSON.parse(sessionStorage.getItem("User"));
 let itemsArray;
-let i = 0;
+var i = 0;
 $(document).ready(function () {
   $("#load-more").on("click", function () {
     if (i == 500) return
-    for (item of itemsArray) {
+    for (item in itemsArray) {
+      AddSongToPage(itemsArray[i], "SongS");
       i++;
-      AddSongToPage(item, "SongS");
       if (i % 50 == 0) break;
     }
   })
@@ -21,9 +21,9 @@ $(document).ready(function () {
 function LoadGenerePage() {
   GetAllSongs((data) => {
     itemsArray = data;
-    for (item of itemsArray) {
+    for (item in itemsArray) {
+      AddSongToPage(itemsArray[i], "SongS");
       i++;
-      AddSongToPage(item, "SongS");
       if (i % 50 == 0) break;
     }
   });
