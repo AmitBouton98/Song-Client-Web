@@ -89,15 +89,13 @@ function SpeachToText() {
     let recognization = new webkitSpeechRecognition();
     let output = $('#msgTB')
     recognization.onstart = () => {
-        setTimeout(() => {
-            recognization.start();
-        }, 1000);
         output.val('')
     }
-
+    
     recognization.onresult = (e) => {
         var transcript = e.results[0][0].transcript;
         output.val(transcript)
     }
-
+    
+    recognization.start();
 }
