@@ -81,10 +81,20 @@
                                 <div class="card-body">
                                     <div class="feature__icon" style="color: var(--bs-blue);"><i
                                             class="fa-brands fa-rocketchat fs-4"></i></div>
-                                    <h5 class="mt-4 mb-3">Chat - firebase</h5>
+                                    <h5 class="mt-4 mb-3">Chat</h5>
                                     <p>On the website, you have <b>Chat</b> that you can speak with the other accounts
                                         in the web. <br>
                                         We use firebase to store the chat</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-sm-6">
+                            <div class="card h-100 py-2">
+                                <div class="card-body">
+                                    <div class="feature__icon" style="color: var(--bs-blue);"><i
+                                            class="fa-brands fa-rocketchat fs-4"></i></div>
+                                    <h5 class="mt-4 mb-3">Chat Speech to text - Web Speech API</h5>
+                                    <p>On the website, you can speack and it translate to text (we use this feature in the chat) </p>
                                 </div>
                             </div>
                         </div>
@@ -105,7 +115,7 @@
                                 <div class="card-body">
                                     <div class="feature__icon" style="color: var(--bs-blue);"><i
                                             class="fa-solid fa-radio fs-4"></i></div>
-                                    <h5 class="mt-4 mb-3">Radio station -channel digital.100fm</h5>
+                                    <h5 class="mt-4 mb-3">Radio station</h5>
                                     <p>On the website, you can listen to selected Radio stations.</p>
                                     <p>we use channel- digital.100fm (http://digital.100fm.co.il/ChannelList_Kodi.xml).
                                     </p>
@@ -139,7 +149,7 @@
                                 <div class="card-body">
                                     <div class="feature__icon" style="color: var(--bs-pink);"><i
                                             class="ri-question-answer-fill fs-4"></i></div>
-                                    <h5 class="mt-4 mb-3">Played for songs - sql</h5>
+                                    <h5 class="mt-4 mb-3">Played for songs</h5>
                                     <p>We created table for played and we gather each play for song for each player, and
                                         it provide us the abillity to know they preferences.</p>
                                 </div>
@@ -150,7 +160,7 @@
                                 <div class="card-body">
                                     <div class="feature__icon" style="color: var(--bs-purple);"><i
                                             class="ri-vip-crown-fill fs-4"></i></div>
-                                    <h5 class="mt-4 mb-3">Top 10 songs - based on played</h5>
+                                    <h5 class="mt-4 mb-3">Top 10 songs</h5>
                                     <p>On the website, you can <b>listen</b> to the top 10 songs that have been most
                                         frequently
                                         heard.</p>
@@ -162,7 +172,7 @@
                                 <div class="card-body">
                                     <div class="feature__icon" style="color: var(--bs-red);"><i
                                             class="ri-vip-crown-fill fs-4"></i></div>
-                                    <h5 class="mt-4 mb-3">Top 10 artists - based on played</h5>
+                                    <h5 class="mt-4 mb-3">Top 10 artists</h5>
                                     <p>On the website, you can view the artists with the most plays songs .</p>
                                 </div>
                             </div>
@@ -172,19 +182,28 @@
                                 <div class="card-body">
                                     <div class="feature__icon" style="color: var(--bs-indigo);"><i
                                             class="fa-regular fa-lightbulb fs-4"></i></div>
-                                    <h5 class="mt-4 mb-3">recommendation system - based on played</h5>
+                                    <h5 class="mt-4 mb-3">recommendation system</h5>
                                     <p>On the website, you have recommendation system based on your favorites.</p>
                                 </div>
                             </div>
                         </div>
-                        
+                        <div class="col-xl-3 col-lg-4 col-sm-6">
+                            <div class="card h-100 py-2">
+                                <div class="card-body">
+                                    <div class="feature__icon" style="color: var(--bs-orange);"><i
+                                            class="fa-regular fa-lightbulb fs-4"></i></div>
+                                    <h5 class="mt-4 mb-3">Advance search system</h5>
+                                    <p>On the website, you have the most advance search system!</p>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="col-xl-3 col-lg-4 col-sm-6">
                             <div class="card h-100 py-2">
                                 <div class="card-body">
                                     <div class="feature__icon" style="color: var(--bs-gray);"><i
                                             class="fa-solid fa-key fs-4"></i></div>
-                                    <h5 class="mt-4 mb-3">fotget password - elasticemail mail</h5>
+                                    <h5 class="mt-4 mb-3">fotget password</h5>
                                     <p>On the website, you can reset you password and get unique key to your email (you
                                         have 30 min to reset).</p>
                                     <p>There is 1000 email limit for this, we use smtp.elasticemail.com for the host.
@@ -198,8 +217,9 @@
                                 <div class="card-body">
                                     <div class="feature__icon" style="color: var(--bs-blue);"><i
                                             class="ri-music-2-fill fs-4"></i></div>
-                                    <h5 class="mt-4 mb-3">Listen to music - Youtube data v3 api</h5>
-                                    <p>On the website, you can listen to music (<b>youtube data api v3</b>)."https://www.youtube.com/iframe_api"</p>
+                                    <h5 class="mt-4 mb-3">Listen to music</h5>
+                                    <p>On the website, you can listen to music (youtube data api v3
+                                        )."https://www.youtube.com/iframe_api"</p>
                                     <p>we did it by adding only valid songs (with working url to youtube with python
                                         code) and than use YT.Player</p>
                                 </div>
@@ -213,7 +233,7 @@
                                             class="fa-brands fa-youtube fs-4"></i></div>
                                     <h5 class="mt-4 mb-3">navigate to youtube</h5>
                                     <p>On the website, for each song you can navigate to youtube. based on the youtube
-                                        id we got from <b>api call</b></p>
+                                        id we got from api call</p>
                                 </div>
                             </div>
                         </div>
@@ -223,9 +243,9 @@
                                 <div class="card-body">
                                     <div class="feature__icon" style="color: var(--bs-red);"><i
                                             class="fa-brands fa-youtube fs-4"></i></div>
-                                    <h5 class="mt-4 mb-3">YoutubeId and YoutubeUrl - Youtube data v3 api</h5>
-                                    <p>We took the youtubeId and the youtubeUrl(img of the song) by using <b>youtube data
-                                        api v3</b> call. we search in yourube query and get the result from there</p>
+                                    <h5 class="mt-4 mb-3">YoutubeId and YoutubeUrl</h5>
+                                    <p>We took the youtubeId and the youtubeUrl(img of the song) by using youtube data
+                                        api v3 call. we search in yourube query and get the result from there</p>
                                     <p>we use this path :
                                         https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(SongData.artistName
                                         + " " + SongData.name)}&key=${apiKey}.</p>
@@ -254,8 +274,8 @@
                                 <div class="card-body">
                                     <div class="feature__icon" style="color: var(--bs-red);"><i
                                             class="fa-brands fa-youtube fs-4"></i></div>
-                                    <h5 class="mt-4 mb-3">Artist url - spotify api</h5>
-                                    <p>We use <b>api call in spotify</b> to get the artist image because there is bug in
+                                    <h5 class="mt-4 mb-3">Artist url</h5>
+                                    <p>We use api call for sporift to get the artist image because there is bug in
                                         last.fm to get the img. we search in protify and got the info from there</p>
                                     <p>we use this api
                                         https://api.spotify.com/v1/search?type=artist&q=${encodeURIComponent(artistName)}&decorate_restrictions=false&best_match=true&include_external=audio&limit=1.
@@ -271,7 +291,7 @@
                                 <div class="card-body">
                                     <div class="feature__icon" style="color: var(--bs-blue);"><i
                                             class="fa-solid fa-database fs-4"></i></div>
-                                    <h5 class="mt-4 mb-3">Analyse data </h5>
+                                    <h5 class="mt-4 mb-3">Analyse data</h5>
                                     <p>On the website, you can view your personal analytics info about your account.</p>
                                     <p>for example you can view your most played song and most favorite artist(based on
                                         his song played0), your score and more.</p>
@@ -283,8 +303,8 @@
                                 <div class="card-body">
                                     <div class="feature__icon" style="color: var(--bs-green);"><i
                                             class="fa-solid fa-database fs-4"></i></div>
-                                    <h5 class="mt-4 mb-3">Speech api js - hugging face</h5>
-                                    <p>On the website, you the website you can listen to artist info by <b>speech api js</b>
+                                    <h5 class="mt-4 mb-3">Speech api js </h5>
+                                    <p>On the website, you the website you can listen to artist info by speech api js
                                         (like hugging face ai).</p>
                                     <p>It build in browser api (SpeechSynthesisUtterance).</p>
                                 </div>
@@ -309,7 +329,7 @@
                                 <div class="card-body">
                                     <div class="feature__icon" style="color: var(--bs-blue);"><i
                                             class="ri-music-2-fill fs-4"></i></div>
-                                    <h5 class="mt-4 mb-3">500 songs - selection in python</h5>
+                                    <h5 class="mt-4 mb-3">500 songs</h5>
                                     <p>On the website, you can <b>listen</b> to 500 selected songs from 265 different
                                         artists.</br> we create python code to get the 500song + duration + youtubeId +
                                         youtubeUrl
@@ -317,23 +337,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-3 col-lg-4 col-sm-6">
-                            <div class="card h-100 py-2">
-                                <div class="card-body">
-                                    <div class="feature__icon" style="color: var(--bs-orange);"><i
-                                            class="fa-regular fa-lightbulb fs-4"></i></div>
-                                    <h5 class="mt-4 mb-3">Advance search system</h5>
-                                    <p>On the website, you have the most advance search system!</p>
-                                </div>
-                            </div>
-                        </div>
+
 
                         <div class="col-xl-3 col-lg-4 col-sm-6">
                             <div class="card h-100 py-2">
                                 <div class="card-body">
                                     <div class="feature__icon" style="color: var(--bs-green);"><i
                                             class="fa-solid fa-gamepad fs-4"></i></div>
-                                    <h5 class="mt-4 mb-3">Game - competitive</h5>
+                                    <h5 class="mt-4 mb-3">Game</h5>
                                     <p>On the website, you can play and enjoy a competitive game. you can watch the
                                         other player score as well</p>
                                 </div>
@@ -346,7 +357,7 @@
                                 <div class="card-body">
                                     <div class="feature__icon" style="color: var(--bs-yellow);"><i
                                             class="fa-solid fa-image fs-4"></i></div>
-                                    <h5 class="mt-4 mb-3">change image - storage in server</h5>
+                                    <h5 class="mt-4 mb-3">change image</h5>
                                     <p>On the website, you can pick image when register and even change it in update
                                         details.</p>
                                 </div>
