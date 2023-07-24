@@ -1,5 +1,9 @@
+const user_info = JSON.parse(sessionStorage.getItem("User"));
 $(document).ready(function () {
-  const user_info = JSON.parse(sessionStorage.getItem("User"));
+  if (user_info == undefined) {
+    window.location.replace("./login.html")
+  }
+  sessionStorage.removeItem("User")
   $("#user-email").text(user_info["email"]);
   $("#reset-password-form").submit(function () {
     resetPassword();
@@ -36,7 +40,6 @@ function resetPassword() {
   for (var i = 0; i < inputs.length; i++) {
     key_letters += $(inputs[i]).val();
   }
-  const user_info = JSON.parse(sessionStorage.getItem("User"));
   // call the change_user_password function from the server
   change_user_password(key_letters, user_info["email"], $("#password").val());
   // delete the user from the session storage 
