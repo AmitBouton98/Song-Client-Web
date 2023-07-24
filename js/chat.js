@@ -1,7 +1,8 @@
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
-
+const synth = window.speechSynthesis;
+let recognization = new webkitSpeechRecognition();
 let user = JSON.parse(sessionStorage.getItem("User"));
 
 function init() {
@@ -12,6 +13,8 @@ function init() {
     // listen to removing messages
     listenToRemove();
     ph = document.getElementById("ph");
+    populateVoiceList()
+
 }
 function renderMessage(msg) {
     console.log(msg.key);
@@ -84,3 +87,36 @@ function AddMSG() {
     });
     document.getElementById("msgTB").value = ""
 }
+
+function populateVoiceList() {
+    voices = synth.getVoices();
+    voiceSelect = document.getElementById("voiceSelect")
+    for (const voice of voices) {
+        console.log(voice.lang)
+        const option = document.createElement("option");
+        option.textContent = `${voice.lang}`;
+        option.setAttribute("data-lang", voice.lang);
+        option.setAttribute("data-name", voice.name);
+        voiceSelect.appendChild(option);
+    }
+}
+// this funtion is for speach to text
+function SpeachToText() {
+    recognization.lang = $("#voiceSelect").val()
+    let output = $('#msgTB')
+    recognization.onstart = () => {
+        $("#mic-btn").addClass("mic-on-animation")
+        output.val('')
+    }
+    recognization.onspeechend = () => {
+        $("#mic-btn").removeClass("mic-on-animation")
+        recognization.stop();
+    };
+    recognization.onresult = (e) => {
+        var transcript = e.results[0][0].transcript;
+        output.val(transcript)
+    }
+
+    recognization.start();
+}
+

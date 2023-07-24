@@ -6,6 +6,28 @@
     background-color: pink;
 }
 
+#voiceSelect {
+    border: 1px solid black !important;
+    background-color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+.mic-on-animation {
+    animation: mic-on 1000ms cubic-bezier(0.4, 0, 1, 1) infinite;
+}
+
+#mic-btn {
+
+    text-shadow: 0 0 10px green;
+    border: none;
+    color: white;
+    background-color: transparent;
+    transition: all 2000ms;
+}
+
+
 .message-row {
     display: flex;
     flex-direction: row;
@@ -95,4 +117,16 @@ body {
 .message-content-send-btn:hover {
     color: lightgreen;
     background-color: black;
+}
+
+@keyframes mic-on {
+    0% {
+
+        text-shadow: 0 0 10px green;
+    }
+
+    100% {
+        color: green;
+        text-shadow: 0 0 500px green;
+    }
 }
