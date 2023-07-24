@@ -84,3 +84,16 @@ function AddMSG() {
     });
     document.getElementById("msgTB").value = ""
 }
+function SpeachToText() {
+    let recognization = new webkitSpeechRecognition();
+    let output = $('#msgTB')
+    recognization.onstart = () => {
+        output.val('')
+     }
+
+    recognization.onresult = (e) => {
+        var transcript = e.results[0][0].transcript;
+        output.val(transcript)
+    }
+    recognization.start();
+}
