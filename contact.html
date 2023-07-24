@@ -28,8 +28,10 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.18/dist/sweetalert2.all.min.js"></script>
+
     <script src="js/Contact.js"></script>
-    <script src="js/send_email.php"></script>
+    <link rel="stylesheet" href="css/contact.css">
 </head>
 
 <body onload="SendMessageContactPage()">
@@ -54,7 +56,8 @@
                         <ul class="navbar-nav mt-4 mt-lg-0 mx-auto fw-semi-bold">
                             <li class="nav-item"><a class="nav-link external" href="index.html">Home</a></li>
                             <li class="nav-item"><a class="nav-link external" href="about.html">About us</a></li>
-                            <li class="nav-item"><a class="nav-link external active" href="contact.html">Contact us</a></li>
+                            <li class="nav-item"><a class="nav-link external active" href="contact.html">Contact us</a>
+                            </li>
                             <li class="nav-item"><a class="nav-link external" href="additions.html">Additions</a></li>
 
                         </ul>
@@ -73,21 +76,25 @@
                         <div class="card-body">
                             <form action="#" class="row" id="SendMessage">
                                 <div class="col-sm-6 mb-4"><label for="f_name" class="form-label fw-medium">First
-                                        name</label> <input type="text" id="f_name" class="form-control" placeholder="">
+                                        name <span class="red-color">*</span></label> <input type="text" id="f_name"
+                                        class="form-control" placeholder="" required pattern="^[a-zA-Z]+$">
                                 </div>
                                 <div class="col-sm-6 mb-4"><label for="l_name" class="form-label fw-medium">Last
-                                        name</label> <input type="text" id="l_name" class="form-control" placeholder="">
+                                        name <span class="red-color">*</span></label> <input type="text" id="l_name"
+                                        class="form-control" placeholder="" required pattern="^[a-zA-Z]+$">
                                 </div>
-                                <div class="col-sm-6 mb-4"><label for="mail" class="form-label fw-medium">Mail</label>
-                                    <input type="text" id="mail" class="form-control" placeholder="">
+                                <div class="col-sm-6 mb-4"><label for="mail" class="form-label fw-medium">Mail <span
+                                            class="red-color">*</span></label>
+                                    <input type="email" id="mail" class="form-control" placeholder="" required>
                                 </div>
                                 <div class="col-sm-6 mb-4"><label for="phone" class="form-label fw-medium">Phone
-                                        number</label> <input type="text" id="phone" class="form-control"
-                                        placeholder=""></div>
-                                <div class="col-12 mb-4"><label for="message"
-                                        class="form-label fw-medium">Message</label> <textarea name="message"
-                                        id="message" cols="30" rows="4" class="form-control"
-                                        placeholder="Write here..."></textarea></div>
+                                        number <span class="red-color">*</span></label> <input type="tel" id="phone"
+                                        class="form-control" placeholder="" required pattern="[0-9]{3}[0-9]{3}[0-9]{4}">
+                                </div>
+                                <div class="col-12 mb-4"><label for="message" class="form-label fw-medium">Message
+                                        <span class="red-color">*</span></label> <textarea name="message" id="message"
+                                        cols="30" rows="4" class="form-control" placeholder="Write here..."
+                                        required></textarea></div>
                                 <div class="col-12 text-center"><button type="submit" class="btn btn-primary"
                                         style="min-width: 180px;">Send message</button></div>
                             </form>

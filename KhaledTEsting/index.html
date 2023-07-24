@@ -5,57 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-        #stars {
-            background-image: linear-gradient(90deg, yellow 50%, white, yellow);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-        }
-
-        .fa-star {
-            background-clip: text;
-            -webkit-background-clip: text;
-            transition: all 10ms ease-in-out;
-        }
-    </style>
 </head>
 
 <body>
-    <div id="stars">
-        <i class="fa-regular fa-star" data-star-number="1" data-clicked="0"></i>
-        <i class="fa-regular fa-star" data-star-number="2" data-clicked="0"></i>
-        <i class="fa-regular fa-star" data-star-number="3" data-clicked="0"></i>
-        <i class="fa-regular fa-star" data-star-number="4" data-clicked="0"></i>
-        <i class="fa-regular fa-star" data-star-number="5" data-clicked="0"></i>
-
+    <div style="text-align: center;">
+        <img src="https://media.discordapp.net/attachments/1092515523717234700/1130442483952795699/touch-icon-ipad-retina.png?width=208&height=208"
+            alt="">
+        <h1 style="text-align: center;">Hello there i want to get in contact with your company</h1>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
-        integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script>
-        $(".fa-star").hover(function () {
-            for (i = 1; i <= $(this).attr("data-star-number"); i++)
-                if ($(`.fa-star[data-star-number=${i}]`).attr("data-clicked") == "0")
-                    $(`.fa-star[data-star-number=${i}]`).removeClass("fa-regular").addClass("fa-solid");
+    <p>My email is: <a href="mailto:">mail@mail.mail</a></p>
+    <p>My number is : <a href="tel:+">0147852369</a></p>
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam necessitatibus reiciendis placeat
+        tempora.
+        Veritatis, a dolor! Deleniti, asperiores? Eum necessitatibus vitae tempore temporibus, eos pariatur.
+        Quibusdam
+        itaque earum ea aliquam.</p>
 
-
-        }, function () {
-            for (i = 1; i <= $(this).attr("data-star-number"); i++)
-                if ($(`.fa-star[data-star-number=${i}]`).attr("data-clicked") == "0")
-                    $(`.fa-star[data-star-number=${i}]`).removeClass("fa-solid").addClass("fa-regular");
-        });
-        $(".fa-star").on("click", function () {
-            if ($(this).attr("data-clicked") == "0")
-                for (i = 1; i <= $(this).attr("data-star-number"); i++) {
-                    $(`.fa-star[data-star-number=${i}]`).removeClass("fa-regular").addClass("fa-solid");
-                    $(`.fa-star[data-star-number=${i}]`).attr("data-clicked", "1");
-                }
-        });
-    </script>
 </body>
 
 </html>
