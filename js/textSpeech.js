@@ -1,6 +1,6 @@
 let speaking = false;
 let utterance;
-
+//Web Speech Api
 function toggleSpeech() {
   const text = $(".textToSpeak").text();
   if (!speaking) {
