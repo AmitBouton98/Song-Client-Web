@@ -35,7 +35,7 @@ function renderMessage(msg) {
 function listenToNewMessages() {
     // child_added will be evoked for every child that was added
     // on the first entry, it will bring all the childs
-    ref.on("child_added", (snapshot) => {
+    ref.on("child_added", (snapshot) => { //eventListener to listen and respond the nodes in the database reference
         msg = {
             name: snapshot.val().name,
             content: snapshot.val().msg,
