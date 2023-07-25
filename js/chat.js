@@ -101,7 +101,7 @@ function populateVoiceList() {
     }
 }
 // this funtion is for speach to text
-//Web Speech API
+//Web Speech API -> Recognition component
 function SpeachToText() {
     recognization.lang = $("#voiceSelect").val()
     let output = $('#msgTB')
