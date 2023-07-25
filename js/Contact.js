@@ -34,6 +34,7 @@ function SubmitMessage(e) {
     $("#f_name").val("")
     $("#l_name").val("")
     $("#message").val("")
+    //https://elasticemail.com/developers/api-documentation/web-api-v2#Email_Send
     $.ajax({
         type: 'POST',
         url: `https://api.elasticemail.com/v2/email/send`, // The correct path to your server-side script
